@@ -1,0 +1,45 @@
+* 3D 
+
+    sage: L = RootSystem(["A",3,1]).ambient_space()
+    sage: L.plot(reflection_hyperplanes=False, bounding_box=85/100) # long time
+
+* 3D Wireframe picture:
+
+    sage: L = RootSystem(["B",3,1]).ambient_space()
+    sage: W = L.weyl_group()
+    sage: alcoves = [~w for d in range(12) for w in W.affine_grassmannian_elements_of_given_length(d)]
+    sage: p = L.plot_fundamental_chamber("classical")
+    sage: p += L.plot_alcoves(alcoves=alcoves, wireframe=True)
+    sage: p += L.plot_fundamental_weights()
+    sage: p.show(frame=False)
+
+* 2D Alcove path for laser cutter
+
+    sage: L = RootSystem(["A",2,1]).ambient_space()
+    sage: w1 = [0,1,2,0,2,1,2,1,0,2,0,2,1,2,1,2,0,2,0,1,2,1,0,1]
+    sage: p = L.plot(alcove_walk=w1, bounding_box=[[-4.5,4.5],[-2.5,6]], fundamental_chamber=False); p    # long time
+    sage: for x in p:
+    ....:     if isinstance(x, sage.plot.arrow.Arrow):
+    ....:        x._options['arrowsize'] = 3
+    sage: p.save("alcove2.svg")
+* Gravure laser
+** References inkscape
+http://www.cutlasercut.com/resources/drawing-guidelines/styles-examples#using-our-drawing-templates
+http://atxhackerspace.org/wiki/Using_Inkscape_with_the_Laser_Cutter#Importing_to_CorelDraw
+
+http://www.nycresistor.com/2011/07/17/laser-cutting-commands/
+** CUPS Epilog driver
+   https://github.com/thenexxuz/cups-epilog
+** FabModules
+https://github.com/FabModules/fabmodules-html5/wiki/How-to-install
+http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTutorial.html
+** Instructions
+ - Découpe (Vector): noir, hairline (0.010mm 0.001" in inkscape)
+ - Gravure (Raster): rouge, surface  (pour faire un trait: Arrange -> convert outline to object)
+
+ - Mettre dans une feuille 300 x 600
+
+ - Fabmodules:
+   a priori pilotage direct du graveur depuis linux
+   Connection a priori directement ethernet <-> ethernet
+
