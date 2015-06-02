@@ -3,13 +3,10 @@
 from pyx import *
 
 text.set(mode="latex")
-#text.preamble(r"\usepackage{times}")
 text.preamble(r"""
 \usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts}
 \usepackage{color}
-\makeatletter
-\newcommand\HUGE{\@setfontsize\Huge{35.83}{47}}
-\makeatother
 """)
 col = color.cmyk.Grey
 text.preamble(r"\definecolor{Gray}{cmyk}{%(c)g,%(m)g,%(y)g,%(k)g}" % col.color)
@@ -32,22 +29,22 @@ def draw_piece(left, right, throw):
         border = path.path(path.moveto(x,0), path.lineto(x,1))
         for i, bal in enumerate(state):
             if bal:
-                border.append(path.arc(x,1.5*(i+1),0.5,-90,90))
+                border.append(path.arc(x,1.5*(i+1)+0.5,0.5,-90,90))
             else:
-                border.append(path.arcn(x,1.5*(i+1),0.5,-90,90))
-            border.append(path.lineto(x,1.5*(i+1)+1))
+                border.append(path.arcn(x,1.5*(i+1)+0.5,0.5,-90,90))
+            border.append(path.lineto(x,1.5*(i+1)+1.5))
         return border
 
     def draw_balls(xl, xr, balls, throw):
         for i, bal in enumerate(balls[1:]):
             if bal:
-                can.fill(path.circle(xr, 1.5*(i+1), 0.5), [color.cmyk.Grey])
-                can.stroke(path.path(path.moveto(xl, 1.5*(i+2)), path.lineto(xr, 1.5*(i+1))),
+                can.fill(path.circle(xr, 1.5*i+2, 0.5), [color.cmyk.Grey])
+                can.stroke(path.path(path.moveto(xl, 1.5*(i+1)+2), path.lineto(xr, 1.5*i+2)),
                            [style.linewidth.balls, color.cmyk.Grey]
                 )
         if throw != 0:
-            can.fill(path.circle(xr, 1.5*throw, 0.5), [color.cmyk.Grey])
-            can.stroke(path.path(path.moveto(xl, 1.5), path.lineto(xr, 1.5*throw)),
+            can.fill(path.circle(xr, 1.5*throw+0.5, 0.5), [color.cmyk.Grey])
+            can.stroke(path.path(path.moveto(xl, 2), path.lineto(xr, 1.5*throw+0.5)),
                        [style.linewidth.balls, color.cmyk.Grey]
             )
     draw_balls(0, 4, left, throw)
@@ -55,13 +52,13 @@ def draw_piece(left, right, throw):
     can.stroke(ball_border(0, left), cut)
     can.stroke(ball_border(4, right), cut)
     can.stroke(path.path(path.moveto(0,0), path.lineto(4,0)), cut)
-    top = 1.5*maxthrow + 1
+    top = 1.5*maxthrow + 1.5
     can.stroke(path.path(path.moveto(0,top), path.lineto(4,top)), cut)
 
-    can.text(2, 0.3, r"\textcolor{Gray}{\HUGE\bf\textsf{"+str(throw)+"}}",
-             [text.halign.center])
+    can.text(2, 0.3, r"\textcolor{Gray}{\bf\textsf{"+str(throw)+"}}",
+             [text.halign.center, trafo.scale(5)])
 
-    can.text(0.1, 8.2, r"\textcolor{Gray}{\small Florent Hivert}")
+    can.text(3.7, 0.1, r"\textcolor{Gray}{A\!\!\!W\!Z}", [trafo.scale(0.3)])
     return can
 
 def next_state(state, throw):
@@ -77,18 +74,22 @@ def next_state(state, throw):
 
 c = canvas.canvas()
 
+#Pour ecrire en outline:
+#textpath = text.text(0, 0, r"\textsf{AWZ}").textpath().reversed()
+#c.stroke(textpath, [trafo.scale(10)])
+
 st1 = [1,0,1,1,0];
 
 throw = 1; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(1, 11)])
+c.insert(draw_piece(st, st1, throw), [trafo.translate(1, 11.2)])
 throw = 3; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(6, 11)])
+c.insert(draw_piece(st, st1, throw), [trafo.translate(6, 11.2)])
 throw = 5; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(11, 11)])
+c.insert(draw_piece(st, st1, throw), [trafo.translate(11, 11.2)])
 throw = 5; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(16, 11)])
+c.insert(draw_piece(st, st1, throw), [trafo.translate(16, 11.2)])
 throw = 1; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(21, 11)])
+c.insert(draw_piece(st, st1, throw), [trafo.translate(21, 11.2)])
 
 throw = 4; st = st1; st1 = next_state(st, throw)
 c.insert(draw_piece(st, st1, throw), [trafo.translate(1, 2)])
