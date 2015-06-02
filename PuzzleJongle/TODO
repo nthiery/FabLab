@@ -1,0 +1,17 @@
+Génération du fichier pièces:
+
+   ./piece-pyx.py
+
+Nettoyage du fichier pièce si font LateX:
+
+   eps2eps piece-2x5.eps piece-2x5-ok.eps
+
+Inpression:
+
+   export DEVICE_URI="epilog://129.175.5.206/Legend/rp=60/rs=50/vp=100/vs=10/vf=500/rm=grey"
+   ../../cups-epilog/epilog 123 jdoe test < piece-2x5-ok.eps
+
+   ▒: No such file or directory
+   /usr/bin/gs -q -dBATCH -dNOPAUSE -r600 -g14400x7200 -sDEVICE=bmpgray -sOutputFile=/tmp/epilog-10789.bmp /tmp/epilog-10789.eps > /tmp/epilog-10789.vector
+   Width 14400 Height 7200 Bytes 14400 Line 43200
+   Raster power=100 speed=50
