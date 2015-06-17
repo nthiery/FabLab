@@ -1,3 +1,6 @@
+Some shared notes and projects about the Fablab at Digiteo Moulon
+=================================================================
+
 
 # References
 - http://libre3d.com/: models and references
