@@ -82,6 +82,10 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
 
     export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
 
+    Version Romain :
+
+    export DEVICE_URI="epilog://129.175.5.206/Legend/rp=50/rs=50/vp=100/vs=7/vf=500/rm=grey"
+
 ## Usage
 
 - Color code: grey values for raster, plain red for cutting
