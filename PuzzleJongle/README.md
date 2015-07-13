@@ -45,21 +45,18 @@ Printing (replacing 192.168.*.* by the IP address of your printer).
 ## BUGS and CAVEAT:
 
 
-- I didn't manage to use relative coordinate on the epilog printer. The origin
+1. I didn't manage to use relative coordinate on the epilog printer. The origin
 calibration didn't work. So I used absolute (cartesian) coordinate from the
 left bottom corner of the laser cutter.
 
-- The eps produced by pyx doesn't work well with the driver when using LaTeX
+2. The eps produced by pyx doesn't work well with the driver when using LaTeX
 fonts. It breaks when calling ghostscript. As a workaround I'm using eps2eps
 which seems to fix the problem It is called automatically by my script by the
 following lines:
 
-      import os
+        import os
+        filename = 'piece'
+        c.writeEPSfile(filename)
+        retvalue = os.system("eps2eps %s.eps %s-ok.eps"%(filename, filename))
 
-      filename = 'piece'
-
-      c.writeEPSfile(filename)
-
-      retvalue = os.system("eps2eps %s.eps %s-ok.eps"%(filename, filename))
-
-Good printing.
+Good printing and cutting.
