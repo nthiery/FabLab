@@ -1,44 +1,23 @@
-* 3D 
+Using the Epilog laser cutter
+=============================
 
-    sage: L = RootSystem(["A",3,1]).ambient_space()
-    sage: L.plot(reflection_hyperplanes=False, bounding_box=85/100) # long time
+# References inkscape and laser cutting
 
-* 3D Wireframe picture:
+- http://www.cutlasercut.com/resources/drawing-guidelines/styles-examples#using-our-drawing-templates
+- http://atxhackerspace.org/wiki/Using_Inkscape_with_the_Laser_Cutter#Importing_to_CorelDraw
+- http://www.nycresistor.com/2011/07/17/laser-cutting-commands/
 
-    sage: L = RootSystem(["B",3,1]).ambient_space()
-    sage: W = L.weyl_group()
-    sage: alcoves = [~w for d in range(12) for w in W.affine_grassmannian_elements_of_given_length(d)]
-    sage: p = L.plot_fundamental_chamber("classical")
-    sage: p += L.plot_alcoves(alcoves=alcoves, wireframe=True)
-    sage: p += L.plot_fundamental_weights()
-    sage: p.show(frame=False)
+# Fabmodules:
 
-* 2D Alcove path for laser cutter
-
-    sage: L = RootSystem(["A",2,1]).ambient_space()
-    sage: w1 = [0,1,2,0,2,1,2,1,0,2,0,2,1,2,1,2,0,2,0,1,2,1,0,1]
-    sage: p = L.plot(alcove_walk=w1, bounding_box=[[-4.5,4.5],[-2.5,6]], fundamental_chamber=False); p    # long time
-    sage: for x in p:
-    ....:     if isinstance(x, sage.plot.arrow.Arrow):
-    ....:        x._options['arrowsize'] = 3
-    sage: p.save("alcove2.svg")
-* Gravure laser
-** References inkscape
-http://www.cutlasercut.com/resources/drawing-guidelines/styles-examples#using-our-drawing-templates
-http://atxhackerspace.org/wiki/Using_Inkscape_with_the_Laser_Cutter#Importing_to_CorelDraw
-
-http://www.nycresistor.com/2011/07/17/laser-cutting-commands/
-
-* Fabmodules:
    a priori pilotage direct du graveur depuis linux
    Connection a priori directement ethernet <-> ethernet
-** CUPS Epilog driver
-   https://github.com/thenexxuz/cups-epilog
-** FabModules
 https://github.com/FabModules/fabmodules-html5/wiki/How-to-install
 http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTutorial.html
-** Instructions
-*** Document preparation
+
+# Instructions using CorelDraw on the PC
+
+## Document preparation
+
  - Gravure (Raster): rouge, surface  (pour faire un trait: Arrange ->
    convert outline to object)
  - Découpe (Vector): noir, hairline (0.010mm 0.001" in inkscape)
@@ -51,7 +30,9 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
  - Sélection , right click, -> unlock if needed
  - Select all, enter object position w.r.t. upper corner (see upper left widget of Corel Draw)
  - Select toutes les lignes à découper, style -> outline -> width -> hairline
-*** Printing
+
+## Printing
+
  - Allumer alimentation + machine
  - Allumer aspirateur si nécessaire
  - Faire le zéro:
@@ -64,15 +45,22 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
  - Print
  - Go
 
-** Printing using  cups-epilog
-*** Installing the driver command
+# Instructions for direct printing from linux using CUPS Epilog driver
+
+## References
+
+   https://github.com/thenexxuz/cups-epilog
+
+## Installing the driver command
    sudo apt-get install libcups2-dev
 
    git clone git@github.com:thenexxuz/cups-epilog.git
    cd cups-epilog
    gcc -o epilog `cups-config --cflags` cups-epilog.c `cups-config --libs`
 
-*** Network configuration
+## Network configuration
+
+    Disconnect from wireless network
 
     Connect on the netgear router/switch near the printer
     Disconnect the windows machine
@@ -81,7 +69,7 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
 
     The Epilog printer is on 129.175.5.206 port 515
 
-*** Driver configuration
+## Driver configuration
 
     See the README.md file for details on the parameters
 
@@ -98,15 +86,26 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
 
     export DEVICE_URI="epilog://129.175.5.206/Legend/rp=50/rs=50/vp=100/vs=7/vf=500/rm=grey"
 
-*** Usage
+## Usage
 
-    Export to eps from inkscape (Fichier -> Enregistrer une copie ->
-    eps -> convertir texte en chemin (nécessaire?)
+- Color code: grey values for raster, plain red for cutting
 
-    ./epilog 123 jdoe test < test.pdf
+  See e.g. [](test.eps) for an example
 
-    Color code: grey values for raster, plain red for cutting
 
-    Printing from pdf worked for raster but not for cutting ???
+- Export to eps from inkscape (Fichier -> Enregistrer une copie ->
+  eps -> convertir texte en chemin (nécessaire?)
 
-*** TODO Installing as a CUPS driver???
+- Follow instructions as above for setting up the printer
+
+- Launch the printing with:
+
+    ./epilog 123 <user> <jobname> < file.eps
+
+    ./epilog 123 nicolas test < test.eps
+
+- Printing from pdf worked for raster but not for cutting ???
+
+## Installing as a CUPS printer driver
+
+TODO
