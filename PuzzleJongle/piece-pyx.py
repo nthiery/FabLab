@@ -13,7 +13,7 @@ text.preamble(r"\definecolor{Gray}{cmyk}{%(c)g,%(m)g,%(y)g,%(k)g}" % col.color)
 
 style.linewidth.hairthin = style.linewidth(0.01)
 style.linewidth.balls    = style.linewidth(0.3)
-
+cut = [style.linewidth.hairthin, color.rgb.red]
 
 def draw_piece(left, right, throw):
 
@@ -22,8 +22,6 @@ def draw_piece(left, right, throw):
     maxthrow = len(left)
     assert len(right) == maxthrow
     assert 0 <= throw <= maxthrow
-
-    cut = [style.linewidth.hairthin, color.rgb.red]
 
     def ball_border(x, state):
         border = path.path(path.moveto(x,0), path.lineto(x,1))
@@ -58,7 +56,7 @@ def draw_piece(left, right, throw):
     can.text(2, 0.3, r"\textcolor{Gray}{\bf\textsf{"+str(throw)+"}}",
              [text.halign.center, trafo.scale(5)])
 
-    can.text(3.7, 0.1, r"\textcolor{Gray}{A\!\!\!W\!Z}", [trafo.scale(0.3)])
+    can.text(3.4, 0.2, r"\textcolor{Gray}{A\!\!\!W\!Z}", [trafo.scale(0.8)])
     return can
 
 def next_state(state, throw):
@@ -74,36 +72,43 @@ def next_state(state, throw):
 
 c = canvas.canvas()
 
-#Pour ecrire en outline:
-#textpath = text.text(0, 0, r"\textsf{AWZ}").textpath().reversed()
-#c.stroke(textpath, [trafo.scale(10)])
-
-st1 = [1,0,1,1,0];
-
-throw = 1; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(1, 11.2)])
-throw = 3; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(6, 11.2)])
-throw = 5; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(11, 11.2)])
-throw = 5; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(16, 11.2)])
-throw = 1; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(21, 11.2)])
-
-throw = 4; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(1, 2)])
-throw = 0; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(6, 2)])
-throw = 4; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(11, 2)])
-throw = 2; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(16, 2)])
-throw = 3; st = st1; st1 = next_state(st, throw)
-c.insert(draw_piece(st, st1, throw), [trafo.translate(21, 2)])
+# Pour ecrire en outline:
+#textpath = text.text(0, 0, r"A\!\!\!W\!Z$\mathfrak{S}_n$").textpath().reversed()
+#c.fill(textpath, [trafo.scale(20)]+[pattern.crosshatched0.Large])
 
 
-c.writeEPSfile('piece-2x5')
+#c.insert(draw_piece([1,1,1,0,0],[1,1,1,0,0], 3), [trafo.translate(7, 2)])
+
+hoffset=1
+voffset=2
+
+st1 = [1,1,0,0,1]; throw = 2; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+1, voffset+9.2)])
+st1 = [1,0,1,1,0]; throw = 5; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+6.1, voffset+9.2)])
+st1 = [0,1,1,0,1]; throw = 0; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+11, voffset+9.2)])
+st1 = [1,1,0,1,0]; throw = 4; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+16, voffset+9.2)])
+#st1 = [1,0,0,1,1]; throw = 1; st = st1; st1 = next_state(st, throw)
+#c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+21.4, voffset+9.2)])
+
+st1 = [1,0,1,0,1]; throw = 5; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+1, voffset+0.0)])
+st1 = [1,0,0,1,1]; throw = 2; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+6.1, voffset+0.0)])
+st1 = [1,0,0,1,1]; throw = 5; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+11.2, voffset+0.0)])
+st1 = [0,1,0,1,1]; throw = 0; st = st1; st1 = next_state(st, throw)
+c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+16.3, voffset+0.0)])
+
+
+import os
+
+filename = 'piece'
+c.writeEPSfile(filename)
+retvalue = os.system("eps2eps %s.eps %s-ok.eps"%(filename, filename))
+
 #c.writePDFfile('hello')
 #c.writeSVGfile('hello')
 
