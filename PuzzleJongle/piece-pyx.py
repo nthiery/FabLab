@@ -106,8 +106,8 @@ c.insert(draw_piece(st, st1, throw), [trafo.translate(hoffset+16.3, voffset+0.0)
 import os
 
 filename = 'piece'
-c.writeEPSfile(filename)
-retvalue = os.system("eps2eps %s.eps %s-ok.eps"%(filename, filename))
+c.writeEPSfile(filename)   # write eps file
+retvalue = os.system("eps2eps %s.eps %s-ok.eps"%(filename, filename)) # fix it
 
 #c.writePDFfile('hello')
 #c.writeSVGfile('hello')
