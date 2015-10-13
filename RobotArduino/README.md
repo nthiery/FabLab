@@ -54,8 +54,8 @@ Voici Les composants que j'ai utilisé pour fabriquer ce robot. La
 plupart d'entre eux -- y compris l'arduino, se trouvent dans tout bon
 magasin d'électronique. Certains nécessitent de passer par un
 revendeur spécialisé; il y en a plusieurs en France; en l'occurence je
-suis passé par Snootlab; à titre purement indicatif j'ai précisé la
-référence et le prix chez eux au moment de mon achat.
+suis passé par [Snootlab](snootlab.com); à titre purement indicatif
+j'ai précisé la référence et le prix chez eux au moment de mon achat.
 
 | Reference | Nom                                                                       | Prix unitaire | Quantité | Total   |
 | --------- | ---------------------                                                     | ------------  | -------- | ------: |
