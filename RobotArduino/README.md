@@ -54,14 +54,14 @@ spécialisé; il y en a plusieurs en France; en l'occurence je suis
 passé par Snootlab, et pour information j'ai indiqué la référence chez
 eux.
 
-
-| ADA-00858 | Petit moteur stepper avec réducteur 5V 512 pas                            | 6,00 €  | 2 | 12,00 € |
-| ADA-01438 | Adafruit Motor/Stepper/Servo Shield pour Arduino v2 Kit - v2.0 CMS montés | 21,60 € | 1 | 21,60 € |
-| KIT-00001 | Kit 2+2 connecteurs empilables Arduino                                    | 1,71 €  | 1 | 3,42 €  |
-| KIT-00011 | Kit connecteurs empilables Arduino 1.0                                    | 1.91€   | 1 | 1.91€   |
-| POW-00004 | Bloc support 4 piles AA pour Arduino                                      | 3,71 €  | 1 | 3,71 €  |
-| KIT-01025 | Kit de communication IR                                                   | 5,00 €  | 1 | 5,00 €  |
-| SEN-00005 | Photoresistance 4mm                                                       | 2,00 €  | 2 | 4,00 €  |
+| Reference | Nom                                                                       | Prix unitaire | Quantité | Total   |
+| ADA-00858 | Petit moteur stepper avec réducteur 5V 512 pas                            | 6,00 €        |        2 | 12,00 € |
+| ADA-01438 | Adafruit Motor/Stepper/Servo Shield pour Arduino v2 Kit - v2.0 CMS montés | 21,60 €       |        1 | 21,60 € |
+| KIT-00001 | Kit 2+2 connecteurs empilables Arduino                                    | 1,71 €        |        1 | 3,42 €  |
+| KIT-00011 | Kit connecteurs empilables Arduino 1.0                                    | 1.91€         |        1 | 1.91€   |
+| POW-00004 | Bloc support 4 piles AA pour Arduino                                      | 3,71 €        |        1 | 3,71 €  |
+| KIT-01025 | Kit de communication IR                                                   | 5,00 €        |        1 | 5,00 €  |
+| SEN-00005 | Photoresistance 4mm                                                       | 2,00 €        |        2 | 4,00 €  |
 
 À ajouter: résistances, led, ...
 
