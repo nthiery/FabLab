@@ -55,6 +55,7 @@ passé par Snootlab, et pour information j'ai indiqué la référence chez
 eux.
 
 | Reference | Nom                                                                       | Prix unitaire | Quantité | Total   |
+| --------- | ---------------------                                                     | ------------  | -------- | -----   |
 | ADA-00858 | Petit moteur stepper avec réducteur 5V 512 pas                            | 6,00 €        |        2 | 12,00 € |
 | ADA-01438 | Adafruit Motor/Stepper/Servo Shield pour Arduino v2 Kit - v2.0 CMS montés | 21,60 €       |        1 | 21,60 € |
 | KIT-00001 | Kit 2+2 connecteurs empilables Arduino                                    | 1,71 €        |        1 | 3,42 €  |
