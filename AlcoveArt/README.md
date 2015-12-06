@@ -50,24 +50,25 @@ Sauvegarder dans alcove-sans-fond.svg
 
 ### Blueprint
 
-- Scanner les bouts de bois sur une feuille A4 (par ex.)
-- Créer trois calques: BluePrint, Masque, Coupe
+- Scanner les bouts de bois sur une feuille A4 (par ex.) -> 2015-12-04-bois.jpg
+- Créer 2015-12-04-bois.svg avec trois calques: BluePrint, Calage, Coupe
 - Scan des bouts de bois -> BluePrint
-- Dessiner deux petites croix de calibrage (en haut et en bas) -> BluePrint
-  (variante: importer un fichier callage.svg comme calque)
+- Dessiner deux petites croix de calibrage (en haut et en bas) -> Calage
+  (variante: importer un fichier calage.svg comme calque)
 - Copier-coller le contenu alcove-sans-fond -> Coupe
 
 ### Découpe à la forme du bout de bois
 
 # Dessin frontière
 
-- Dessin frontière dans le calque masque
+- Créer un nouveau calque Masque
+- Dessin frontière dans Masque
 - Pas de contour, diminuer l'opacité
-- Masquer le calque BluePrint
+- Cacher le calque BluePrint
 
 # Ajout de la frontière aux alcoves
 
-- Copie sur place Ctrl-Alt-V -> calque de coupe
+- Copie sur place Ctrl-Alt-V -> Coupe
 - Cacher le calque Masque
 
 - Pas de fond
@@ -81,7 +82,7 @@ Sauvegarder dans alcove-sans-fond.svg
 # Intersection avec l'intérieur de la frontière
 
 - Afficher le calque Masque
-- Sélectionner masque et alcoves
+- Sélectionner la frontière et les alcoves
 - Intersection Ctrl-*
 - Déplacer dans le calque supérieur (Shift-PgUp)
 - Supprimer le calque Masque
@@ -98,20 +99,19 @@ Sauvegarder dans alcove-sans-fond.svg
 Chemin -> Séparer Shift-Ctrl-K
 Sélectionner la partie extérieure (en zoomant si nécessaire)
 Supprimer
-Tout sélectionner ^A
+Tout resélectionner ^A
 Union Ctrl-*
 
 ## Vérifier
 
 Afficher le calque Bois
-Remonter la croix de calibrage -> Coupe (Shift-PgUp x2)
 
 ## Imprimer
 
 Imprimmer le tout sur feuille A4
 Positionner la feuille sur la découpeuse
 
-Sélectionner le calque coupe
+Montrer les calques Calage et Coupe
 Sauvegarder -> alcove-tranche-coupe.pdf
 
 Lancer l'impression
