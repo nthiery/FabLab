@@ -6,7 +6,7 @@ Après quelques minutes de visite de Git Hub, M. Thiery me demanda de créer un 
 
 ## Visite et entrainement sur l'éditeur de texte
 
-Je doit donc m'entrainer à créer des testes et à utiliser les raccourcis de base. Je crois que pour les titres c'est ok :
+Je doit donc m'entrainer à créer des textes et à utiliser les raccourcis de base. Je crois que pour les titres c'est ok :
 
 # Titre
 
