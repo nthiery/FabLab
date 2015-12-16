@@ -20,7 +20,6 @@ Mais allez vous-en !
 Vous êtes toujours là ? Vous voulez continuer à lire les choses inutiles que je suis en train d'écrire ? Très bien ! Alors maintenant j'écrirais en polonais :
 Napisałem w języku polskim. Nie możesz przeczytać. Jestem silniejszy od ciebie. Będzie cię drażnić.
 Vous ne comprenez pas ? J'ai pitié de vous ! Voilà [une petite aide](https://translate.google.fr/?hl=fr)
-
 Bon, ok je repasse aux choses sérieuses.
 
 # Journée de lundi
