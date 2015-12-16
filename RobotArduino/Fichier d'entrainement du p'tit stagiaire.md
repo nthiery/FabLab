@@ -31,6 +31,6 @@ Lundi, moi et mon collègue stagiaire Malick avons été acueilli par Mme Cohen.
 
 # Journée de mardi
 
-Mardi, nous sommes allés avec M Thiery et Florent, un de ses collègues au FabLab. On nous a montré un écran géant et une application que celui-ci utilisait, puis nous allés regarder les deux imprimentes 3D et la découpeuse laser. L'après-midi, nous sommes retournés au bureau de M. Thiery, j'ai dessiné sur Inkscape deux petites pièces à découper au laser pendant que Malick jouait avec le son de son ordinateur, puis sommes retournés au FabLab pour faire la découpe. Puis nous sommes retourné au bureau de M Thiery et avons continué nos activité respective ( lui montaer et baisser le son et moi continuer de dessiner des pièces ).
+Mardi, nous sommes allés avec M Thiery et Florent, un de ses collègues au FabLab. On nous a montré un écran géant et une application que celui-ci utilisait, puis nous allés regarder les deux imprimentes 3D et la découpeuse laser. L'après-midi, nous sommes retournés au bureau de M. Thiery, j'ai dessiné sur Inkscape deux petites pièces à découper au laser pendant que Malick jouait avec le son de son ordinateur, puis sommes retournés au FabLab pour faire la découpe. Puis nous sommes retourné au bureau de M Thiery et avons continué nos activité respective ( lui monter et baisser le son et moi continuer de dessiner des pièces ).
 
 Dès que je reviens, je vous en dit plus !
