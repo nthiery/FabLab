@@ -52,6 +52,9 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
    https://github.com/thenexxuz/cups-epilog
 
 ## Installing the driver command
+
+::
+
    sudo apt-get install libcups2-dev
 
    git clone git@github.com:thenexxuz/cups-epilog.git
