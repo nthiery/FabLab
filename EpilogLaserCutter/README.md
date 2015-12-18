@@ -53,11 +53,11 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
 
 ## Installing the driver command
 
-::
+Instructions:
 
    sudo apt-get install libcups2-dev
 
-   git clone git@github.com:thenexxuz/cups-epilog.git
+   git clone https://github.com/thenexxuz/cups-epilog.git
    cd cups-epilog
    gcc -o epilog `cups-config --cflags` cups-epilog.c `cups-config --libs`
 
