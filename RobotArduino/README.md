@@ -98,6 +98,23 @@ rentable d'acheter l'un des nombreux kits de démarrage.
 
 TODO: compléter et ajouter les photos
 
+## Configuration ordinateur
+
+### Installer l'application arduino
+
+Linux Ubuntu:
+
+    sudo apt-get install arduino
+
+Autres: voir ...
+
+### Installer la bibliothèque de contrôle de l'extension Adafruit de commande de moteur
+
+    https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/install-software
+
+Références:
+- https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino
+
 ## Tests led
 
 Using a 1kOhm or 10kOhm resistance?
