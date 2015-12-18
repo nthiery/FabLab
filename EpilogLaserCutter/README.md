@@ -53,9 +53,12 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
 
 ## Installing the driver command
 
-Instructions:
+
+Sous Linux:
 
     sudo apt-get install libcups2-dev
+
+Download and compile the driver
 
     git clone https://github.com/thenexxuz/cups-epilog.git
     cd cups-epilog
@@ -69,9 +72,16 @@ Connect on the netgear router/switch near the printer
 
 Disconnect the windows machine
 
+Under Linux:
+
     sudo ifconfig eth0 129.175.5.207/16
 
-    The Epilog printer is on 129.175.5.206 port 515
+Under Mac/OS: Preferences -> Network -> Configuration -> Add a new one
+(namedFabLab for example) -> manual -> IP: 129.175.5.207/16
+
+The Epilog printer is on 129.175.5.206 port 515. To test the connection:
+
+    ping 129.175.5.206
 
 ## Driver configuration
 
