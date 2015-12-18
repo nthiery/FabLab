@@ -108,19 +108,22 @@ Afficher le calque Bois
 
 ## Imprimer
 
-Imprimmer le tout sur feuille A4
-Positionner la feuille sur la découpeuse
+- Imprimmer le fichier avec les trois calquees sur feuille A4 (attention à rester en 100% de zoom!)
+- Positionner la feuille sur la découpeuse
 
-Montrer les calques Calage et Coupe
-Sauvegarder -> alcove-tranche-coupe.pdf
+- Launch a dry run of 2015-12-04-callage.eps
 
-Lancer l'impression
+    sudo ifconfig eth0 129.175.5.207/16
+    export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
+    ../cups-epilog/epilog 123 nicolas calage < 2015-12-04-callage.eps
 
-TODO:
+- Hide the layers except for Coupe
 
-- s'assurer que la coupe commence par les croix de calage
-- Alternative: créer feuille standard de calage, et l'inclure dans le document
+- Export to eps: Enregistrer une copie -> eps -> ...
 
-Mettre le bois sur la feuille
+- Put the wood on the sheet, with a bit of two-sided tape to prevent
+  the air blower from moving the wood
 
-Relancer l'impression
+- Launch a dry run (pointer on, bay open)
+
+- Launch a full run
