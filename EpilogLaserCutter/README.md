@@ -55,18 +55,19 @@ http://fab.cba.mit.edu/classes/4.140/tutorials/LaserCutterTutorial/LaserCutterTu
 
 Instructions:
 
-   sudo apt-get install libcups2-dev
+    sudo apt-get install libcups2-dev
 
-   git clone https://github.com/thenexxuz/cups-epilog.git
-   cd cups-epilog
-   gcc -o epilog `cups-config --cflags` cups-epilog.c `cups-config --libs`
+    git clone https://github.com/thenexxuz/cups-epilog.git
+    cd cups-epilog
+    gcc -o epilog `cups-config --cflags` cups-epilog.c `cups-config --libs`
 
 ## Network configuration
 
-    Disconnect from wireless network
+Disconnect from wireless network
 
-    Connect on the netgear router/switch near the printer
-    Disconnect the windows machine
+Connect on the netgear router/switch near the printer
+
+Disconnect the windows machine
 
     sudo ifconfig eth0 129.175.5.207/16
 
@@ -74,18 +75,18 @@ Instructions:
 
 ## Driver configuration
 
-    See the README.md file for details on the parameters
+See the README.md file for details on the parameters
 
-    From the settings sheet, one would have expected the following to work for wood:
+From the settings sheet, one would have expected the following to work for wood:
 
     export DEVICE_URI="epilog://129.175.5.206/Legend/rp=25/rs=100/vp=35/vs=100/vf=500/rm=grey" 
 
-    but the power seems too low. Slowing down with the following seems
-    about alright:
+but the power seems too low. Slowing down with the following seems
+about alright:
 
     export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
 
-    Version Romain :
+Version Romain :
 
     export DEVICE_URI="epilog://129.175.5.206/Legend/rp=50/rs=50/vp=100/vs=7/vf=500/rm=grey"
 
