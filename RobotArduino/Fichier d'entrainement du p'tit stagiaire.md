@@ -31,6 +31,9 @@ Lundi, moi et mon collègue stagiaire Malick avons été acueilli par Mme Cohen.
 
 # Journée de mardi
 
-Mardi, nous sommes allés avec M Thiery et Florent, un de ses collègues au FabLab. On nous a montré un écran géant et une application que celui-ci utilisait, puis nous allés regarder les deux imprimentes 3D et la découpeuse laser. L'après-midi, nous sommes retournés au bureau de M. Thiery, j'ai dessiné sur Inkscape deux petites pièces à découper au laser pendant que Malick jouait avec le son de son ordinateur, puis sommes retournés au FabLab pour faire la découpe. Puis nous sommes retourné au bureau de M Thiery et avons continué nos activité respective ( lui monter et baisser le son et moi continuer de dessiner des pièces ).
+Mardi, nous sommes allés avec M Thiery et Florent, un de ses collègues au FabLab. On nous a montré un écran géant et une application que celui-ci utilisait, puis nous allés regarder les deux imprimentes 3D et la découpeuse laser. L'après-midi, nous sommes retournés au bureau de M. Thiery, j'ai dessiné sur Inkscape deux petites pièces à découper au laser pendant que Malick jouait avec le son de son ordinateur, puis sommes retournés au FabLab pour faire la découpe. Ensuite nous sommes retourné au bureau de M Thiery et avons continué nos activité respective ( lui monter et baisser le son et moi continuer de dessiner des pièces ).
 
-Dès que je reviens, je vous en dit plus !
+# Fin de stage
+
+Oui, bon, d'accord, je l'avoue, je n'ai pas le courrage de tout vous raconter...alors je ne dirais que mon avis final.
+Ce fut une très belle semaine où j'ai découvert plein de belles choses ( Arduino, découpeuse laser, imprimante 3D, mitraillete...non...oubliez le dernier...c'était pour vérifier que vous me suiviez bien ;) ) et fait un magnifique stage...je recommande donc fortement un stage au LRI pour tout les 3èmes des années futures qui sont intéressés par l'informatique.
