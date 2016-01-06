@@ -11,3 +11,5 @@ Some shared notes and projects about the Fablab at Digiteo Moulon
 - FreeCAD: interactive 3D modelling with Python bindings
 - http://www.pythonocc.org/ : 3D CAD/CAE/PLM development framework for Python.
 - http://www.freecadweb.org/wiki/index.php?title=Python_scripting_tutorial
+
+http://www.instructables.com/id/Programmatic-Creation-of-a-3D-Model-for-3D-Printin/
