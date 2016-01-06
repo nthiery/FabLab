@@ -71,7 +71,7 @@ j'ai précisé la référence et le prix chez eux au moment de mon achat.
 | OPT-00003 | 10 Led 3mm vertes diffuses x10                                            | 1,51 €        |        1 | 1,51 €  |
 | OPT-00003 | 10 Led 3mm rouge diffuses x10                                             | 1,51 €        |        1 | 1,51 €  |
 | KIT-01028 | Plaque d'essai                                                            | 3,50 €        |        1 | 3,50 €  |
-| --------- | ---------------                                                           | -----------   |      --- | ---     |
+| --------- | ---------------                                                           | -----------   |      --- | ---:     |
 | Total     |                                                                           |               |          | 82,75 € |
 
 Oups, c'est au final plus cher que ce que j'avais annoncé pendant les
@@ -97,6 +97,23 @@ rentable d'acheter l'un des nombreux kits de démarrage.
 
 
 TODO: compléter et ajouter les photos
+
+## Configuration ordinateur
+
+### Installer l'application arduino
+
+Linux Ubuntu:
+
+    sudo apt-get install arduino
+
+Autres: voir ...
+
+### Installer la bibliothèque de contrôle de l'extension Adafruit de commande de moteur
+
+    https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/install-software
+
+Références:
+- https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino
 
 ## Tests led
 
