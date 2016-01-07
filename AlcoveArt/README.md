@@ -1,4 +1,4 @@
-# Walk in the type A2 alcove picture, laser cut in a 6cm slice of olive tree wood
+# Walk in the type A2 alcove picture, laser cut in a 10cm high slice of olive tree wood
 
 ![Picture of the end result](2015-12-16-alcoves.jpg)
 
@@ -96,11 +96,11 @@ Sauvegarder dans alcove-sans-fond.svg
 
 #### Enlever le cercle extérieur
 
-Chemin -> Séparer Shift-Ctrl-K
-Sélectionner la partie extérieure (en zoomant si nécessaire)
-Supprimer
-Tout resélectionner ^A
-Union Ctrl-*
+- Chemin -> Séparer Shift-Ctrl-K
+- Sélectionner la partie extérieure (en zoomant si nécessaire)
+- Supprimer
+- Tout resélectionner ^A
+- Union Ctrl-*
 
 ### Vérifier
 
@@ -115,7 +115,9 @@ Afficher le calque Bois
 
 - Hide the layers except for Coupe
 
-- Export to eps: Enregistrer une copie -> eps -> ...
+- Export to eps
+
+        Enregistrer une copie -> eps -> ...
 
 - Launch a dry run (laser pointer on, bay open, no blower)
 
@@ -128,7 +130,7 @@ Afficher le calque Bois
 
 - Launch a full run
 
-      ../cups-epilog/epilog 123 nthiery alcoves < 2015-12-16-alcoves1.eps
+        ../cups-epilog/epilog 123 nthiery alcoves < 2015-12-16-alcoves1.eps
 
 ## Other Sage alcove pictures we may want to lazer cut or 3D print
 
