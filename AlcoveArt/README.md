@@ -1,6 +1,6 @@
-# Walk in the type A2 alcove picture, laser cut in a slice of olive tree wood
+# Walk in the type A2 alcove picture, laser cut in a 6cm slice of olive tree wood
 
-- ![Picture of the end result](2015-12-16-alcoves.jpg)
+![Picture of the end result](2015-12-16-alcoves.jpg)
 
 - [SVG file](2016-01-04-chat.svg)
 
@@ -119,9 +119,9 @@ Afficher le calque Bois
 
 - Launch a dry run (laser pointer on, bay open, no blower)
 
-      sudo ifconfig eth0 129.175.5.207/16
-      export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
-      ../cups-epilog/epilog 123 nthiery alcoves < 2015-12-16-alcoves1.eps
+        sudo ifconfig eth0 129.175.5.207/16
+        export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
+        ../cups-epilog/epilog 123 nthiery alcoves < 2015-12-16-alcoves1.eps
 
 - Put the wood on the sheet, with a bit of two-sided tape to prevent
   the air blower from moving the wood
