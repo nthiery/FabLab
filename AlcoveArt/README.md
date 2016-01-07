@@ -1,6 +1,6 @@
 # Walk in the type A2 alcove picture, laser cut in a slice of olive tree wood
 
-- [!2015-12-16-alcoves.jpg]()
+- ![Picture of the end result](2015-12-16-alcoves.jpg)
 
 - [SVG file](2016-01-04-chat.svg)
 
