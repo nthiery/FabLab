@@ -1,21 +1,22 @@
-# 3D picture
+# Walk in the type A2 alcove picture, laser cut in a 10cm high slice of olive tree wood
 
-    sage: L = RootSystem(["A",3,1]).ambient_space()
-    sage: L.plot(reflection_hyperplanes=False, bounding_box=85/100) # long time
+![Picture of the end result](2015-12-16-alcoves.jpg)
 
-# 3D Wireframe picture:
+- [SVG file](2016-01-04-chat.svg)
 
-    sage: L = RootSystem(["B",3,1]).ambient_space()
-    sage: W = L.weyl_group()
-    sage: alcoves = [~w for d in range(12) for w in W.affine_grassmannian_elements_of_given_length(d)]
-    sage: p = L.plot_fundamental_chamber("classical")
-    sage: p += L.plot_alcoves(alcoves=alcoves, wireframe=True)
-    sage: p += L.plot_fundamental_weights()
-    sage: p.show(frame=False)
+This directory contains a bunch of other svg pictures that have been
+cut or engraved in similar slices of wood.
 
-# 2D Alcove path for laser cutter
+## Preparation of the wood slice:
 
-## Création fichier de base dans Sage
+Cut a branch using a band saw into slices of thickness roughly 3mm.
+
+In the above picture, the wood is coming from an olive tree in
+Provence that died of frost in the harsh winter of 1955.
+
+## Construction of the SVG file
+
+### Création fichier de base dans Sage
 
     sage: L = RootSystem(["A",2,1]).ambient_space()
     sage: w1 = [0,1,2,0,2,1,2,1,0,2,0,2,1,2,1,2,0,2,0,1,2,1,0,1]
@@ -45,7 +46,6 @@ S'assurer que le dessin est composé uniquement d'à plats, sans contours:
 - Pas de contour
 - Fond
 
-
 Sauvegarder dans alcove-sans-fond.svg
 
 ### Blueprint
@@ -59,14 +59,14 @@ Sauvegarder dans alcove-sans-fond.svg
 
 ### Découpe à la forme du bout de bois
 
-# Dessin frontière
+#### Dessin frontière
 
 - Créer un nouveau calque Masque
 - Dessin frontière dans Masque
 - Pas de contour, diminuer l'opacité
 - Cacher le calque BluePrint
 
-# Ajout de la frontière aux alcoves
+#### Ajout de la frontière aux alcoves
 
 - Copie sur place Ctrl-Alt-V -> Coupe
 - Cacher le calque Masque
@@ -79,7 +79,7 @@ Sauvegarder dans alcove-sans-fond.svg
 - Sélectionner les alcoves et la frontière (^A)
 - Union Ctrl-+
 
-# Intersection avec l'intérieur de la frontière
+#### Intersection avec l'intérieur de la frontière
 
 - Afficher le calque Masque
 - Sélectionner la frontière et les alcoves
@@ -87,43 +87,64 @@ Sauvegarder dans alcove-sans-fond.svg
 - Déplacer dans le calque supérieur (Shift-PgUp)
 - Supprimer le calque Masque
 
-# Extraction du contour de coupe
+#### Extraction du contour de coupe
 
 - Opacité: 100%
 - Contour en chemin
 - Pas de fond
 - Contour -> 0,1 px, rouge
 
-# Enlever le cercle extérieur
+#### Enlever le cercle extérieur
 
-Chemin -> Séparer Shift-Ctrl-K
-Sélectionner la partie extérieure (en zoomant si nécessaire)
-Supprimer
-Tout resélectionner ^A
-Union Ctrl-*
+- Chemin -> Séparer Shift-Ctrl-K
+- Sélectionner la partie extérieure (en zoomant si nécessaire)
+- Supprimer
+- Tout resélectionner ^A
+- Union Ctrl-*
 
-## Vérifier
+### Vérifier
 
 Afficher le calque Bois
 
-## Imprimer
+## Print
 
-- Imprimmer le fichier avec les trois calquees sur feuille A4 (attention à rester en 100% de zoom!)
-- Positionner la feuille sur la découpeuse
+- Print the file with its three layers on A4 paper (be careful to stick to 100% zoom!)
 
-- Launch a dry run of 2015-12-04-callage.eps
-
-    sudo ifconfig eth0 129.175.5.207/16
-    export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
-    ../cups-epilog/epilog 123 nicolas calage < 2015-12-04-callage.eps
+- Put the sheet on the laser cutter, with its lower left corner on the
+  upper limit of the 12 mark.
 
 - Hide the layers except for Coupe
 
-- Export to eps: Enregistrer une copie -> eps -> ...
+- Export to eps
+
+        Enregistrer une copie -> eps -> ...
+
+- Launch a dry run (laser pointer on, bay open, no blower)
+
+        sudo ifconfig eth0 129.175.5.207/16
+        export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
+        ../cups-epilog/epilog 123 nthiery alcoves < 2015-12-16-alcoves1.eps
 
 - Put the wood on the sheet, with a bit of two-sided tape to prevent
   the air blower from moving the wood
 
-- Launch a dry run (pointer on, bay open)
-
 - Launch a full run
+
+        ../cups-epilog/epilog 123 nthiery alcoves < 2015-12-16-alcoves1.eps
+
+## Other Sage alcove pictures we may want to lazer cut or 3D print
+
+### 3D picture
+
+    sage: L = RootSystem(["A",3,1]).ambient_space()
+    sage: L.plot(reflection_hyperplanes=False, bounding_box=85/100) # long time
+
+### 3D Wireframe picture:
+
+    sage: L = RootSystem(["B",3,1]).ambient_space()
+    sage: W = L.weyl_group()
+    sage: alcoves = [~w for d in range(12) for w in W.affine_grassmannian_elements_of_given_length(d)]
+    sage: p = L.plot_fundamental_chamber("classical")
+    sage: p += L.plot_alcoves(alcoves=alcoves, wireframe=True)
+    sage: p += L.plot_fundamental_weights()
+    sage: p.show(frame=False)
