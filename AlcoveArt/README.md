@@ -9,7 +9,7 @@ cut or engraved in similar slices of wood.
 
 ## Preparation of the wood slice:
 
-Cut a branch using a band saw into slices of thickness roughly 3mm.
+Cut a branch using a band saw into slices of thickness roughly 3cm.
 
 In the above picture, the wood is coming from an olive tree in
 Provence that died of frost in the harsh winter of 1955.
