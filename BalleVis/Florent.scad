@@ -6,14 +6,15 @@ diamExt=74;
 haut=49;
 diamHaut=35;
 module cloche () {
-     cylinder(d1=diamExt, d2=diamHaut, h=haut);
+     cylinder(d2=diamExt, d1=diamHaut, h=haut);
 }
+poscloche=35;
 
-pitchRadius=43; 	// rayon du milieu du pas de vis
+pitchRadius=42; 	// rayon du milieu du pas de vis
 length=20;              // longeur de la vis
 epaisseur=4;            // epaisseur de la balle
 
-
+HauteurVis = -length/2-5;
 
 pitch=8;		// axial distance from crest to crest
 threadHeightToPitch=0.2;// ratio between the height of the profile and the pitch
@@ -49,7 +50,6 @@ module vis_inter () {
   }
 }
 
-
 module vis_exter () {
      trapezoidNut(
 	length=length,        // axial length of the threaded rod
@@ -71,7 +71,7 @@ module vis_exter () {
 
 module balle_interieur() {
      union() {
-	  translate ([0,0,-length/2])
+	  translate ([0,0,HauteurVis])
 	       difference () {
 	       union() {
 		    vis_inter();
@@ -102,14 +102,14 @@ module balle_interieur() {
 module balle_exterieur() {
      union () {
 	  intersection () {
-	       translate ([0,0,-length/2]) vis_exter();
-	       translate ([0,0,-length/2]) rotate([0,0,180]) vis_exter ();
+	       translate ([0,0,HauteurVis]) vis_exter();
+	       translate ([0,0,HauteurVis]) rotate([0,0,180]) vis_exter ();
 	       sphere(r=rsphere,$fn=stepsPerTurn);
 	  }
 	  difference() {
 	       intersection () {
 		    sphere(r=rsphere,$fn=stepsPerTurn);
-		    translate([0,0,rsphere+1+length/2])
+		    translate([0,0,rsphere+length+HauteurVis])
 			 cube(2*rsphere+2,center=true);
 	       }
 	       sphere(r=rsphere-epaisseur, $fn=stepsPerTurn);
@@ -118,13 +118,13 @@ module balle_exterieur() {
 }
 
 
-translate ([0,0, -15]) cloche();
+// translate ([0,0, -poscloche]) cloche();
 
 // Coupe par un cube pour voir l'interieur de la balle: 
-difference () { union () {
+//difference () { union () {
 
-// translate ([80, 0, 0])
+translate ([120, 0, 0])
 balle_interieur ();
 balle_exterieur ();
 
-} translate([0,0,-100]) cube ([100,100,200]); }
+//} translate([0,0,-100]) cube ([100,100,200]); }
