@@ -2,7 +2,6 @@ use <HelixMod.scad>;
 
 jeu = 0.2;
 steps = 10;
-zz=0.01;
 
 intersection()
 { 
