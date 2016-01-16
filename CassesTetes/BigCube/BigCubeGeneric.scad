@@ -59,25 +59,22 @@ module bipiece() {
 
 module assemble(cote, lbar, t) {
 
-module quad () {
+  module quad () {
      translate([0,0,  cote/2*(1-t) ]) bipiece();
      translate([0,0,-(cote/2*(1-t))]) rotate([0, 180, 0]) bipiece();
-};
+  };
 
-translate ([ lbar, 0,  lbar]) quad();
-translate ([ lbar, 0, -lbar]) quad();
-translate ([-lbar, 0,  lbar]) quad();
-translate ([-lbar, 0, -lbar]) quad();
+  module direct() {
+     translate ([ lbar, 0,  lbar]) quad();
+     translate ([ lbar, 0, -lbar]) quad();
+     translate ([-lbar, 0,  lbar]) quad();
+     translate ([-lbar, 0, -lbar]) quad();
+  }
 
-translate ([0,  lbar,  lbar]) rotate([90, 90, 0]) quad();
-translate ([0,  lbar, -lbar]) rotate([90, 90, 0]) quad();
-translate ([0, -lbar,  lbar]) rotate([90, 90, 0]) quad();
-translate ([0, -lbar, -lbar]) rotate([90, 90, 0]) quad();
-
-translate ([ lbar,  lbar, 0]) rotate([0, 90, 0]) rotate([0, 0, 90]) quad();
-translate ([ lbar, -lbar, 0]) rotate([0, 90, 0]) rotate([0, 0, 90]) quad();
-translate ([-lbar,  lbar, 0]) rotate([0, 90, 0]) rotate([0, 0, 90]) quad();
-translate ([-lbar, -lbar, 0]) rotate([0, 90, 0]) rotate([0, 0, 90]) quad();
+  direct ();
+  rotate([90, 90, 0]) direct();
+  rotate([0, 90, 0]) rotate([0, 0, 90]) direct();
+  
 }
 
 
@@ -106,7 +103,7 @@ module link() { }
 // bipiece();
 
 // Assemble the cube
-time = 1; // 0 = beggining of the move, 1 = end of the move
+time = 0.5; // 0 = beggining of the move, 1 = end of the move
 assemble(cote, lbar, time) { bipiece(); };
 
 // Animation
