@@ -4,6 +4,7 @@ eps=0.5;
 d=cote*sqrt(2)/4;
 de=d+eps;
 
+supwidth = 0.5;
 
 module piece() {
   intersection() {
@@ -25,28 +26,27 @@ module piece() {
 
 bla=d-2*eps;
 
-translate([0,0,-eps/2]) {
-     union() {
-piece();
-// This is the support 
+
+// This is the support
+module support () {
 intersection() {
-  union() {
-    translate([0,0,d/4-eps]) rotate([0,0, 45]) cube ([1,3*d-2*eps,d], center=true);
-    translate([0,0,d/4-eps]) rotate([0,0,-45]) cube ([1,3*d-2*eps,d], center=true);
-    translate([ bla, bla, 0]) cube(6, center=true);
-    translate([ bla,-bla, 0]) cube(6, center=true);
-    translate([-bla, bla, 0]) cube(6, center=true);
-    translate([-bla,-bla, 0]) cube(6, center=true);
+  difference() {
+    translate([0,0,d/4-eps]) {
+      union() {
+        rotate([0,0, 45]) cube ([supwidth,4*d-2*eps,d], center=true);
+	rotate([0,0,-45]) cube ([supwidth,4*d-2*eps,d], center=true);
+       }
+    }
+    translate([ d,0,d+cote/2]) rotate([0, 45,0]) cube([c2, cote+eps, cote], center=true);
+    translate([-d,0,d+cote/2]) rotate([0,-45,0]) cube([c2, cote+eps, cote], center=true);
   }
   translate([-cote/2, -cote, eps/2]) cube([cote,c2,c2]);
 }
 }
+
+translate([0,0,-eps/2]) {
+     union() {
+	  piece();
+	  support();
+     }
 }
-/*
-// #cube(cote, center=true);
-rotate([0, 180, 0]) piece();
-rotate([90, 90, 0]) piece();
-rotate([-90, 90, 0]) piece();
-rotate([0, 90, 0]) rotate([0, 0, 90]) piece();
-rotate([0, -90, 0]) rotate([0, 0, 90]) piece();
-*/
