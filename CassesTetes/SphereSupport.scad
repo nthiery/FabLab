@@ -40,7 +40,7 @@ intersection() {
     translate([ d,0,d+cote/2]) rotate([0, 45,0]) cube([c2, cote+eps, cote], center=true);
     translate([-d,0,d+cote/2]) rotate([0,-45,0]) cube([c2, cote+eps, cote], center=true);
   }
-  translate([-cote/2, -cote, eps/2]) cube([cote,c2,c2]);
+  translate([-cote/2, -cote, eps/2]) cube([cote,c2,5]);
 }
 }
 
