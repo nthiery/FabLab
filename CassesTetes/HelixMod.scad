@@ -33,3 +33,19 @@ module quarter_cylinder_helix (
 
 color([1,0,0]) translate([0,0,-40])
 quarter_cylinder_helix (40, 360, 20, radius=40, nb = 16, jeu=0.1);
+
+
+module slice_cylinder_helix (
+    angle, height, twist, slices, radius, nb,
+    jeu = 0.1,
+    zz=0.01)
+{
+     intersection() {
+	  half_cylinder_helix(height, twist, slices, radius, nb, jeu, zz);
+	  rotate([0,0,180-angle])
+	  half_cylinder_helix(height, twist, slices, radius, nb, jeu, zz);
+     }
+};
+
+color([0,1,0]) translate([0,0,-80])
+slice_cylinder_helix (120, 40, 360, 20, radius=40, nb = 16, jeu=0.1);
