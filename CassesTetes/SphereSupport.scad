@@ -1,10 +1,10 @@
-cote=40;
+cote=40*0.8;
 c2=2*cote;
-eps=0.5;
+eps=0.4;
 d=cote*sqrt(2)/4;
 de=d+eps;
 
-supwidth = 0.5;
+supwidth = 1;
 
 module piece() {
   intersection() {
