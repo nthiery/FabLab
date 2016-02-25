@@ -1,4 +1,4 @@
-use <Octahedron.scad>;
+use <../../BasicShapes/Octahedron.scad>;
 
 module shapeCylinder() {
      rotate([90, 0, 0])
