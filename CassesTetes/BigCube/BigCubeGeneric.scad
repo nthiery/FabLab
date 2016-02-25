@@ -1,8 +1,13 @@
 use <../../BasicShapes/Octahedron.scad>;
+use <../../BasicShapes/Dodecahedron.scad>;
 
 module shapeCylinder(cote) {
      rotate([90, 0, 0])
 	  cylinder(r=sqrt(2)/2*cote, h=3*cote, center=true);
+};
+
+module shapeDodecahedron(cote) {
+     dodecahedron(cote/2);
 };
 
 module shapeOctahedron(cote) {
@@ -88,6 +93,7 @@ $fn=50;
 // Choice of the vertex of the cube
 // module shape(cote) { shapeBar(cote); } lbar=cote;
 // module shape() { shapeCylinder(cote); } lbar=1.22*cote;
+// module shape() { shapeDodecahedron(cote); } lbar=cote;
 module shape() { shapeOctahedron(cote); } lbar=3*cote/2;
 // module shape() { sphere(cote*sqrt(3)/2); } lbar=cote*1.21;
 // module shape() { shapeTruncatedCube(cote); } lbar=5*cote/4+eps;
@@ -107,3 +113,22 @@ assemble(cote, lbar, time) { bipiece(); };
 
 // Animation
 // assemble(cote, lbar, $t) { bipiece(); };
+
+module Klingon() {
+t = 1;
+  module quad (cote) {
+     translate([0,0,  cote/2*(1-t) ]) bipiece(cote);
+     translate([0,0,-(cote/2*(1-t))]) rotate([0, 180, 0]) bipiece(cote);
+  };
+
+translate ([ lbar, 0,  lbar]) quad(cote);
+translate ([ lbar, 0, -lbar]) quad(cote);
+rotate([90, 90, 0]) translate ([ lbar, 0,  lbar]) quad(cote);
+rotate([90, 90, 0]) translate ([-lbar, 0,  lbar]) quad(cote);
+rotate([0, 90, 0]) rotate([0, 0, 90]) translate ([-lbar, 0,  lbar]) quad(cote);
+}
+
+// Klingon();
+
+
+
