@@ -1,3 +1,5 @@
+use <../BasicShapes/Dodecahedron.scad>;
+
 cote=40*0.8;
 c2=2*cote;
 eps=0.4;
@@ -9,7 +11,7 @@ supwidth = 1;
 module piece() {
   intersection() {
     difference() {
-        sphere(cote*sqrt(3)/2, $fn=200);
+	dodecahedron(cote/2);
 
 	translate([0,  cote/4, 0]) rotate([45, 0, 0]) cube([c2, de, de], center=true);
 	translate([0, -cote/4, 0]) rotate([45, 0, 0]) cube([c2, de, de], center=true);
@@ -44,9 +46,18 @@ intersection() {
 }
 }
 
+
 translate([0,0,-eps/2]) {
      union() {
 	  piece();
 	  support();
      }
 }
+
+
+//piece();
+//rotate([0, 180, 0]) piece();
+//rotate([90, 90, 0]) piece();
+//rotate([-90, 90, 0]) piece();
+//rotate([0, 90, 0]) rotate([0, 0, 90]) piece();
+//rotate([0, -90, 0]) rotate([0, 0, 90]) piece();

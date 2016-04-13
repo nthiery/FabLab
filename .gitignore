@@ -1,1 +1,5 @@
 *.eps
+*.gcode
+*.stl
+*.eps
+*.png
