@@ -17,7 +17,7 @@ cut = [style.linewidth.hairthin, color.rgb.red]
 
 can = canvas.canvas()
 
-def rect():
+def square():
     can = canvas.canvas()
     border = path.path(path.moveto(0,0),
                        path.lineto(0,1),
@@ -30,7 +30,7 @@ def rect():
 
 def level1():
     can = canvas.canvas()
-    can.insert(rect(), [trafo.scale(1/3., 1/3., 0.5, 0.5)])
+    can.insert(square(), [trafo.scale(1/3., 1/3., 0.5, 0.5)])
     return can
 
 def step(c):
@@ -47,20 +47,21 @@ c = step(c)
 c = step(c)
 c = step(c)
 c = step(c)
+# c = step(c)
 
-hoffset=0.2
-voffset=1
+hoffset=0.4
+voffset=0.2
 
-size = 7
+size = 12
 
 res = canvas.canvas()
 
 res.insert(c,      [trafo.scale(size, size), trafo.translate(hoffset, voffset)])
-res.insert(rect(), [trafo.scale(size, size), trafo.translate(hoffset, voffset)])
+res.insert(square(), [trafo.scale(size, size), trafo.translate(hoffset, voffset)])
 
 import os
 
-filename = 'rect'
+filename = 'square'
 res.writeEPSfile(filename)   # write eps file
 retvalue = os.system("eps2eps %s.eps %s-ok.eps"%(filename, filename)) # fix it
 
