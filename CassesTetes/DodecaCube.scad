@@ -11,7 +11,7 @@ supwidth = 1;
 module piece() {
   intersection() {
     difference() {
-	dodecahedron(cote/2);
+	dodecahedron(cote/2+4*eps);
 
 	translate([0,  cote/4, 0]) rotate([45, 0, 0]) cube([c2, de, de], center=true);
 	translate([0, -cote/4, 0]) rotate([45, 0, 0]) cube([c2, de, de], center=true);
@@ -55,9 +55,11 @@ translate([0,0,-eps/2]) {
 }
 
 
-//piece();
-//rotate([0, 180, 0]) piece();
-//rotate([90, 90, 0]) piece();
-//rotate([-90, 90, 0]) piece();
-//rotate([0, 90, 0]) rotate([0, 0, 90]) piece();
-//rotate([0, -90, 0]) rotate([0, 0, 90]) piece();
+/*
+piece();
+rotate([0, 180, 0]) piece();
+rotate([90, 90, 0]) piece();
+rotate([-90, 90, 0]) piece();
+rotate([0, 90, 0]) rotate([0, 0, 90]) piece();
+rotate([0, -90, 0]) rotate([0, 0, 90]) piece();
+*/
