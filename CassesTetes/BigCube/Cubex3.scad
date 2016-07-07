@@ -105,8 +105,8 @@ module link() { linkBar(r=cote/3); }
 // bipiece();
 
 // Assemble the cube
-time = 0; // 0 = beggining of the move, 1 = end of the move
-assemble(cote, lbar, time) { bipiece(); };
+// time = 1 // 0 = beggining of the move, 1 = end of the move
+// assemble(cote, lbar, time) { bipiece(); };
 
 // Animation
-// assemble(cote, lbar, $t) { bipiece(); };
+assemble(cote, lbar, $t) { bipiece(); };
