@@ -102,14 +102,20 @@ Version Romain :
 
 For paper cutting:
 
+  - vs 100 is too fast. On one sheet of 120g paper:
+
+      - vs=100,vp=5, wiggly cut, cut leaves tiny bridges (eg if you cut a circle, the inner disk stays attached).
+      - vs=100,vp=25, same wiggling, burn marks on the rear.
+
+
   - 4 sheets of 120g paper + 1 sheet of 80g on top as protection against black dust
-	vp 15, vs 30. Some small areas near the cut are lightly brown.
-	vp 10: some cuts aren't complete.
+    vp 25, vs 30. Some small areas near the cut are lightly brown.
+    vp 10, vs 30: some cuts aren't complete.
 
-  - one sheet of 205g paper, vp 10, vs 30: underside has serious brown marks
+  - one sheet of 205g paper:
 
-  - vs 70: some circular cuts are wiggly. Reducing speed to vs=30 makes it better.
-
+      - vp 10, vs 30: rear side has serious brown marks, front side is fine.
+      - vs 70: some circular cuts are wiggly. Reducing speed to vs=30 makes it better.
 
 ## Usage
 
@@ -144,8 +150,8 @@ For paper cutting:
   Solution: Extensions → Modify Path → Convert to dashes.
   (or on a non-dashed path: Path effects → Pattern along path, then object to path.)
   (Last resort: Path -> Stroke to path.
-  You get a set of filled polygons, so you then need to click
-  Fill: none, Stroke paint: red, Stroke style: 0.1mm.)
+   You get a set of filled polygons, so you then need to click
+   Fill: none, Stroke paint: red, Stroke style: 0.1mm.)
 
 - you can check ghostview will be happy when called by the driver with
   eps2eps input.eps /dev/null
