@@ -21,11 +21,31 @@ cube4 = [[0,1,2,3],[0,1,3,2],         ,         ,[0,3,1,2],[0,3,2,1],
 	          ,         ,         ,         ,         ,         ,
 	          ,         ,         ,         ,         ,         ,
 	 [3,0,1,2],[3,0,2,1],         ,         ,[3,2,0,1],[3,2,1,0]];
+     
+permtree4 = [[4, 1, 1, 4],
+ [3, 4, 2, 1],
+ [1, 4, 3, 2],
+ [4, 3, 2, 1],
+ [4, 3, -1, 4],
+ [4, 1, 3, 2],
+ [2, 4, 3, 1],
+ [4, 2, 3, 1],
+ [1, 4, 1, 4],
+ [3, 2, 4, 1],
+ [3, 4, -1, 4],
+ [2, 3, 4, 1],
+ [2, 1, 3, 4],
+ [3, 1, 4, 2],
+ [1, 2, 3, 4],
+ [1, 3, 4, 2],
+ [2, 1, 4, 3],
+ [1, 2, 4, 3]];
 
 // projection matrix 4D -> 3D
 projmatrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [-1/3, -1/3, -1/3]];
 
-scale(10) convex_poly([for (p=perm4) p * projmatrix]);
+//scale(10) convex_poly([for (p=perm4) p * projmatrix]);
+scale(10) convex_poly([for (p=permtree4) p * projmatrix]);
 // scale(20) convex_poly([for (p=ass4) p * projmatrix]);
 // scale(10) convex_poly([for (p=cube4) p * projmatrix]);
 
