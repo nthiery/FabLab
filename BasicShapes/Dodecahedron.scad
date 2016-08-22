@@ -1,29 +1,33 @@
+// Construct a regular dodecahedron from a cube by adding 6 prisms on each
+// faces of the cube. The side of the cube are of lenght 2 before scaling.
+
+// radius of the pentagones
 rpenta = 1/sin(72);
 
+// side of the pentagones
 // rpenta * 1/2*sqrt(2)*sqrt(-sqrt(5) + 5)
-cpenta = rpenta * sqrt(pow(sin(72), 2) + pow(1-cos(72), 2));
+spenta = rpenta * sqrt(pow(sin(72), 2) + pow(1-cos(72), 2));
 
-// z^2 + (1-cpenta/2)^2 + 1 = cpenta^2
-// zc = sqrt(pow(cpenta, 2) - (pow(1-cpenta/2, 2) + 1));
-zc = cpenta/2;
+// height of the prisms is spenta/2
+// z^2 + (1-spenta/2)^2 + 1 = spenta^2
+// zc = sqrt(pow(spenta, 2) - (pow(1-spenta/2, 2) + 1));
 
 module dodecaprism() {
-     polyhedron ( points = [
-		       [ 1, 1, 0],
-		       [ 1,-1, 0],
-		       [-1, 1, 0],
-		       [-1,-1, 0],
-		       [ cpenta/2,0,zc],
-		       [-cpenta/2,0,zc]
+     polyhedron ( points = [[ 1, 1, 0],
+			    [ 1,-1, 0],
+			    [-1, 1, 0],
+			    [-1,-1, 0],
+			    [ spenta/2, 0, spenta/2],
+			    [-spenta/2, 0, spenta/2]
 		       ],
-                 faces = [[0,2,1],
-                          [1,2,3],
-                          [0,1,4],
-			  [0,4,2],
-			  [2,4,5],
-			  [1,3,4],
-			  [3,5,4],
-			  [2,5,3]
+                 faces = [[0, 2, 1],
+                          [1, 2, 3],
+                          [0, 1, 4],
+			  [0, 4, 2],
+			  [2, 4, 5],
+			  [1, 3, 4],
+			  [3, 5, 4],
+			  [2, 5, 3]
 		      ]
              );
 
@@ -41,4 +45,4 @@ module dodecahedron(scl) {
   }
 };
 
-dodecahedron();
+dodecahedron(10);
