@@ -22,7 +22,13 @@ release in 2002) but it is still actively maintained (last release from
 integrate a suggested bug fix). In my opinion, the code is also quite clear
 and well written, I had no difficulties to debug it.
 
+Installation under Ubuntu:
 
+    sudo apt-get install python3-pyx
+
+or just:
+
+    pip install pyx
 
 ## EXAMPLE on how to use PYX
 
