@@ -1,9 +1,9 @@
 ---
 layout: project-lasercuter
 title: A laser cut type A2 alcove walk
-authors: [ nthiery ]
-sources: 2015-12-16-alcoves.svg
-images: 2015-12-16-alcoves.jpg
+authors: [nthiery]
+sources: [2015-12-16-alcoves.svg]
+images: [2015-12-16-alcoves.jpg]
 date: 2015/12/16
 ---
 
