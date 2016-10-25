@@ -3,6 +3,7 @@ layout: project-lasercuter
 title: A laser printed boat
 authors: [ nthiery, elise]
 images: [boat.jpg, pieces.jpg]
+sources: model.svg
 artwork: [RoseDesVents.png, Aigle.png]
 date: 2015/05/29
 ---
