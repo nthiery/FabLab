@@ -1,0 +1,17 @@
+<div class="sidebar">
+  <div>
+    <div class="sidebar-about">
+      <h1>
+        <a href="{{ site.baseurl }}/">
+          {{ site.title }}
+        </a>
+      </h1>
+      <p>{{ site.description }}</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      {% include sidebar-nav-item.html url="/projects/" title="Projects" %}
+      {% include sidebar-nav-item.html url="/people/" title="People" %}
+    </nav>
+  </div>
+</div>

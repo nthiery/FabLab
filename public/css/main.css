@@ -1,0 +1,112 @@
+.emoji {
+  display: inline; }
+
+img.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 65%;
+    vertical-align: baseline;
+}
+
+/* colored tables, aka grid lists */
+table.grid-list {
+    width: 100%;
+    border: 1px solid black;
+}
+table.grid-list td {
+    /* background-color: green; */
+}
+
+img.largeicon {
+  display: inline;
+  max-height: 6em;
+  max-width: 3em;
+  vertical-align: middle;
+}
+
+img.hugeicon {
+  display: inline;
+  max-height: 6em;
+  max-width: 6em;
+  vertical-align: middle;
+}
+
+
+/* Pour afficher des portraits pas trop gros et isolés */
+img.portrait {
+  display: block;
+  max-height: 10em;
+  max-width: 10em;
+  vertical-align: top;
+}
+
+
+svg.icon, img.icon {
+  max-height: 0.8em;
+  max-width: 0.9em;
+  vertical-align: baseline;
+}
+
+#sites {
+  display: flex;
+  flex-flow: row wrap; }
+  #sites .site {
+    min-width: 35ex;
+    flex: 1 1 50%; }
+
+#logos {
+  margin-top: 4em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around; }
+  #logos a {
+    margin: 10px; }
+    #logos a img {
+      height: 60px; }
+
+#legend::before {
+  content: " ";
+  display: block;
+  width: 4em;
+  border-top: solid thin black;
+  margin-top: 1em; }
+#legend span {
+  white-space: nowrap;
+  margin-right: 1em; }
+
+.sidebar h1 {
+  display: block;
+  margin: 0px;
+  padding: 5px; }
+
+.logo-europe {
+  display: none; }
+
+@media screen and (min-width: 48em) {
+  .theme-base-odk .sidebar {
+    float: left;
+    width: 18rem; }
+
+  .theme-base-odk .content {
+    overflow: hidden; }
+
+  .logo-europe {
+    display: block; } }
+
+.site-url {
+  display: none; }
+
+@media print {
+  .sidebar-nav, .logo-europe, .lead {
+    display: none; }
+
+  .sidebar {
+    padding: 0; }
+
+  .sidebar-about h1 {
+    display: inline-block;
+    width: 2em; }
+  .sidebar-about .lead.site-url {
+    display: block;
+    font-size: 80%; } }

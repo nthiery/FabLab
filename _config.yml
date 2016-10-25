@@ -1,0 +1,27 @@
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Fablab Digiscope
+tagline:          ''
+description:      ''
+url:              'https://nthiery.github.io/FabLab/'
+baseurl:          ''
+
+# About/contact
+author:
+  name:           'Nicolas M. Thiéry'
+  url:            http://Nicolas.Thiery.name/
+
+gems:
+- emoji
+
+# Custom vars
+version:          0.1.0
+
+github:
+  repo:           https://github.com/nthiery/FabLab/
+
+collections:
+  activites:
+    output: true

@@ -1,0 +1,21 @@
+---
+layout: default
+sources: [model.svg]
+---
+
+<div class="page">
+
+  <h1 class="page-title">
+    {{page.title}}
+  </h1>
+
+  <table>
+    <tr><td>Authors</td><td>{% for author in page.authors %} <a href="http://github.com/{{author}}">{{author}}</a>{% endfor %}</td></tr>
+    <tr><td>Sources</td><td> {% for file in page.sources %} <a href="{{file}}">{{file}}</a> {% endfor %}</td></tr>
+    {% if page.artwork %}<tr><td>Artwork</td><td> {% for file in page.artwork %} <a href="{{file}}"><img class=largeicon src="{{file}}"></a> {% endfor %}</td></tr>{% endif %}
+  </table>
+
+  {% for image in page.images %}<a href="{{image}}"><img class=image src="{{image}}"></a>{% endfor %}
+
+  {{ content }}
+</div>
