@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Models
+title: Projects
 ---
 
 {% assign projectpages = site.pages | where: "layout", "project-lasercuter" %}
@@ -13,3 +13,5 @@ title: Models
     </tr>
   {% endfor %}
 </table>
+
+And many more that have not yet been indexed.
