@@ -8,11 +8,8 @@ title: Models
 <table>
   {% for page in projectpages %}
     <tr>
-      <td><a href="{{page.dir}}"><img class="largeicon" src="{{page.dir}}/{{page.images[0]}}"></a></td>
-      <td><a href="{{page.dir}}">{{page.title}}</a></td>
+      <td><a href="{{site.baseurl}}/{{page.dir}}"><img class="largeicon" src="{{site.baseurl}}/{{page.dir}}/{{page.images[0]}}"></a></td>
+      <td><a href="{{site.baseurl}}/{{page.dir}}">{{page.title}}</a></td>
     </tr>
   {% endfor %}
 </table>
-
-
-And many more that have not yet been categorized!
