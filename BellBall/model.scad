@@ -15,8 +15,8 @@ poscloche=35;
 
 
 pitchRadius=42; 	// rayon du milieu du pas de vis
-length=15;              // longeur de la vis
-epaisseur=4;            // epaisseur de la balle
+length=10;              // longeur de la vis
+epaisseur=3;            // epaisseur de la balle
 
 HauteurVis = -length/2;
 
@@ -48,7 +48,7 @@ nbOuvertures=16;
 // Les cônes sont définis
 hauteurOuvertures=100; // Ne pas changer, sauf si la balle
 diametreInterieurOuvertures=50;
-diametreExterieurOuvertures=400;
+diametreExterieurOuvertures=480;
 epaisseurOuvertures=40;
 
 // Il n'y a pas de primitive dans OpenScad pour construire un polytope plein défini par ses points extrémaux
@@ -148,6 +148,7 @@ module balle_interieur() {
 			      $fn=stepsPerTurn);
 	  }
       // socle cloche
+      // TODO: le socle est trop épais maintenant et dépasse
       translate ([0,0, -poscloche-epaisseurSocleCloche/2-epaisseurFeutre])
           cylinder(r=diamHaut/2, h=epaisseurSocleCloche/2, $fn=stepsPerTurn);
       translate ([0,0, -poscloche-epaisseurSocleCloche-epaisseurFeutre])
@@ -190,16 +191,17 @@ module balle_exterieur() {
 }
 
 
-//decalage = 120;
-decalage = 0;
-translate ([0,decalage, -poscloche]) 
-  cloche();
+decalage = 120;
+//decalage = 0;
+//translate ([0,decalage, -poscloche]) 
+//  cloche();
 
 // Coupe par un cube pour voir l'interieur de la balle: 
-difference () { union () {
+//difference () { 
+  union () {
     balle_interieur ();
     translate ([0, decalage, 0])
       balle_exterieur();
-  } translate([50,50,-100]) 
-  cube ([100,100,400],center=true);
-}
+  } 
+  // translate([50,50,-100]) cube ([100,100,400],center=true);
+//}
