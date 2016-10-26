@@ -1,6 +1,6 @@
 ---
 layout: project
-machine: laser_cutter
+machines: laser_cutter
 title: Type A2 alcove art
 authors: [nthiery]
 sources: [2015-12-16-alcoves.svg]
