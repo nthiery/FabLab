@@ -15,7 +15,7 @@ layout: default
     <tr><td>Machine</td><td>{% for machine in page.machines %} <a href="{{site.baseurl}}/machines/{{machine}}">{{machine}}</a>{% endfor %}</td></tr>
     {% if page.parameters %}<tr><td>Parameters</td><td> {{page.parameters}}</td></tr>{% endif %}
     {% if page.date %}<tr><td>Date</td><td> {{page.date}}</td></tr>{% endif %}
-    {% if page.material %}<tr><td>License</td><td> {{page.material}}</td></tr>{% endif %}
+    {% if page.material %}<tr><td>Material</td><td> {{page.material}}</td></tr>{% endif %}
     {% if page.license %}<tr><td>License</td><td> {{page.license}}</td></tr>{% endif %}
   </table>
 
