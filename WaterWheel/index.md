@@ -1,6 +1,6 @@
 ---
 layout: project
-machine: laser_cutter
+machines: laser_cutter
 title: A laser cut Water Wheel for a pond fountain
 authors: [nthiery, elise]
 images: [fountain-closeup.jpg, fountain.jpg, negative.jpg]
