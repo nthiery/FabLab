@@ -3,7 +3,7 @@ layout: page
 title: Projects
 ---
 
-{% assign projectpages = site.pages | where: "layout", "project-lasercuter" %}
+{% assign projectpages = site.pages | where: "layout", "project" %}
 
 <table>
   {% for page in projectpages %}

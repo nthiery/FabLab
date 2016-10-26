@@ -1,10 +1,12 @@
 ---
-layout: project-lasercuter
-title: A laser cut type A2 alcove walk
+layout: project
+machine: laser_cutter
+title: Type A2 alcove art
 authors: [nthiery]
 sources: [2015-12-16-alcoves.svg]
 images: [2015-12-16-alcoves.jpg]
 date: 2015/12/16
+material: olive tree wood
 ---
 
 I built this as a gift for a colleague working on crystals and root

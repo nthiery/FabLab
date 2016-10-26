@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<div class="page">
+
+  <h1 class="page-title">
+    {{page.title}}
+  </h1>
+
+  <table>
+    <tr><td>Authors</td><td>{% for author in page.authors %} <a href="http://github.com/{{author}}" target="_blank">{{author}}</a>{% endfor %}</td></tr>
+    <tr><td>Sources</td><td> {% for file in page.sources %} <a href="{{file}}">{{file}}</a> {% endfor %}</td></tr>
+    {% if page.artwork %}<tr><td>Artwork</td><td> {% for file in page.artwork %} <a href="{{site.baseurl}}{{page.dir}}{{file}}"><img class=largeicon src="{{file}}"></a> {% endfor %}</td></tr>{% endif %}
+    <tr><td>Machine</td><td>{% for machine in page.machines %} <a href="{{site.baseurl}}/machines/{{machine}}">{{machine}}</a>{% endfor %}</td></tr>
+    {% if page.parameters %}<tr><td>Parameters</td><td> {{page.parameters}}</td></tr>{% endif %}
+    {% if page.date %}<tr><td>Date</td><td> {{page.date}}</td></tr>{% endif %}
+    {% if page.material %}<tr><td>License</td><td> {{page.material}}</td></tr>{% endif %}
+    {% if page.license %}<tr><td>License</td><td> {{page.license}}</td></tr>{% endif %}
+  </table>
+
+  {% for image in page.images %}<a href="{{image}}"><img class=image src="{{image}}"></a>{% endfor %}
+
+  {{ content }}
+</div>

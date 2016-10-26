@@ -190,15 +190,16 @@ module balle_exterieur() {
 }
 
 
-decalage = 120;
-//decalage = 0;
-//translate ([0,decalage, -poscloche]) 
-//  cloche();
+//decalage = 120;
+decalage = 0;
+translate ([0,decalage, -poscloche]) 
+  cloche();
 
 // Coupe par un cube pour voir l'interieur de la balle: 
-//difference () { union () {
-  balle_interieur ();
-  translate ([0, decalage, 0])
-    balle_exterieur();
-//} translate([50,50,-100]) 
-//  cube ([100,100,400],center=true); }
+difference () { union () {
+    balle_interieur ();
+    translate ([0, decalage, 0])
+      balle_exterieur();
+  } translate([50,50,-100]) 
+  cube ([100,100,400],center=true);
+}
