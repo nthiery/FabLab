@@ -1,9 +1,9 @@
 ---
-layout: project
+layout: project-disabled
 machines: 3D_printer
 title: A juggling ball holding a bell
 authors: [delavenere, hivert, nthiery]
-license: ...
+license: ???
 sources: [model.scad]
 images: [model.png]
 date: 2016/10/20
