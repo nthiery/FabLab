@@ -1,22 +1,58 @@
 use <Thread_Library.scad>
 
+version = "preview_open";
+//version = "preview_closed";
+version = "print";
+//version = "accessoires";
 
-// Dimension de la cloche d'après texto Vincent.
+// Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
+stepsPerTurn  = version == "print" ? 64:16; 	// number of slices to create per turn
+
+// Dimensions vis et ecrous
+visDiametreTete=6;
+visDiametre=3;
+visLongueur=30;
+
+ecrouEpaisseur = 1.5;
+ecrouDiametre = 6.5;
+
+// Dimension de la cloche
 diamExt=74;
 haut=49;
 diamHaut=35;
-epaisseurFeutre=2;  // Epaisseur de la couche amortissante entre la boule et la cloche
-epaisseurSocleCloche=8;
-ecartementVisCloche=10;
-module cloche () {
-     cylinder(d2=diamExt, d1=diamHaut, h=haut);
-}
-poscloche=35;
+clochePosition=34;
 
+module cloche () {
+    cylinder(d2=diamExt, d1=diamHaut, h=haut);
+}
+
+// Dimensions socle cloche
+epaisseurFeutre = 0;  // Epaisseur de l'éventuelle couche amortissante entre le socle et la cloche
+socleDiametre = diamHaut;
+visClocheEcartement=10;
+visClocheEnfoncement=2.5;
+
+// Dimensions contre socle cloche
+contreSocleDiametre = 2*visClocheEcartement+ecrouDiametre+2;
+contreSocleEpaisseur = 4;
+
+module contreSocle () {
+    difference () {
+        cylinder(r=contreSocleDiametre/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
+        union () {
+            for (angle=[0:90:360]) {
+                rotate([0,0,angle+45]) {
+                    translate([visClocheEcartement, 0, -.1]) vis();
+                    translate([visClocheEcartement, 0, contreSocleEpaisseur-ecrouEpaisseur+.1]) ecrou();
+                }
+            }
+        }
+    }
+}
 
 pitchRadius=42; 	// rayon du milieu du pas de vis
 length=10;              // longeur de la vis
-epaisseur=3;            // epaisseur de la balle
+epaisseur=2.5;            // epaisseur de la balle
 
 HauteurVis = -length/2;
 
@@ -32,50 +68,67 @@ clearance=0.05;		// radial clearance, normalized to thread height
 backlash=0.05; 		// axial clearance, normalized to pitch
 
 
-// Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn=64; 	// number of slices to create per turn
-//stepsPerTurn=16; 	// number of slices to create per turn
-
 rsphere = pitchRadius+epaisseur;
 echo ("Rayon de la balle : ", rsphere);
 
-////////////////////////////////////////////////////////
-// Dessin d'ouvertures régulières dans la balle
-// Ici on les construit en creusant une collection de nbOuvertures cônes centrés sur le centre de la
-// balle et répartis autour d'un axe radial 
-nbOuvertures=16;
-// Les variables suivantes contrôlent 
-// Les cônes sont définis
-hauteurOuvertures=100; // Ne pas changer, sauf si la balle
-diametreInterieurOuvertures=50;
-diametreExterieurOuvertures=480;
-epaisseurOuvertures=40;
+//////////////////////////////////////////////////////////////////////////////
+// Utilitaires
 
 // Il n'y a pas de primitive dans OpenScad pour construire un polytope plein défini par ses points extrémaux
-// À la place, on peut faire l'enveloppe convexe de micro cubes.
+// À la place, on peut faire l'enveloppe convexe de micro cubes comme celui ci-dessous
 // https://spolearninglab.com/curriculum/software/3d_modeling/openscad/openscad_06.html
-// 
+
 module pseudoPoint () {
     cube(.1, center=true);
 }
 
+// Coupe un objet centré par un coin à 45 degrés pour en voir l'intérieur
+// r: une majoration du rayon maximal de l'objet
+module coupe(r) {
+    difference() {
+        children(0);
+        rotate([0,0,-135]) translate([r,r,0]) cube ([2*r,2*r,2*r], center=true);
+    }
+}
+
+module vis(acces=0) {
+    cylinder(r=visDiametre/2,h=visLongueur, $fn=stepsPerTurn);
+    cylinder(r2=0,r1=visDiametreTete/2,h=visDiametreTete/2, $fn=stepsPerTurn);
+    translate([0,0,-acces])
+        cylinder(r=visDiametreTete/2, h=acces, $fn=stepsPerTurn);
+}
+
+module ecrou() {
+    difference() {
+        cylinder(r=ecrouDiametre/2, h=ecrouEpaisseur, $fn=6);
+        translate([0,0,-.1])
+        cylinder(r=visDiametre/2, h=ecrouEpaisseur+.2, $fn=stepsPerTurn);
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Dessin d'ouvertures régulières dans la balle
+// Ici on les construit en creusant une collection de nbOuvertures cônes centrés sur le centre de la
+// balle et répartis autour d'un axe radial
+nbOuvertures=16;
+// Les variables suivantes contrôlent la forme du cône de base
+hauteurOuvertures=100; // Ne pas changer, sauf si la balle devenait plus grande
+diametreInterieurOuvertures=47;
+epaisseurInterieurOuvertures=3;
+diametreExterieurOuvertures=500;
+epaisseurExterieurOuvertures=60;
+
 module ouvertures () {
-  for (i =[1:nbOuvertures])
-    rotate(a=360/nbOuvertures*i,v=[0,0,1])
-        hull () {
-            translate([0,0,0]) pseudoPoint();
-            translate([0                    ,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
-            translate([-epaisseurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
-            translate([ epaisseurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
-        }
-        //polyhedron(points=[[0,0,0],
-        //                    [0                    ,diametreInterieurOuvertures,diametreExterieurOuvertures],
-        //                    [-epaisseurOuvertures,diametreExterieurOuvertures,diametreExterieurOuvertures],
-        //                    [ epaisseurOuvertures,diametreExterieurOuvertures,diametreExterieurOuvertures]],
-        //            faces=[[0,1,2],[0,2,3],[0,3,1],[1,2,3]]);
-        //scale([1,epaisseurOuvertures,1])
-        //    translate([-diametreExterieurOuvertures/2,0,0]) 
-        //        cylinder(h=hauteurOuvertures,r=(diametreExterieurOuvertures-diametreInterieurOuvertures)/2,$fn=3);
+    ratio = diametreInterieurOuvertures / diametreExterieurOuvertures;
+    for (i =[1:nbOuvertures])
+        rotate(a=360/nbOuvertures*i,v=[0,0,1])
+            hull () {
+                translate([0,0,0]) pseudoPoint();
+                translate([-epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
+                translate([ epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
+                translate([-epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
+                translate([ epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
+            }
 }
 
 module vis_inter () {
@@ -114,16 +167,10 @@ module vis_exter () {
 
 }
 
-// TODO: chanfrein
-diametreVis=3;
-module trouVis() {
-         cylinder(r=diametreVis/2,h=1.1*rsphere, $fn=stepsPerTurn,center=true);
-}
-
 module balle_interieur() {
   difference() {
     union() {
-      translate ([0,0,HauteurVis])
+        translate ([0,0,HauteurVis])
 	       difference () {
 	       union() {
 		    vis_inter();
@@ -131,8 +178,8 @@ module balle_interieur() {
 	       }
 	       translate ([0,0,-1])
 		    cylinder (r=pitchRadius-epaisseur,h=40, $fn=stepsPerTurn);
-	  }
-	  difference() {
+        }
+        difference() {
 	       intersection () {
 		    sphere(r=rsphere,$fn=stepsPerTurn);
 		    translate([0,0,-(rsphere+1)-length/2])
@@ -146,20 +193,20 @@ module balle_interieur() {
 	       translate ([0,0,-length/2-1.5*epaisseur-0.1])
 		    cylinder (r=pitchRadius-epaisseur,h=length+0.2,
 			      $fn=stepsPerTurn);
-	  }
-      // socle cloche
-      // TODO: le socle est trop épais maintenant et dépasse
-      translate ([0,0, -poscloche-epaisseurSocleCloche/2-epaisseurFeutre])
-          cylinder(r=diamHaut/2, h=epaisseurSocleCloche/2, $fn=stepsPerTurn);
-      translate ([0,0, -poscloche-epaisseurSocleCloche-epaisseurFeutre])
-          cylinder(r1=diamHaut/4, r2=diamHaut/2, h=epaisseurSocleCloche,   $fn=stepsPerTurn);
+        }
+        // socle cloche
+        intersection() {
+            sphere(r=rsphere, $fn=stepsPerTurn);
+            translate ([0,0, -rsphere])
+                cylinder(r=socleDiametre/2, h=rsphere-clochePosition, $fn=stepsPerTurn);
+        }
     }
     union () {
         mirror([0,0,1]) ouvertures();
-        translate([-ecartementVisCloche,0, -poscloche]) trouVis();
-        translate([ecartementVisCloche,0, -poscloche]) trouVis();
-        translate([0,-ecartementVisCloche, -poscloche]) trouVis();
-        translate([0, ecartementVisCloche, -poscloche]) trouVis();
+        for (angle=[0:90:360]) {
+            rotate([0,0,angle+45])
+                translate([visClocheEcartement,0, -rsphere+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
+        }
     }
   }
 }
@@ -183,25 +230,46 @@ module balle_exterieur() {
 	   }
      }
      union () {
-         // Trou de vis
-         cylinder(r=diametreVis/2,h=1.1*rsphere, $fn=stepsPerTurn);
+         // la vis pour attacher le contrepoids
+         translate([0,0,rsphere]) rotate([180,0,0])
+             vis();
          ouvertures ();
      }
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////
+// Construction des différentes versions
 
-decalage = 120;
-//decalage = 0;
-//translate ([0,decalage, -poscloche]) 
-//  cloche();
-
-// Coupe par un cube pour voir l'interieur de la balle: 
-//difference () { 
-  union () {
-    balle_interieur ();
-    translate ([0, decalage, 0])
-      balle_exterieur();
-  } 
-  // translate([50,50,-100]) cube ([100,100,400],center=true);
-//}
+if (version == "print") {
+    translate([rsphere+2, 0, 0]) rotate([0,180,0])
+    balle_interieur();
+    translate([-rsphere, 0, 0])
+    balle_exterieur();
+    translate([rsphere, 0, 0])
+    contreSocle();
+}
+else if (version == "preview_closed") {
+    translate ([0,0, -clochePosition])
+        cloche();
+    coupe(rsphere) {
+        union() {
+            balle_interieur();
+            balle_exterieur();
+        }
+    }
+}
+else if (version == "preview_open") {
+    translate([rsphere,0,0])
+    coupe(rsphere)
+        balle_interieur();
+    translate([-rsphere,0,0])
+    coupe(rsphere)
+        balle_exterieur();
+} else if (version == "accessoires") {
+    vis();
+    translate([10,0,0])
+        ecrou();
+    translate([-20,0,0])
+        contreSocle();
+}
