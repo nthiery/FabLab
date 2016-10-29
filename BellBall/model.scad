@@ -10,7 +10,7 @@ vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
 //vue = "accessoires";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = vue == "impression" ? 16:16; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 64:32; 	// number of slices to create per turn
 
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions vis et ecrous
@@ -54,6 +54,7 @@ contreSocleEpaisseur = 6;
 pitchRadius=42; 	// rayon du milieu du pas de vis
 length=10;              // longeur du pas de vis
 epaisseur=2.5;            // epaisseur de la balle
+epaisseur_vis_interne=1.5;
 
 HauteurVis = -length/2;
 
@@ -152,7 +153,7 @@ nbOuvertures=16;
 hauteurOuvertures=100; // Ne pas changer, sauf si la balle devenait plus grande
 diametreInterieurOuvertures=47;
 epaisseurInterieurOuvertures=3;
-diametreExterieurOuvertures=500;
+diametreExterieurOuvertures=600;
 epaisseurExterieurOuvertures=60;
 
 module ouvertures () {
@@ -205,74 +206,86 @@ module vis_exter () {
 }
 
 module balle_interieur() {
-  difference() {
-    union() {
-        translate ([0,0,HauteurVis])
-	       difference () {
-	       union() {
-		    vis_inter();
-		    rotate([0,0,180]) vis_inter ();
-	       }
-	       translate ([0,0,-1])
-		    cylinder (r=pitchRadius-epaisseur,h=40, $fn=stepsPerTurn);
+    difference () {
+        union() {
+            // Les deux filets
+            for (angle=[0,180])
+                translate ([0,0,HauteurVis]) rotate([0,0,angle]) vis_inter();
+            // La demi calotte
+            difference() {
+                sphere(r=rsphere,$fn=stepsPerTurn);
+                union() {
+                    // Les ouvertures
+                    mirror([0,0,1]) ouvertures();
+                    // Un demi-espace simulé par un cube de largeur 4*rsphere
+                    translate([0,0, 2*rsphere-length/2])
+                        cube(4*rsphere,center=true);
+                }
+            }
         }
-        difference() {
-	       intersection () {
-		    sphere(r=rsphere,$fn=stepsPerTurn);
-		    translate([0,0,-(rsphere+1)-length/2])
-			 cube(2*rsphere+2,center=true);
-	       }
-	       intersection () {
-		    sphere(r=rsphere-epaisseur, $fn=stepsPerTurn);
-		    translate([0,0, -(rsphere+1)-length/2-1.5*epaisseur])
-			 cube(2*rsphere+2,center=true);
-	       }
-	       translate ([0,0,-length/2-1.5*epaisseur-0.1])
-		    cylinder (r=pitchRadius-epaisseur,h=length+0.2,
-			      $fn=stepsPerTurn);
-        }
-        // socle cloche
-        intersection() {
-            sphere(r=rsphere, $fn=stepsPerTurn);
-            translate ([0,0, -rsphere])
-                cylinder(r=socleDiametre/2, h=rsphere-cloche_position, $fn=stepsPerTurn);
-        }
+        // forme interne ovoïde pour rajouter de l'épaisseur au niveau de la vis interne
+        translate([0,0,-HauteurVis])
+            scale([rsphere-epaisseur-epaisseur_vis_interne,
+                   rsphere-epaisseur-epaisseur_vis_interne,
+                   rsphere-epaisseur-HauteurVis])
+            sphere($fn=stepsPerTurn);
     }
-    union () {
-        mirror([0,0,1]) ouvertures();
+}
+
+module ajoute_socle() {
+    difference() {
+        // Le socle
+        union() {
+            children();
+            // socle cloche
+            intersection() {
+                sphere(r=rsphere, $fn=stepsPerTurn);
+                translate ([0,0, -rsphere])
+                    cylinder(r=socleDiametre/2, h=rsphere-cloche_position, $fn=stepsPerTurn);
+            }
+        }
+        // Les trous de vis
         for (angle=[0:90:360]) {
             rotate([0,0,angle+45])
                 translate([visClocheEcartement,0, -rsphere+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
         }
     }
-  }
 }
 
+module balle_cloche_interieur() {
+    ajoute_socle()
+        balle_interieur();
+}
 
 module balle_exterieur() {
-  difference () {
-     union () {
-	   intersection () {
-	       translate ([0,0,HauteurVis]) vis_exter();
-	       translate ([0,0,HauteurVis]) rotate([0,0,180]) vis_exter ();
-	       sphere(r=rsphere,$fn=stepsPerTurn);
-	   }
-	   difference() {
-	       intersection () {
-		    sphere(r=rsphere,$fn=stepsPerTurn);
-		    translate([0,0,rsphere+length+HauteurVis])
-			  cube(2*rsphere+2,center=true);
-	       }
-	       sphere(r=rsphere-epaisseur, $fn=stepsPerTurn);
-	   }
-     }
-     union () {
-         // la vis pour attacher le contrepoids
-         translate([0,0,rsphere]) rotate([180,0,0])
-             vis();
-         ouvertures ();
-     }
-  }
+    // Le pas de vis externe
+    intersection () {
+        // Les deux filets
+        for (angle=[0,180])
+            translate ([0,0,HauteurVis]) rotate([0,0,angle]) vis_exter ();
+        // La forme externe du pas de vis
+        sphere(r=rsphere,$fn=stepsPerTurn);
+    }
+    // Le reste de la demi-sphere
+    difference() {
+        sphere(r=rsphere,$fn=stepsPerTurn);
+        union() {
+            sphere(r=rsphere-epaisseur, $fn=stepsPerTurn);
+            ouvertures ();
+            // un demi-espace
+            translate([0,0,-2*rsphere+HauteurVis])
+                cube(4*rsphere,center=true);
+        }
+    }
+}
+
+module balle_cloche_exterieur() {
+    difference () {
+        balle_exterieur();
+        // la vis pour attacher le contrepoids
+        translate([0,0,rsphere]) rotate([180,0,0])
+            vis();
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -280,9 +293,9 @@ module balle_exterieur() {
 
 if (vue == "impression") {
     translate([rsphere+2, 0, -HauteurVis]) rotate([0,180,0])
-    balle_interieur();
+    balle_cloche_interieur();
     translate([-rsphere, 0, -HauteurVis])
-    balle_exterieur();
+    balle_cloche_exterieur();
     translate([rsphere, 0, 0])
     contreSocle();
 }
@@ -291,18 +304,18 @@ else if (vue == "montee") {
         cloche();
     coupe(rsphere) {
         union() {
-            balle_interieur();
-            balle_exterieur();
+            balle_cloche_interieur();
+            balle_cloche_exterieur();
         }
     }
 }
 else if (vue == "eclatee") {
     translate([rsphere,0,0])
     coupe(rsphere)
-        balle_interieur();
+        balle_cloche_interieur();
     translate([-rsphere,0,0])
     coupe(rsphere)
-        balle_exterieur();
+        balle_cloche_exterieur();
 } else if (vue == "accessoires") {
     vis();
     translate([10,0,0])
