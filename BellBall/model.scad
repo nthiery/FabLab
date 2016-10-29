@@ -1,57 +1,58 @@
 use <Thread_Library.scad>
 
-version = "preview_open";
-//version = "preview_closed";
-version = "print";
-//version = "accessoires";
+//////////////////////////////////////////////////////////////////////////////
+// Configuration générale
+
+// Choix de la vue
+vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
+//vue = "montee";
+//vue = "impression";
+//vue = "accessoires";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = version == "print" ? 64:16; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 16:16; 	// number of slices to create per turn
 
+//////////////////////////////////////////////////////////////////////////////
 // Dimensions vis et ecrous
-visDiametreTete=6;
-visDiametre=3;
-visLongueur=30;
+vis_diametre=3;
+vis_longueur=30;
+// Forme de la tête de la vis
+vis_formeTete = "plate"; // ["fraisee", "plate"]
+vis_diametreTete=6;
+vis_longueurTete=2;
 
-ecrouEpaisseur = 1.5;
-ecrouDiametre = 6.5;
+ecrou_epaisseur = 2;
+ecrou_diametre = 6.5;
 
-// Dimension de la cloche
-diamExt=74;
-haut=49;
-diamHaut=35;
-clochePosition=34;
+// Dimensions de la cloche
+cloche_diametre_grand=74;
+cloche_hauteur=49;
+cloche_diametre_petit=35;
+// À quelle hauteur est acrochée la base de la cloche
+cloche_position=34;
 
-module cloche () {
-    cylinder(d2=diamExt, d1=diamHaut, h=haut);
-}
+// Dimensions du marteau
+marteau_diametre = 20;
+marteau_diametreRessort = 5;
+marteau_longueurRessort = 25;
 
 // Dimensions socle cloche
 epaisseurFeutre = 0;  // Epaisseur de l'éventuelle couche amortissante entre le socle et la cloche
-socleDiametre = diamHaut;
+socleDiametre = cloche_diametre_petit;
 visClocheEcartement=10;
 visClocheEnfoncement=2.5;
 
+//////////////////////////////////////////////////////////////////////////////
 // Dimensions contre socle cloche
-contreSocleDiametre = 2*visClocheEcartement+ecrouDiametre+2;
-contreSocleEpaisseur = 4;
 
-module contreSocle () {
-    difference () {
-        cylinder(r=contreSocleDiametre/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
-        union () {
-            for (angle=[0:90:360]) {
-                rotate([0,0,angle+45]) {
-                    translate([visClocheEcartement, 0, -.1]) vis();
-                    translate([visClocheEcartement, 0, contreSocleEpaisseur-ecrouEpaisseur+.1]) ecrou();
-                }
-            }
-        }
-    }
-}
+contreSocleDiametre = 2*visClocheEcartement+ecrou_diametre+2;
+contreSocleEpaisseur = 6;
+
+//////////////////////////////////////////////////////////////////////////////
+// Dimensions de la balle: pas de vis, ...
 
 pitchRadius=42; 	// rayon du milieu du pas de vis
-length=10;              // longeur de la vis
+length=10;              // longeur du pas de vis
 epaisseur=2.5;            // epaisseur de la balle
 
 HauteurVis = -length/2;
@@ -66,7 +67,6 @@ threadAngle=30; 	// angle between the two faces of the thread
 RH=true; 		// true/false the thread winds clockwise
 clearance=0.05;		// radial clearance, normalized to thread height
 backlash=0.05; 		// axial clearance, normalized to pitch
-
 
 rsphere = pitchRadius+epaisseur;
 echo ("Rayon de la balle : ", rsphere);
@@ -91,20 +91,57 @@ module coupe(r) {
     }
 }
 
-module vis(acces=0) {
-    cylinder(r=visDiametre/2,h=visLongueur, $fn=stepsPerTurn);
-    cylinder(r2=0,r1=visDiametreTete/2,h=visDiametreTete/2, $fn=stepsPerTurn);
-    translate([0,0,-acces])
-        cylinder(r=visDiametreTete/2, h=acces, $fn=stepsPerTurn);
+//////////////////////////////////////////////////////////////////////////////
+// Accessoires
+
+module vis(diametre=vis_diametre, longueur=vis_longueur,
+           diametreTete=vis_diametreTete, longueurTete=vis_longueurTete, formeTete=vis_formeTete,
+           acces=0) {
+    // Filetage
+    cylinder(r=diametre/2,h=longueur, $fn=stepsPerTurn);
+    // Tête
+    if (formeTete == "fraisee")
+        cylinder(r2=0,r1=vis_diametreTete/2,h=diametreTete/2, $fn=stepsPerTurn);
+    else
+        cylinder(r=vis_diametreTete/2, h=vis_longueurTete, $fn=stepsPerTurn);
+    // Volume d'accès à la tête (optionel)
+    if ( acces > 0 )
+        translate([0,0,-acces])
+            cylinder(r=diametreTete/2, h=acces, $fn=stepsPerTurn);
 }
 
-module ecrou() {
+module ecrou(diametre=ecrou_diametre, epaisseur=ecrou_epaisseur, diametre_interne=vis_diametre) {
     difference() {
-        cylinder(r=ecrouDiametre/2, h=ecrouEpaisseur, $fn=6);
+        cylinder(r=diametre/2, h=epaisseur, $fn=6);
         translate([0,0,-.1])
-        cylinder(r=visDiametre/2, h=ecrouEpaisseur+.2, $fn=stepsPerTurn);
+        cylinder(r=diametre_interne/2, h=epaisseur+.2, $fn=stepsPerTurn);
     }
 }
+
+module cloche (diametre_grand=cloche_diametre_grand,
+               diametre_petit=cloche_diametre_petit,
+               hauteur = cloche_hauteur) {
+    cylinder(d2=diametre_grand, d1=diametre_petit, h=hauteur);
+}
+
+// TODO: rajouter le trou central!
+module contreSocle () {
+    difference () {
+        cylinder(r=contreSocleDiametre/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
+        union () {
+            // Trous pour les vis
+            for (angle=[0:90:360]) {
+                rotate([0,0,angle+45]) {
+                    translate([visClocheEcartement, 0, -.1]) vis();
+                    translate([visClocheEcartement, 0, contreSocleEpaisseur-ecrou_epaisseur+.1]) ecrou();
+                }
+            }
+            // Trou pour le ressort du marteau
+            cylinder(r=marteau_diametreRessort/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
+        }
+    }
+}
+
 
 //////////////////////////////////////////////////////////////////////////////
 // Dessin d'ouvertures régulières dans la balle
@@ -198,7 +235,7 @@ module balle_interieur() {
         intersection() {
             sphere(r=rsphere, $fn=stepsPerTurn);
             translate ([0,0, -rsphere])
-                cylinder(r=socleDiametre/2, h=rsphere-clochePosition, $fn=stepsPerTurn);
+                cylinder(r=socleDiametre/2, h=rsphere-cloche_position, $fn=stepsPerTurn);
         }
     }
     union () {
@@ -239,18 +276,18 @@ module balle_exterieur() {
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// Construction des différentes versions
+// Construction des différentes vues
 
-if (version == "print") {
-    translate([rsphere+2, 0, 0]) rotate([0,180,0])
+if (vue == "impression") {
+    translate([rsphere+2, 0, -HauteurVis]) rotate([0,180,0])
     balle_interieur();
-    translate([-rsphere, 0, 0])
+    translate([-rsphere, 0, -HauteurVis])
     balle_exterieur();
     translate([rsphere, 0, 0])
     contreSocle();
 }
-else if (version == "preview_closed") {
-    translate ([0,0, -clochePosition])
+else if (vue == "montee") {
+    translate ([0,0, -cloche_position])
         cloche();
     coupe(rsphere) {
         union() {
@@ -259,14 +296,14 @@ else if (version == "preview_closed") {
         }
     }
 }
-else if (version == "preview_open") {
+else if (vue == "eclatee") {
     translate([rsphere,0,0])
     coupe(rsphere)
         balle_interieur();
     translate([-rsphere,0,0])
     coupe(rsphere)
         balle_exterieur();
-} else if (version == "accessoires") {
+} else if (vue == "accessoires") {
     vis();
     translate([10,0,0])
         ecrou();
