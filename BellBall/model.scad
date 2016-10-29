@@ -10,7 +10,7 @@ vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
 //vue = "accessoires";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = vue == "impression" ? 64:32; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 64:16; 	// number of slices to create per turn
 
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions vis et ecrous
