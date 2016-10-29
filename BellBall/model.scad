@@ -125,7 +125,6 @@ module cloche (diametre_grand=cloche_diametre_grand,
     cylinder(d2=diametre_grand, d1=diametre_petit, h=hauteur);
 }
 
-// TODO: rajouter le trou central!
 module contreSocle () {
     difference () {
         cylinder(r=contreSocleDiametre/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
@@ -138,7 +137,7 @@ module contreSocle () {
                 }
             }
             // Trou pour le ressort du marteau
-            cylinder(r=marteau_diametreRessort/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
+            cylinder(r=marteau_diametreRessort/2,h=3*contreSocleEpaisseur, $fn=stepsPerTurn,center=true);
         }
     }
 }
@@ -296,7 +295,7 @@ if (vue == "impression") {
     balle_cloche_interieur();
     translate([-rsphere, 0, -HauteurVis])
     balle_cloche_exterieur();
-    translate([rsphere, 0, 0])
+    translate([rsphere+2, 0, 0])
     contreSocle();
 }
 else if (vue == "montee") {
