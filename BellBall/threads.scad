@@ -74,14 +74,14 @@ function segments (diameter) = min (50, ceil (diameter*6));
 //               is 1" diameter per 16" length).
 module metric_thread (diameter=8, pitch=1, length=1, internal=false, n_starts=1,
                       thread_size=-1, groove=false, square=false, rectangle=0,
-                      angle=30, taper=0)
+                      angle=30, taper=0, n_segments=0)
 {
    // thread_size: size of thread "V" different than travel per turn (pitch).
    // Default: same as pitch.
    local_thread_size = thread_size == -1 ? pitch : thread_size;
    local_rectangle = rectangle ? rectangle : 1;
 
-   n_segments = segments (diameter);
+   n_segments = (n_segments == 0)? segments (diameter): n_segments;
    h = (square || rectangle) ? local_thread_size*local_rectangle/2 : local_thread_size * cos (angle);
 
    h_fac1 = (square || rectangle) ? 0.90 : 0.625;
@@ -92,7 +92,7 @@ module metric_thread (diameter=8, pitch=1, length=1, internal=false, n_starts=1,
    if (! groove) {
       metric_thread_turns (diameter, pitch, length, internal, n_starts,
                            local_thread_size, groove, square, rectangle, angle,
-                           taper);
+                           taper, n_segments=n_segments);
    }
 
    difference () {
@@ -143,8 +143,9 @@ module english_thread (diameter=0.25, threads_per_inch=20, length=1,
 // ----------------------------------------------------------------------------
 module metric_thread_turns (diameter, pitch, length, internal, n_starts, 
                             thread_size, groove, square, rectangle, angle,
-                            taper)
+                            taper, n_segments=0)
 {
+   n_segments = (n_segments == 0)? segments (diameter): n_segments;
    // Number of turns needed.
    n_turns = floor (length/pitch);
 
@@ -155,7 +156,7 @@ module metric_thread_turns (diameter, pitch, length, internal, n_starts,
          translate ([0, 0, i*pitch]) {
             metric_thread_turn (diameter, pitch, internal, n_starts, 
                                 thread_size, groove, square, rectangle, angle,
-                                taper, i*pitch);
+                                taper, i*pitch, n_segments=n_segments);
          }
       }
 
@@ -169,16 +170,16 @@ module metric_thread_turns (diameter, pitch, length, internal, n_starts,
 
 // ----------------------------------------------------------------------------
 module metric_thread_turn (diameter, pitch, internal, n_starts, thread_size,
-                           groove, square, rectangle, angle, taper, z)
+                           groove, square, rectangle, angle, taper, z, n_segments=0)
 {
-   n_segments = segments (diameter);
+   n_segments = (n_segments == 0)? segments (diameter): n_segments;
    fraction_circle = 1.0/n_segments;
    for (i=[0 : n_segments-1]) {
       rotate ([0, 0, i*360*fraction_circle]) {
          translate ([0, 0, i*n_starts*pitch*fraction_circle]) {
             current_diameter = diameter - taper*(z + i*n_starts*pitch*fraction_circle);
             thread_polyhedron (current_diameter/2, pitch, internal, n_starts, 
-                               thread_size, groove, square, rectangle, angle);
+                               thread_size, groove, square, rectangle, angle, n_segments);
          }
       }
    }
@@ -194,9 +195,9 @@ function z_fct (current_radius, radius, pitch, angle)
 
 // ----------------------------------------------------------------------------
 module thread_polyhedron (radius, pitch, internal, n_starts, thread_size,
-                          groove, square, rectangle, angle)
+                          groove, square, rectangle, angle, n_segments=0)
 {
-   n_segments = segments (radius*2);
+   n_segments = (n_segments == 0)? segments (diameter): n_segments;
    fraction_circle = 1.0/n_segments;
 
    local_rectangle = rectangle ? rectangle : 1;
