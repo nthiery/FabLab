@@ -8,9 +8,10 @@ vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
 //vue = "montee";
 //vue = "impression";
 //vue = "accessoires";
+//vue = "pas_de_vis";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = vue == "impression" ? 64:16; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 64:32; 	// number of slices to create per turn
 
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions vis et ecrous
@@ -188,20 +189,22 @@ module ouvertures () {
             }
 }
 
-module vis_inter () {
+module vis_inter (clearance=clearance, backslash=backlash) {
   intersection() {
-     trapezoidThread(
-	length=length+5,        // axial length of the threaded rod
-	pitch=pitch,
-	pitchRadius=pitchRadius,
-	threadHeightToPitch=threadHeightToPitch,
-	profileRatio=profileRatio,
-	threadAngle=threadAngle,
-	RH=RH,
-	clearance=clearance,
-	backlash=backlash,
-	stepsPerTurn=stepsPerTurn
-	);
+      for (angle=[0,180])
+          rotate([0,0,angle])
+              trapezoidThread(
+                  length=length+10,        // axial length of the threaded rod
+                  pitch=pitch,
+                  pitchRadius=pitchRadius,
+                  threadHeightToPitch=threadHeightToPitch,
+                  profileRatio=profileRatio,
+                  threadAngle=threadAngle,
+                  RH=RH,
+                  clearance=clearance,
+                  backlash=backlash,
+                  stepsPerTurn=stepsPerTurn
+                  );
      cube ([2*(pitch+pitchRadius+1), 2*(pitch+pitchRadius+1), length*2], center=true);
   }
 }
@@ -228,10 +231,8 @@ module balle_interieur() {
     difference () {
         union() {
             // Les deux filets
-            for (angle=[0,180])
-                translate ([0,0,HauteurVis]) rotate([0,0,angle]) vis_inter();
             // La demi calotte
-            difference() {
+/*            difference() {
                 sphere(r=rsphere,$fn=stepsPerTurn);
                 union() {
                     // Les ouvertures
@@ -240,7 +241,7 @@ module balle_interieur() {
                     translate([0,0, 2*rsphere-length/2])
                         cube(4*rsphere,center=true);
                 }
-            }
+            }*/
         }
         // forme interne ovoïde pour rajouter de l'épaisseur au niveau de la vis interne
         translate([0,0,-HauteurVis])
@@ -280,19 +281,18 @@ module balle_exterieur() {
     // Le pas de vis externe
     intersection () {
         // Les deux filets
-        for (angle=[0,180])
+        intersection_for (angle=[0,181])
             translate ([0,0,HauteurVis]) rotate([0,0,angle]) vis_exter ();
         // La forme externe du pas de vis
         sphere(r=rsphere,$fn=stepsPerTurn);
     }
-    // Le reste de la demi-sphere
     difference() {
         sphere(r=rsphere,$fn=stepsPerTurn);
         union() {
             sphere(r=rsphere-epaisseur, $fn=stepsPerTurn);
             ouvertures ();
             // un demi-espace
-            translate([0,0,-2*rsphere+HauteurVis])
+            translate([0,0,-2*rsphere-HauteurVis])
                 cube(4*rsphere,center=true);
         }
     }
@@ -327,11 +327,9 @@ else if (vue == "montee") {
     }
 }
 else if (vue == "eclatee") {
-    translate([rsphere,0,0])
-        coupe ()
+    translate([rsphere,0,0]) coupe (rsphere)
         balle_cloche_interieur();
-    translate([-rsphere,0,0])
-        coupe()
+    translate([-rsphere,0,0]) coupe(rsphere)
         balle_cloche_exterieur();
 } else if (vue == "accessoires") {
     vis();
@@ -341,4 +339,6 @@ else if (vue == "eclatee") {
         contreSocle();
     translate([50,0,0])
         cloche();
+} else if (vue == "pas_de_vis") {
+    vis_inter();
 }
