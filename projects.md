@@ -15,3 +15,6 @@ title: Projects
 </table>
 
 And many more that have not yet been indexed.
+
+See also the [project galery](http://fablab.digiscope.fr/#!/projects) on the [official FabLab site]({{site.official_fablab_url}}).
+

@@ -3,5 +3,5 @@ layout: page
 title: Welcome to another site for the FabLab Digiscope
 ---
 
-This web sites hosts a collection of notes and projects that have been
-built at the [FabLab Digicope](https://fablabdigiscope.wordpress.com/).
+This web site hosts a collection of notes and projects of some of the
+users of the [FabLab Digicope]({{site.official_fablab_url}}).
