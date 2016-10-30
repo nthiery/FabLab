@@ -4,5 +4,7 @@ layout: default
 
 <div class="page">
   <h1 class="page-title">The FabLab's {{ page.title }}</h1>
+  {% for image in page.images %}<a href="{{image}}"><img class=image src="{{image}}"></a>{% endfor %}
+
   {{ content }}
 </div>

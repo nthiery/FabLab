@@ -1,6 +1,7 @@
 ---
 layout: machine
-title: epilog laser cutter
+title: Epilog laser-cutter Mini 24"
+images: epilog_lasercutter_min_241.jpg
 ---
 
 

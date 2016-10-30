@@ -1,6 +1,7 @@
 ---
 layout: machine
 title: 3D printers Ultimaker2
+images: ultimaker-2-imprimante-3d.png
 ---
 
 ##
