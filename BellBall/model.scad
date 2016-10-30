@@ -1,11 +1,11 @@
-use <Thread_Library.scad>
+use <threads.scad>
 
 //////////////////////////////////////////////////////////////////////////////
 // Configuration générale
 
 // Choix de la vue
 vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-//vue = "montee";
+vue = "montee";
 //vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
@@ -55,26 +55,20 @@ contreSocleEpaisseur = 6;
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions de la balle: pas de vis, ...
 
-pitchRadius=42; 	// rayon du milieu du pas de vis
-length=10;              // longeur du pas de vis
-epaisseur=2.5;            // epaisseur de la balle
-epaisseur_vis_interne=1.5;
+balle_diametre_interne=84; 	// rayon du milieu du pas de vis
+balle_epaisseur=2.5;          // epaisseur de la balle
+pasDeVis_epaisseurFilets=2; // epaisseur des filets
+pasDeVis_nbFilets=2;        // nombre de filets
+pasDeVis_longueur=10;              // longeur du pas de vis
+// surplus d'epaisseur au niveau de la vis interne
+pasDeVis_surplusEpaisseur=1.5;
+// Décallage vers le bas du pas de vis interne pour s'assurer qu'il
+// morde bien dans le pas de vis externe quand la balle est fermée,
+// et aussi qu'il fusionne bien avec sa demi-sphère
+pasDeVis_mordant=.1;
 
-HauteurVis = -length/2;
-
-pitch=8;		// axial distance from crest to crest
-threadHeightToPitch=0.2;// ratio between the height of the profile and the pitch
-			// std value for Acme or metric lead screw is 0.5
-profileRatio=0.25;	// ratio between the lengths of the raised part of the profile and the pitch
-			// std value for Acme or metric lead screw is 0.5
-threadAngle=30; 	// angle between the two faces of the thread
-			// std value for Acme is 29 or for metric lead screw is 30
-RH=true; 		// true/false the thread winds clockwise
-clearance=0.05;		// radial clearance, normalized to thread height
-backlash=0.05; 		// axial clearance, normalized to pitch
-
-rsphere = pitchRadius+epaisseur;
-echo ("Rayon de la balle : ", rsphere);
+balle_diametre = balle_diametre_interne+2*balle_epaisseur;
+echo ("Diamètre de la balle : ", balle_diametre);
 
 //////////////////////////////////////////////////////////////////////////////
 // Utilitaires
@@ -82,9 +76,10 @@ echo ("Rayon de la balle : ", rsphere);
 // Il n'y a pas de primitive dans OpenScad pour construire un polytope plein défini par ses points extrémaux
 // À la place, on peut faire l'enveloppe convexe de micro cubes comme celui ci-dessous
 // https://spolearninglab.com/curriculum/software/3d_modeling/openscad/openscad_06.html
+// Ici, on mets des sphères de rayon 1 afin d'éviter les angles vifs
 
 module pseudoPoint () {
-    cube(.1, center=true);
+    sphere(center=true,$fn=16);
 }
 
 // Coupe un objet centré par un coin à 45 degrés pour en voir l'intérieur
@@ -123,7 +118,7 @@ module ecrou(diametre=ecrou_diametre, epaisseur=ecrou_epaisseur,
     color("silver") difference() {
         cylinder(r=diametre/2, h=epaisseur, $fn=6);
         translate([0,0,-.1])
-            cylinder(r=diametre_interne/2, h=epaisseur+.2, $fn=stepsPerTurn);
+            cylinder(d=balle_diametre_interne, h=epaisseur+.2, $fn=stepsPerTurn);
     }
 }
 
@@ -171,10 +166,10 @@ module contreSocle () {
 nbOuvertures=16;
 // Les variables suivantes contrôlent la forme du cône de base
 hauteurOuvertures=100; // Ne pas changer, sauf si la balle devenait plus grande
-diametreInterieurOuvertures=47;
-epaisseurInterieurOuvertures=3;
+diametreInterieurOuvertures=50;
+epaisseurInterieurOuvertures=1;
 diametreExterieurOuvertures=600;
-epaisseurExterieurOuvertures=60;
+epaisseurExterieurOuvertures=55;
 
 module ouvertures () {
     ratio = diametreInterieurOuvertures / diametreExterieurOuvertures;
@@ -189,65 +184,31 @@ module ouvertures () {
             }
 }
 
-module vis_inter (clearance=clearance, backslash=backlash) {
-  intersection() {
-      for (angle=[0,180])
-          rotate([0,0,angle])
-              trapezoidThread(
-                  length=length+10,        // axial length of the threaded rod
-                  pitch=pitch,
-                  pitchRadius=pitchRadius,
-                  threadHeightToPitch=threadHeightToPitch,
-                  profileRatio=profileRatio,
-                  threadAngle=threadAngle,
-                  RH=RH,
-                  clearance=clearance,
-                  backlash=backlash,
-                  stepsPerTurn=stepsPerTurn
-                  );
-     cube ([2*(pitch+pitchRadius+1), 2*(pitch+pitchRadius+1), length*2], center=true);
-  }
-}
-
-module vis_exter () {
-     trapezoidNut(
-	length=length,        // axial length of the threaded rod
-        radius=4*pitchRadius,              // outer radius of the nut
-	pitch=pitch,
-	pitchRadius=pitchRadius,
-	threadHeightToPitch=threadHeightToPitch,
-	profileRatio=profileRatio,
-	threadAngle=threadAngle,
-	RH=RH,
-	clearance=clearance,
-	backlash=backlash,
-	stepsPerTurn=stepsPerTurn,
-        countersunk=0.5        // depth of 45 degree chamfered entries, normalized to pitch
-        );
-
-}
-
 module balle_interieur() {
     difference () {
         union() {
-            // Les deux filets
+            // Le pas de vis
+            translate([0,0,-pasDeVis_longueur/2-pasDeVis_mordant])
+            metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2, length=pasDeVis_longueur,
+                          pitch=pasDeVis_epaisseurFilets,
+                          n_starts=pasDeVis_nbFilets, n_segments=stepsPerTurn);
             // La demi calotte
-/*            difference() {
-                sphere(r=rsphere,$fn=stepsPerTurn);
+            difference() {
+                sphere(d=balle_diametre,$fn=stepsPerTurn);
                 union() {
                     // Les ouvertures
                     mirror([0,0,1]) ouvertures();
-                    // Un demi-espace simulé par un cube de largeur 4*rsphere
-                    translate([0,0, 2*rsphere-length/2])
-                        cube(4*rsphere,center=true);
+                    // Un demi-espace simulé par un cube de largeur 2*balle_diametre
+                    translate([0,0, balle_diametre-pasDeVis_longueur/2])
+                        cube(2*balle_diametre,center=true);
                 }
-            }*/
+            }
         }
         // forme interne ovoïde pour rajouter de l'épaisseur au niveau de la vis interne
-        translate([0,0,-HauteurVis])
-            scale([rsphere-epaisseur-epaisseur_vis_interne,
-                   rsphere-epaisseur-epaisseur_vis_interne,
-                   rsphere-epaisseur-HauteurVis])
+        translate([0,0,pasDeVis_longueur/2])
+            scale([balle_diametre_interne/2-pasDeVis_surplusEpaisseur,
+                   balle_diametre_interne/2-pasDeVis_surplusEpaisseur,
+                   balle_diametre_interne/2+pasDeVis_longueur/2])
             sphere($fn=stepsPerTurn);
     }
 }
@@ -259,15 +220,15 @@ module ajoute_socle() {
             children();
             // socle cloche
             intersection() {
-                sphere(r=rsphere, $fn=stepsPerTurn);
-                translate ([0,0, -rsphere])
-                    cylinder(r=socleDiametre/2, h=rsphere-cloche_position-epaisseurFeutre, $fn=stepsPerTurn);
+                sphere(d=balle_diametre, $fn=stepsPerTurn);
+                translate ([0,0, -balle_diametre/2])
+                    cylinder(r=socleDiametre/2, h=balle_diametre/2-cloche_position-epaisseurFeutre, $fn=stepsPerTurn);
             }
         }
         // Les trous de vis
         for (angle=[0:90:360]) {
             rotate([0,0,angle+45])
-                translate([cloche_ecartement_trous_vis,0, -rsphere+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
+                translate([cloche_ecartement_trous_vis,0, -balle_diametre/2+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
         }
     }
 }
@@ -278,23 +239,16 @@ module balle_cloche_interieur() {
 }
 
 module balle_exterieur() {
-    // Le pas de vis externe
-    intersection () {
-        // Les deux filets
-        intersection_for (angle=[0,181])
-            translate ([0,0,HauteurVis]) rotate([0,0,angle]) vis_exter ();
-        // La forme externe du pas de vis
-        sphere(r=rsphere,$fn=stepsPerTurn);
-    }
     difference() {
-        sphere(r=rsphere,$fn=stepsPerTurn);
-        union() {
-            sphere(r=rsphere-epaisseur, $fn=stepsPerTurn);
-            ouvertures ();
-            // un demi-espace
-            translate([0,0,-2*rsphere-HauteurVis])
-                cube(4*rsphere,center=true);
-        }
+        sphere(d=balle_diametre,$fn=stepsPerTurn);
+        translate([0,0,-balle_diametre+-pasDeVis_longueur/2])
+            cube(2*balle_diametre,center=true);
+        translate([0,0,-pasDeVis_longueur/2])
+        metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2, length=pasDeVis_longueur,
+                      pitch=pasDeVis_epaisseurFilets, n_starts=pasDeVis_nbFilets,
+                      n_segments=stepsPerTurn, internal=true);
+        sphere(d=balle_diametre_interne, $fn=stepsPerTurn);
+        ouvertures ();
     }
 }
 
@@ -302,7 +256,7 @@ module balle_cloche_exterieur() {
     difference () {
         balle_exterieur();
         // la vis pour attacher le contrepoids
-        translate([0,0,rsphere]) rotate([180,0,0])
+        translate([0,0,balle_diametre/2]) rotate([180,0,0])
             vis();
     }
 }
@@ -311,15 +265,15 @@ module balle_cloche_exterieur() {
 // Construction des différentes vues
 
 if (vue == "impression") {
-    translate([rsphere+2, 0, -HauteurVis]) rotate([0,180,0])
+    translate([balle_diametre/2+2, 0, pasDeVis_longueur/2]) rotate([0,180,0])
     balle_cloche_interieur();
-    translate([-rsphere, 0, -HauteurVis])
+    translate([-balle_diametre/2, 0, pasDeVis_longueur/2])
     balle_cloche_exterieur();
-    translate([rsphere+2, 0, 0])
+    translate([balle_diametre/2+2, 0, 0])
     contreSocle();
 }
 else if (vue == "montee") {
-    coupe(rsphere) {
+    coupe(balle_diametre) {
         translate ([0,0, -cloche_position])
             cloche();
         balle_cloche_interieur();
@@ -327,9 +281,9 @@ else if (vue == "montee") {
     }
 }
 else if (vue == "eclatee") {
-    translate([rsphere,0,0]) coupe (rsphere)
+    translate([balle_diametre/2,0,0]) coupe (balle_diametre)
         balle_cloche_interieur();
-    translate([-rsphere,0,0]) coupe(rsphere)
+    translate([-balle_diametre/2,0,0]) coupe(balle_diametre)
         balle_cloche_exterieur();
 } else if (vue == "accessoires") {
     vis();
