@@ -22,3 +22,7 @@ a fini l'impression 1cm plus à droite.
 - Largeur tête écrou OK: l'écrou se coince en appuyant un peu fort.
 - Épaisseur écrous trop fine (x1.5?)
 - Trous de vis trop fins: les vis rentrent, mais en force
+- Un brim de 1cm est suffisant
+- Il manque le trou dans le socle
+- contresocle trop fin
+- Prévoir plutôt une vis à tête "plate" plutôt que fraisée

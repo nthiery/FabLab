@@ -20,6 +20,7 @@ vis_longueur=30;
 vis_formeTete = "plate"; // ["fraisee", "plate"]
 vis_diametreTete=6;
 vis_longueurTete=2;
+vis_marge=.1;
 
 ecrou_epaisseur = 2;
 ecrou_diametre = 6.5;
@@ -28,8 +29,11 @@ ecrou_diametre = 6.5;
 cloche_diametre_grand=74;
 cloche_hauteur=49;
 cloche_diametre_petit=35;
+cloche_epaisseur=1;
+cloche_diametre_trou=14;
 // À quelle hauteur est acrochée la base de la cloche
 cloche_position=34;
+cloche_ecartement_trous_vis=10;
 
 // Dimensions du marteau
 marteau_diametre = 20;
@@ -37,15 +41,14 @@ marteau_diametreRessort = 5;
 marteau_longueurRessort = 25;
 
 // Dimensions socle cloche
-epaisseurFeutre = 0;  // Epaisseur de l'éventuelle couche amortissante entre le socle et la cloche
+epaisseurFeutre = .1;  // Epaisseur de l'éventuelle couche amortissante entre le socle et la cloche
 socleDiametre = cloche_diametre_petit;
-visClocheEcartement=10;
 visClocheEnfoncement=2.5;
 
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions contre socle cloche
 
-contreSocleDiametre = 2*visClocheEcartement+ecrou_diametre+2;
+contreSocleDiametre = 2*cloche_ecartement_trous_vis+ecrou_diametre+2;
 contreSocleEpaisseur = 6;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -87,7 +90,8 @@ module pseudoPoint () {
 // r: une majoration du rayon maximal de l'objet
 module coupe(r) {
     difference() {
-        children(0);
+        children();
+        color("black")
         rotate([0,0,-135]) translate([r,r,0]) cube ([2*r,2*r,2*r], center=true);
     }
 }
@@ -95,34 +99,50 @@ module coupe(r) {
 //////////////////////////////////////////////////////////////////////////////
 // Accessoires
 
-module vis(diametre=vis_diametre, longueur=vis_longueur,
+module vis(diametre=vis_diametre, longueur=vis_longueur, marge=vis_marge,
            diametreTete=vis_diametreTete, longueurTete=vis_longueurTete, formeTete=vis_formeTete,
            acces=0) {
     // Filetage
-    cylinder(r=diametre/2,h=longueur, $fn=stepsPerTurn);
-    // Tête
-    if (formeTete == "fraisee")
-        cylinder(r2=0,r1=vis_diametreTete/2,h=diametreTete/2, $fn=stepsPerTurn);
-    else
-        cylinder(r=vis_diametreTete/2, h=vis_longueurTete, $fn=stepsPerTurn);
-    // Volume d'accès à la tête (optionel)
-    if ( acces > 0 )
-        translate([0,0,-acces])
-            cylinder(r=diametreTete/2, h=acces, $fn=stepsPerTurn);
+    color("silver") {
+        cylinder(d=diametre+marge,h=longueur, $fn=stepsPerTurn);
+        // Tête
+        if (formeTete == "fraisee")
+            cylinder(d2=0,d1=vis_diametreTete,d=diametreTete, $fn=stepsPerTurn);
+        else
+            cylinder(d=vis_diametreTete, h=vis_longueurTete, $fn=stepsPerTurn);
+        // Volume d'accès à la tête (optionel)
+        if ( acces > 0 )
+            translate([0,0,-acces])
+                cylinder(d=diametreTete, h=acces+.1, $fn=stepsPerTurn);
+    }
 }
 
-module ecrou(diametre=ecrou_diametre, epaisseur=ecrou_epaisseur, diametre_interne=vis_diametre) {
-    difference() {
+module ecrou(diametre=ecrou_diametre, epaisseur=ecrou_epaisseur,
+             diametre_interne=vis_diametre-2*vis_marge) {
+    color("silver") difference() {
         cylinder(r=diametre/2, h=epaisseur, $fn=6);
         translate([0,0,-.1])
-        cylinder(r=diametre_interne/2, h=epaisseur+.2, $fn=stepsPerTurn);
+            cylinder(r=diametre_interne/2, h=epaisseur+.2, $fn=stepsPerTurn);
     }
 }
 
 module cloche (diametre_grand=cloche_diametre_grand,
                diametre_petit=cloche_diametre_petit,
-               hauteur = cloche_hauteur) {
-    cylinder(d2=diametre_grand, d1=diametre_petit, h=hauteur);
+               hauteur=cloche_hauteur, epaisseur=cloche_epaisseur,
+               diametre_trou=cloche_diametre_trou) {
+    color ("red")
+        difference() {
+        cylinder(d2=diametre_grand, d1=diametre_petit, h=hauteur, $fn=stepsPerTurn);
+        // Forme intérieure de la cloche
+        translate([0,0,epaisseur])
+            cylinder(d2=diametre_grand-epaisseur, d1=diametre_petit-epaisseur, h=hauteur-epaisseur+.1, $fn=stepsPerTurn);
+        // Trou central
+        cylinder(d=diametre_trou,h=3*epaisseur,$fn=stepsPerTurn,center=true);
+        // Trous des vis
+        for (angle=[0:90:360])
+            rotate([0,0,angle+45])
+                translate([cloche_ecartement_trous_vis, 0, -vis_longueur/2]) vis();
+    }
 }
 
 module contreSocle () {
@@ -132,8 +152,8 @@ module contreSocle () {
             // Trous pour les vis
             for (angle=[0:90:360]) {
                 rotate([0,0,angle+45]) {
-                    translate([visClocheEcartement, 0, -.1]) vis();
-                    translate([visClocheEcartement, 0, contreSocleEpaisseur-ecrou_epaisseur+.1]) ecrou();
+                    translate([cloche_ecartement_trous_vis, 0, -.1]) vis();
+                    translate([cloche_ecartement_trous_vis, 0, contreSocleEpaisseur-ecrou_epaisseur+.1]) ecrou();
                 }
             }
             // Trou pour le ressort du marteau
@@ -240,13 +260,13 @@ module ajoute_socle() {
             intersection() {
                 sphere(r=rsphere, $fn=stepsPerTurn);
                 translate ([0,0, -rsphere])
-                    cylinder(r=socleDiametre/2, h=rsphere-cloche_position, $fn=stepsPerTurn);
+                    cylinder(r=socleDiametre/2, h=rsphere-cloche_position-epaisseurFeutre, $fn=stepsPerTurn);
             }
         }
         // Les trous de vis
         for (angle=[0:90:360]) {
             rotate([0,0,angle+45])
-                translate([visClocheEcartement,0, -rsphere+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
+                translate([cloche_ecartement_trous_vis,0, -rsphere+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
         }
     }
 }
@@ -299,21 +319,19 @@ if (vue == "impression") {
     contreSocle();
 }
 else if (vue == "montee") {
-    translate ([0,0, -cloche_position])
-        cloche();
     coupe(rsphere) {
-        union() {
-            balle_cloche_interieur();
-            balle_cloche_exterieur();
-        }
+        translate ([0,0, -cloche_position])
+            cloche();
+        balle_cloche_interieur();
+        balle_cloche_exterieur();
     }
 }
 else if (vue == "eclatee") {
     translate([rsphere,0,0])
-    coupe(rsphere)
+        coupe ()
         balle_cloche_interieur();
     translate([-rsphere,0,0])
-    coupe(rsphere)
+        coupe()
         balle_cloche_exterieur();
 } else if (vue == "accessoires") {
     vis();
@@ -321,4 +339,6 @@ else if (vue == "eclatee") {
         ecrou();
     translate([-20,0,0])
         contreSocle();
+    translate([50,0,0])
+        cloche();
 }
