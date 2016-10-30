@@ -19,8 +19,7 @@ gems:
 # Custom vars
 version:          0.1.0
 
-github:
-  repo:           https://github.com/nthiery/FabLab/
+repository:       nthiery/Fablab
 
 collections:
   activites:
