@@ -1,9 +1,8 @@
 ---
 layout: machine
 title: Epilog laser-cutter Mini 24"
-images: epilog_lasercutter_min_241.jpg
+images: [epilog_lasercutter_min_241.jpg]
 ---
-
 
 ## Network setup
 

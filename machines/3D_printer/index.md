@@ -1,12 +1,8 @@
 ---
 layout: machine
 title: 3D printers Ultimaker2
-images: ultimaker-2-imprimante-3d.png
+images: [ultimaker-2-imprimante-3d.png]
 ---
-
-##
-
-https://fablabdigiscope.wordpress.com/machines/#jp-carousel-789
 
 ## Instructions
 
