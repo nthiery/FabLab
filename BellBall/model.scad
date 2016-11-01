@@ -6,7 +6,7 @@ use <threads.scad>
 // Choix de la vue
 vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
 vue = "montee";
-//vue = "impression";
+vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -15,7 +15,8 @@ stepsPerTurn  = vue == "impression" ? 64:16; 	// number of slices to create per 
 marge = .1;
 
 attache = "vis"; // ["vis", "vis_metal", "clip"]
-// socle = "clip";
+//attache = "clip";
+//attache = "vis_metal";
 
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions vis et ecrous
@@ -35,10 +36,12 @@ cloche_diametre_grand=74;
 cloche_hauteur=49;
 cloche_diametre_petit=35;
 cloche_epaisseur=1;
+// Les deux diamètres possibles du trou de fixation de la cloche
 cloche_diametre_trou=14;
 cloche_diametre_trou2=10;
 // À quelle hauteur est acrochée la base de la cloche
 cloche_position=34;
+// Écartement des quatre trous de vis de la cloche par rapport au centre
 cloche_ecartement_trous_vis=10;
 
 // Dimensions du marteau
@@ -72,8 +75,8 @@ epaisseurFeutre = .1;  // Epaisseur de l'éventuelle couche amortissante entre l
 socleDiametre = cloche_diametre_petit;
 visClocheEnfoncement=2.5;
 
-contreSocleDiametre = 2*cloche_ecartement_trous_vis+ecrou_diametre+2;
-contreSocleEpaisseur = 6;
+contreAttache_diametre = 2*cloche_ecartement_trous_vis+ecrou_diametre+2;
+contreAttache_epaisseur = 6;
 attache_hauteurSocle =balle_diametre/2-cloche_position-epaisseurFeutre;
 attache_hauteurVis = attache_hauteurSocle*.75;
 
@@ -158,19 +161,19 @@ module marteau(diametre=marteau_diametre, diametreRessort=marteau_diametreRessor
         cylinder(d=diametreRessort,h=longueurRessort+diametre/2);
 }
 
-module contreSocle () {
+module contreAttache_vis_metal() {
     difference () {
-        cylinder(r=contreSocleDiametre/2,h=contreSocleEpaisseur, $fn=stepsPerTurn);
+        cylinder(r=contreAttache_diametre/2,h=contreAttache_epaisseur, $fn=stepsPerTurn);
         union () {
             // Trous pour les vis
             for (angle=[0:90:360]) {
                 rotate([0,0,angle+45]) {
                     translate([cloche_ecartement_trous_vis, 0, -.1]) vis();
-                    translate([cloche_ecartement_trous_vis, 0, contreSocleEpaisseur-ecrou_epaisseur+.1]) ecrou();
+                    translate([cloche_ecartement_trous_vis, 0, contreAttache_epaisseur-ecrou_epaisseur+.1]) ecrou();
                 }
             }
             // Trou pour le ressort du marteau
-            cylinder(d=marteau_diametreRessort,h=3*contreSocleEpaisseur, $fn=stepsPerTurn,center=true);
+            cylinder(d=marteau_diametreRessort,h=3*contreAttache_epaisseur, $fn=stepsPerTurn,center=true);
         }
     }
 }
@@ -218,7 +221,7 @@ module socle_clip(epaisseur=1,jeu=.1,
     cylinder(d1=2*cloche_diametre_trou, d2=0, hauteur/2, $fn=stepsPerTurn);
 }
 
-module contreSocle_vis(diametreVis=cloche_diametre_trou2,
+module contreAttache_vis(diametreVis=cloche_diametre_trou2,
                        diametre_trou=cloche_diametre_trou,
                        hauteur=attache_hauteurSocle, hauteurVis=attache_hauteurVis,
                        diametreTrouInterieur = marteau_diametreRessort,
@@ -227,25 +230,31 @@ module contreSocle_vis(diametreVis=cloche_diametre_trou2,
     difference() {
         union() {
             // La tête de vis
-            cylinder(d=diametre_trou*1.5,h=contreSocleEpaisseur,$fn=8);
+            cylinder(d=diametre_trou*1.5,h=contreAttache_epaisseur,$fn=8);
             // Rondelle intermédiaire pour gérer deux diamètres de trous de cloche
-            translate([0,0,contreSocleEpaisseur])
+            translate([0,0,contreAttache_epaisseur])
                 cylinder(d=diametre_trou, h=cloche_epaisseur,
                          $fn=stepsPerTurn);
             // Le pas de vis
-            translate([0,0,contreSocleEpaisseur+cloche_epaisseur])
+            translate([0,0,contreAttache_epaisseur+cloche_epaisseur])
                 metric_thread(diameter=diametreVis, length=hauteurVis-hauteurGuide,
                               pitch=epaisseurFilets,
                               n_segments=stepsPerTurn);
             // Le guide
-            translate([0,0,contreSocleEpaisseur+cloche_epaisseur+hauteurVis-hauteurGuide])
+            translate([0,0,contreAttache_epaisseur+cloche_epaisseur+hauteurVis-hauteurGuide])
                 cylinder(d1=diametreVis-epaisseurFilets,d2=diametreVis-epaisseurFilets-hauteurGuide/3, hauteurGuide,$fn=stepsPerTurn);
         }
         translate([0,0,-marge])
-        cylinder(d=diametreTrouInterieur,h=contreSocleEpaisseur, $fn=stepsPerTurn);
+        cylinder(d=diametreTrouInterieur,h=contreAttache_epaisseur, $fn=stepsPerTurn);
     }
 }
 
+module contreAttache() {
+    if ( attache=="vis_metal")
+        contreAttache_vis_metal();
+    else if ( attache=="vis")
+        contreAttache_vis();
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // Dessin d'ouvertures régulières dans la balle
@@ -377,7 +386,7 @@ if (vue == "impression") {
     translate([-balle_diametre/2, 0, pasDeVis_longueur/2])
     balle_cloche_exterieur();
     translate([balle_diametre/2+2, 0, 0])
-    contreSocle();
+        contreAttache();
 }
 else if (vue == "montee") {
     coupe(balle_diametre) {
@@ -385,11 +394,9 @@ else if (vue == "montee") {
             cloche();
         balle_cloche_interieur();
         balle_cloche_exterieur();
-        if (attache == "vis") {
-            translate([0,0,-cloche_position+contreSocleEpaisseur+cloche_epaisseur])
-                rotate([180,0,180])
-                contreSocle_vis();
-        }
+        translate([0,0,-cloche_position+contreAttache_epaisseur+cloche_epaisseur])
+            rotate([180,0,0])
+            contreAttache();
         translate([0,0,-cloche_position+cloche_epaisseur])
             marteau();
     }
@@ -404,9 +411,9 @@ else if (vue == "eclatee") {
     translate([10,0,0])
         ecrou();
     translate([-20,0,0])
-        contreSocle();
+        contreAttache();
     translate([-20,-30,0])
-        contreSocle_vis();
+        contreAttache_vis();
     translate([50,0,0])
         cloche();
     translate([50,-50,0])
