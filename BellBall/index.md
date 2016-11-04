@@ -15,8 +15,9 @@ parameters:
   Nozzle size: 0.8
   Support type: Everywhere
   Platform adhesion type: Brim
+  Brim line amount: 10
   Support: everywhere
-material: ???
+material: PLA/PHA
 ---
 
 The professional juggler [Vincent
