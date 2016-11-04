@@ -6,7 +6,7 @@ use <threads.scad>
 // Choix de la vue
 vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
 vue = "montee";
-vue = "impression";
+//vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -225,7 +225,7 @@ module contreAttache_vis(diametreVis=cloche_diametre_trou2,
                        diametre_trou=cloche_diametre_trou,
                        hauteur=attache_hauteurSocle, hauteurVis=attache_hauteurVis,
                        diametreTrouInterieur = marteau_diametreRessort,
-                       epaisseurFilets=2,
+                       epaisseurFilets=pasDeVis_epaisseurFilets,
                        hauteurGuide=1) {
     difference() {
         union() {
@@ -381,14 +381,20 @@ module balle_cloche_exterieur() {
 // Construction des différentes vues
 
 if (vue == "impression") {
-    translate([balle_diametre/2+2, 0, pasDeVis_longueur/2]) rotate([0,180,0])
-    balle_cloche_interieur();
     translate([-balle_diametre/2, 0, pasDeVis_longueur/2])
     balle_cloche_exterieur();
+    translate([balle_diametre/2+2, 0, pasDeVis_longueur/2]) rotate([0,180,0])
+    balle_cloche_interieur();
     translate([balle_diametre/2+2, 0, 0])
         contreAttache();
-}
-else if (vue == "montee") {
+} else if (vue == "impression_attacheVis") {
+    contreAttache();
+    intersection () {
+        rotate([0,180,0])
+            balle_cloche_interieur();
+        cylinder(d=balle_diametre/4, h=balle_diametre*2, $fn=stepsPerTurn);
+    }
+} else if (vue == "montee") {
     coupe(balle_diametre) {
         translate ([0,0, -cloche_position])
             cloche();
