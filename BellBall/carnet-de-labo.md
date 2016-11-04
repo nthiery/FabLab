@@ -26,3 +26,17 @@ a fini l'impression 1cm plus à droite.
 - Il manque le trou dans le socle
 - contresocle trop fin
 - Prévoir plutôt une vis à tête "plate" plutôt que fraisée
+
+## 2016-10-03: impression pas de vis (46931b77474d9530677c71f47852522d53f7378f)
+
+À corriger:
+- guide plus long
+- 1mm de plus de marge au fond
+- diamètre trou cloche 2 plus large: 0,9+ mm
+- diamètre trou ressort: 0.1mm de plus
+- la vis peut être plus courte
+
+- la vis ne rentre qu'en force; explication plausible: le jeu aux
+  normes de la bibliothèque metric_thread est prévu pour du métal; il
+  faut mettre plus de jeu pour de l'impression 3D. Romain utilise
+  0.4mm de jeu avec le logiciel Fusion360.
