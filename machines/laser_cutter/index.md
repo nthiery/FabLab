@@ -29,6 +29,10 @@ laser cutter. Set up the network with:
 
     sudo ifconfig eth0 129.175.5.208/16
 
+If you are using wicd to manage your network connections, you need to turn off first the daemon:
+
+    sudo service wicd stop
+
 Check the network connection:
 
     ping 129.175.5.206
