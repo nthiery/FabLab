@@ -47,7 +47,7 @@ a fini l'impression 1cm plus à droite.
 
 Référence: https://ultimaker.com/en/community/9577-taulman-bridge-on-a-um2
 
-paramètres Cura:
+Paramètres Cura:
 - Shell thickness: 0.8
   Layer Height: 0.2
   Travel speed: 100
@@ -68,12 +68,17 @@ paramètres Ultimaker (custom material 4):
 
 Je ne suis pas sûr que l'on ait interprété "Base Layer = 0.3 / 20mms" correctement
 
-Résultat: [côté](2016-11-04/1.jpg) [dessus](2016-11-04/2.jpg) [dessous](2016-11-04/3.jpg)
+Résultat:
+- Photos de [côté](2016-11-04/1.jpg), [dessus](2016-11-04/2.jpg), [dessous](2016-11-04/3.jpg)
 - À partir de h=4cm environ, il s'est passé n'importe quoi (tas de spaghettis)
 - À la fin de l'impression (après refroidissement? avant?), le model était décollé
 - Le support interne s'est déplacé de .5 cm
 - La découpe du matériau n'est pas immédiate: quand la buse passe
   d'une partie à l'autre, cela fait des fils.
+- Le matériau grésillait au moment de la dépose du brim
+
+Analyse?
+- support trop chaud?
 
 À examiner:
 - qualité du gros pas de vis
