@@ -38,7 +38,7 @@ cloche_diametre_petit=35;
 cloche_epaisseur=1;
 // Les deux diamètres possibles du trou de fixation de la cloche
 cloche_diametre_trou=14;
-cloche_diametre_trou2=10;
+cloche_diametre_trou2=9+2; // Pourquoi doit-on mettre +2?
 // À quelle hauteur est acrochée la base de la cloche
 cloche_position=34;
 // Écartement des quatre trous de vis de la cloche par rapport au centre
@@ -46,7 +46,7 @@ cloche_ecartement_trous_vis=10;
 
 // Dimensions du marteau
 marteau_diametre = 20;
-marteau_diametreRessort = 5;
+marteau_diametreRessort = 5.1;
 marteau_longueurRessort = 25;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ visClocheEnfoncement=2.5;
 contreAttache_diametre = 2*cloche_ecartement_trous_vis+ecrou_diametre+2;
 contreAttache_epaisseur = 6;
 attache_hauteurSocle =balle_diametre/2-cloche_position-epaisseurFeutre;
-attache_hauteurVis = attache_hauteurSocle*.75;
+attache_hauteurVis = attache_hauteurSocle*.7;
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -226,7 +226,7 @@ module contreAttache_vis(diametreVis=cloche_diametre_trou2,
                        hauteur=attache_hauteurSocle, hauteurVis=attache_hauteurVis,
                        diametreTrouInterieur = marteau_diametreRessort,
                        epaisseurFilets=pasDeVis_epaisseurFilets,
-                       hauteurGuide=1) {
+                       hauteurGuide=2) {
     difference() {
         union() {
             // La tête de vis
@@ -339,8 +339,11 @@ module ajoute_attache(hauteurSocle=attache_hauteurSocle,
                         translate([cloche_ecartement_trous_vis,0, -balle_diametre/2+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
                 }
             } else {
-                translate ([0,0, -balle_diametre/2+hauteurSocle-hauteurVis+marge])
-                metric_thread(diameter=cloche_diametre_trou2, length=hauteurVis,
+                jeu = .4; // jeu supplémentaire sur le diamètre
+                // Le trou de vis
+                hauteurTrouVis = hauteurVis+1;
+                translate ([0,0, -balle_diametre/2+hauteurSocle-hauteurTrouVis+marge])
+                metric_thread(diameter=cloche_diametre_trou2+jeu, length=hauteurTrouVis,
                               pitch=pasDeVis_epaisseurFilets,
                               internal=true,
                               n_segments=stepsPerTurn);
@@ -381,11 +384,12 @@ module balle_cloche_exterieur() {
 // Construction des différentes vues
 
 if (vue == "impression") {
-    translate([-balle_diametre/2, 0, pasDeVis_longueur/2])
+    D = balle_diametre/2+1;
+    translate([-D, 0, pasDeVis_longueur/2])
     balle_cloche_exterieur();
-    translate([balle_diametre/2+2, 0, pasDeVis_longueur/2]) rotate([0,180,0])
+    translate([D, 0, pasDeVis_longueur/2]) rotate([0,180,0])
     balle_cloche_interieur();
-    translate([balle_diametre/2+2, 0, 0])
+    translate([0, D*.8, 0])
         contreAttache();
 } else if (vue == "impression_attacheVis") {
     contreAttache();
