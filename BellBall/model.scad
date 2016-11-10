@@ -6,7 +6,7 @@ use <threads.scad>
 // Choix de la vue
 vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
 vue = "montee";
-//vue = "impression";
+vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -54,11 +54,11 @@ marteau_longueurRessort = 25;
 
 balle_diametre_interne=84; 	// rayon du milieu du pas de vis
 balle_epaisseur=2.5;          // epaisseur de la balle
-pasDeVis_epaisseurFilets=2; // epaisseur des filets
+pasDeVis_epaisseurFilets=3; // epaisseur des filets
 pasDeVis_nbFilets=2;        // nombre de filets
 pasDeVis_longueur=10;              // longeur du pas de vis
 // surplus d'epaisseur au niveau de la vis interne
-pasDeVis_surplusEpaisseur=1.5;
+pasDeVis_surplusEpaisseur=2;
 // Décallage vers le bas du pas de vis interne pour s'assurer qu'il
 // morde bien dans le pas de vis externe quand la balle est fermée,
 // et aussi qu'il fusionne bien avec sa demi-sphère
