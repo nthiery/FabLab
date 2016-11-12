@@ -11,7 +11,7 @@ date: 2016/09/16
 
 We built this water-wheel with my daugther Élise for the miniature
 pond in our garden. The fountain is powerered by a solar panel (Kit
-Rimini of NRJ Solar).
+Palermo-S d'Esotec).
 
 She did the first hand drawing and built a cardboard prototype. We
 then designed the svg model together in two steps, using inkscape.
