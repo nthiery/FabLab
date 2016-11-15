@@ -84,3 +84,21 @@ Analyse?
 - qualité du gros pas de vis
 - flexibilité rebond
 - resistance à la chute
+- Suggestion Romain pour mieux coller: laque cheveux fructis bambou
+
+
+# 2016-10-08: impression rouge (42a53e0ae20bddd641823e25de9cbba243d0c2f9)
+
+- Qualité d'impression crade: comme avec le Nylon ci-dessus
+  Romain: remettre la rétraction?
+- Manque jeu sur le pas de vis de la balle
+- Balle intérieure et extérieure serait probablement mieux un peu plus de même épaisseur
+  À ajuster quand on aura choisi le bon matériaux
+- marteauDiamètreRessort à mettre à 5.5 (les gros ressorts sont mieux)
+- Il y avait du support dans le trou de la vis qui était pénible à enlever.
+  Mettre un fond conique pour qu'il n'yait pas besoin de support au centre?
+- Diminuer le nombre de tours de filets sur la vis principale: la
+  balle bleue d'origine a deux tours de filets contre 3 ici, et des
+  filets un peu plus épais.
+- Filets peu marqués dans le pas extérieur
+- Inutile de gérer deux diamètres de trous de cloche
