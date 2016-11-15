@@ -5,13 +5,13 @@ use <threads.scad>
 
 // Choix de la vue
 vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-vue = "montee";
+//vue = "montee";
 vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = vue == "impression" ? 64:16; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 64:32; 	// number of slices to create per turn
 marge = .1;
 
 attache = "vis"; // ["vis", "vis_metal", "clip"]
@@ -46,7 +46,7 @@ cloche_ecartement_trous_vis=10;
 
 // Dimensions du marteau
 marteau_diametre = 20;
-marteau_diametreRessort = 5.1;
+marteau_diametreRessort = 5.5;
 marteau_longueurRessort = 25;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -54,9 +54,10 @@ marteau_longueurRessort = 25;
 
 balle_diametre_interne=84; 	// rayon du milieu du pas de vis
 balle_epaisseur=2.5;          // epaisseur de la balle
-pasDeVis_epaisseurFilets=3; // epaisseur des filets
+pasDeVis_epaisseurFilets=4; // epaisseur des filets
 pasDeVis_nbFilets=2;        // nombre de filets
 pasDeVis_longueur=10;              // longeur du pas de vis
+pasDeVis_jeu=.4;              // jeu supplémentaire sur le diamètre; valeur recommandée par Romain
 // surplus d'epaisseur au niveau de la vis interne
 pasDeVis_surplusEpaisseur=2;
 // Décallage vers le bas du pas de vis interne pour s'assurer qu'il
@@ -90,7 +91,7 @@ attache_hauteurVis = attache_hauteurSocle*.7;
 // Ici, on mets des sphères de rayon 1 afin d'éviter les angles vifs
 
 module pseudoPoint () {
-    sphere(center=true,$fn=16);
+    sphere(center=true,d=2,$fn=16);
 }
 
 // Coupe un objet centré par un coin à 45 degrés pour en voir l'intérieur
@@ -286,7 +287,7 @@ module balle_interieur() {
         union() {
             // Le pas de vis
             translate([0,0,-pasDeVis_longueur/2-pasDeVis_mordant])
-            metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2, length=pasDeVis_longueur,
+            metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2-pasDeVis_jeu, length=pasDeVis_longueur,
                           pitch=pasDeVis_epaisseurFilets,
                           n_starts=pasDeVis_nbFilets, n_segments=stepsPerTurn);
             // La demi calotte
@@ -339,14 +340,15 @@ module ajoute_attache(hauteurSocle=attache_hauteurSocle,
                         translate([cloche_ecartement_trous_vis,0, -balle_diametre/2+visClocheEnfoncement]) vis(acces=visClocheEnfoncement);
                 }
             } else {
-                jeu = .4; // jeu supplémentaire sur le diamètre
                 // Le trou de vis
                 hauteurTrouVis = hauteurVis+1;
                 translate ([0,0, -balle_diametre/2+hauteurSocle-hauteurTrouVis+marge])
-                metric_thread(diameter=cloche_diametre_trou2+jeu, length=hauteurTrouVis,
+                metric_thread(diameter=cloche_diametre_trou2+pasDeVis_jeu, length=hauteurTrouVis,
                               pitch=pasDeVis_epaisseurFilets,
                               internal=true,
                               n_segments=stepsPerTurn);
+                // A faire: fin de trou conique
+                // cylinder(d1=cloche_diametre_trou2, d2=0,h=2);
             }}
         }
     }
@@ -366,7 +368,7 @@ module balle_exterieur() {
         metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2, length=pasDeVis_longueur,
                       pitch=pasDeVis_epaisseurFilets, n_starts=pasDeVis_nbFilets,
                       n_segments=stepsPerTurn, internal=true);
-        sphere(d=balle_diametre_interne, $fn=stepsPerTurn);
+        sphere(d=balle_diametre_interne-1, $fn=stepsPerTurn);
         ouvertures ();
     }
 }
