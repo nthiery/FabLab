@@ -11,12 +11,15 @@ parameters:
   Shell thickness: 0.8
   Layer Height: 0.2
   Travel Speed: 100
+  Print Speed: 50
   Fill density: 100%
   Nozzle size: 0.8
   Support type: Everywhere
   Platform adhesion type: Brim
   Brim line amount: 10
   Support: everywhere
+  Enable retraction: true
+  Bottom-top thickness: 0.8
 material: PLA/PHA
 ---
 
