@@ -38,7 +38,8 @@ cloche_diametre_petit=35;
 cloche_epaisseur=1;
 // Les deux diamètres possibles du trou de fixation de la cloche
 cloche_diametre_trou=14;
-cloche_diametre_trou2=9+2; // Pourquoi doit-on mettre +2?
+//cloche_diametre_trou2=9+2; // Pourquoi doit-on mettre +2?
+cloche_diametre_trou2=cloche_diametre_trou;
 // À quelle hauteur est acrochée la base de la cloche
 cloche_position=34;
 // Écartement des quatre trous de vis de la cloche par rapport au centre
