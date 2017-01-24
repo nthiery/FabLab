@@ -87,7 +87,7 @@ Analyse?
 - Suggestion Romain pour mieux coller: laque cheveux fructis bambou
 
 
-# 2016-10-08: impression rouge (42a53e0ae20bddd641823e25de9cbba243d0c2f9)
+# 2016-11-08: impression rouge (42a53e0ae20bddd641823e25de9cbba243d0c2f9)
 
 - Qualité d'impression crade: comme avec le Nylon ci-dessus
   Romain: remettre la rétraction?
@@ -102,3 +102,29 @@ Analyse?
   filets un peu plus épais.
 - Filets peu marqués dans le pas extérieur
 - Inutile de gérer deux diamètres de trous de cloche
+
+# 2016-11-15: impression rouge (3646d65ca7f48d10cac1459bcf684aca9e5a6855)
+
+- Impression propre: remettre la retraction a marché
+
+- filetage un peut leger manque de la matiere sur l epaisseur du support du filetage
+trop de jours entre la matiere
+support genant pour la vis de fixation du petit support de la cloche
+ je pense qu il faut un  poil plus de matiere
+ 
+
+# 2016-12-21: impression noire (77876f5e466aca5aee4a9f9549721cf39065aaeb)
+
+- Il y avait du support sur la vis intérieur; un peu pénible à enlever
+- Correction possible: mettre un chanfrein en début et fin du pas de vis
+  à la fois sur la vis intérieure et extérieure
+- la fixation de cloche fonctionne super
+- avec un matériau plus souple, il faudra probablement renforcer le tout
+  typiquement rétrécir les ouvertures
+
+À faire:
+- [ ] Chanfrein
+- [ ] arrondir plus les ouvertures
+- [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
+- [ ] trou de fixation du poids: il faudrat 3mm au lieu de 2.5mm
+
