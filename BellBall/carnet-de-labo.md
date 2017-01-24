@@ -127,4 +127,4 @@ support genant pour la vis de fixation du petit support de la cloche
 - [ ] arrondir plus les ouvertures
 - [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
 - [ ] trou de fixation du poids: il faudrat 3mm au lieu de 2.5mm
-
+- [ ] cône au fond du trou dans la vis pour le ressort pour éviter du support
