@@ -5,8 +5,8 @@ use <threads.scad>
 
 // Choix de la vue
 vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-//vue = "montee";
-vue = "impression";
+vue = "montee";
+//vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -54,13 +54,14 @@ marteau_longueurRessort = 25;
 // Dimensions de la balle: pas de vis, ...
 
 balle_diametre_interne=84; 	// rayon du milieu du pas de vis
-balle_epaisseur=2.5;          // epaisseur de la balle
-pasDeVis_epaisseurFilets=4; // epaisseur des filets
+balle_epaisseur=3;          // epaisseur de la balle
+pasDeVis_epaisseurFilets=3; // epaisseur des filets
 pasDeVis_nbFilets=2;        // nombre de filets
 pasDeVis_longueur=10;              // longeur du pas de vis
 pasDeVis_jeu=.4;              // jeu supplémentaire sur le diamètre; valeur recommandée par Romain
+pasDeVis_diametre=balle_diametre_interne+pasDeVis_epaisseurFilets*.75;
 // surplus d'epaisseur au niveau de la vis interne
-pasDeVis_surplusEpaisseur=2;
+pasDeVis_surplusEpaisseur=1.5;
 // Décallage vers le bas du pas de vis interne pour s'assurer qu'il
 // morde bien dans le pas de vis externe quand la balle est fermée,
 // et aussi qu'il fusionne bien avec sa demi-sphère
@@ -68,6 +69,7 @@ pasDeVis_mordant=.1;
 
 balle_diametre = balle_diametre_interne+2*balle_epaisseur;
 echo ("Diamètre de la balle : ", balle_diametre);
+echo ("Diamètre de la balle : ", pasDeVis_diametre);
 
 //////////////////////////////////////////////////////////////////////////////
 // Dimensions attache
@@ -80,7 +82,7 @@ visClocheEnfoncement=2.5;
 contreAttache_diametre = 2*cloche_ecartement_trous_vis+ecrou_diametre+2;
 contreAttache_epaisseur = 6;
 attache_hauteurSocle =balle_diametre/2-cloche_position-epaisseurFeutre;
-attache_hauteurVis = attache_hauteurSocle*.7;
+attache_hauteurVis = attache_hauteurSocle*.75;
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -238,13 +240,14 @@ module contreAttache_vis(diametreVis=cloche_diametre_trou2,
                 cylinder(d=diametre_trou, h=cloche_epaisseur,
                          $fn=stepsPerTurn);
             // Le pas de vis
-            translate([0,0,contreAttache_epaisseur+cloche_epaisseur])
-                metric_thread(diameter=diametreVis, length=hauteurVis-hauteurGuide,
-                              pitch=epaisseurFilets,
-                              n_segments=stepsPerTurn);
-            // Le guide
-            translate([0,0,contreAttache_epaisseur+cloche_epaisseur+hauteurVis-hauteurGuide])
-                cylinder(d1=diametreVis-epaisseurFilets,d2=diametreVis-epaisseurFilets-hauteurGuide/3, hauteurGuide,$fn=stepsPerTurn);
+            intersection() {
+                translate([0,0,contreAttache_epaisseur+cloche_epaisseur])
+                    metric_thread(diameter=diametreVis, length=hauteurVis,
+                                  pitch=epaisseurFilets,
+                                  n_segments=stepsPerTurn);
+                translate([0,0,contreAttache_epaisseur+cloche_epaisseur])
+                    cylinder(d1=diametreVis+hauteurVis,d2=diametreVis-epaisseurFilets-hauteurGuide, hauteurVis,$fn=stepsPerTurn);
+            }
         }
         translate([0,0,-marge])
         cylinder(d=diametreTrouInterieur,h=contreAttache_epaisseur, $fn=stepsPerTurn);
@@ -288,7 +291,7 @@ module balle_interieur() {
         union() {
             // Le pas de vis
             translate([0,0,-pasDeVis_longueur/2-pasDeVis_mordant])
-            metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2-pasDeVis_jeu, length=pasDeVis_longueur,
+            metric_thread(diameter=pasDeVis_diametre-pasDeVis_jeu, length=pasDeVis_longueur,
                           pitch=pasDeVis_epaisseurFilets,
                           n_starts=pasDeVis_nbFilets, n_segments=stepsPerTurn);
             // La demi calotte
@@ -342,14 +345,15 @@ module ajoute_attache(hauteurSocle=attache_hauteurSocle,
                 }
             } else {
                 // Le trou de vis
-                hauteurTrouVis = hauteurVis+1;
+                hauteurTrouVis = hauteurVis;
                 translate ([0,0, -balle_diametre/2+hauteurSocle-hauteurTrouVis+marge])
                 metric_thread(diameter=cloche_diametre_trou2+pasDeVis_jeu, length=hauteurTrouVis,
                               pitch=pasDeVis_epaisseurFilets,
                               internal=true,
                               n_segments=stepsPerTurn);
-                // A faire: fin de trou conique
-                // cylinder(d1=cloche_diametre_trou2, d2=0,h=2);
+                // Fin de trou conique
+                translate ([0,0, -balle_diametre/2+hauteurSocle-hauteurTrouVis-balle_epaisseur+marge])
+                cylinder(d1=0,d2=cloche_diametre_trou2-pasDeVis_epaisseurFilets,h=balle_epaisseur);
             }}
         }
     }
@@ -366,10 +370,10 @@ module balle_exterieur() {
         translate([0,0,-balle_diametre+-pasDeVis_longueur/2])
             cube(2*balle_diametre,center=true);
         translate([0,0,-pasDeVis_longueur/2])
-        metric_thread(diameter=balle_diametre_interne+pasDeVis_epaisseurFilets/2, length=pasDeVis_longueur,
+        metric_thread(diameter=pasDeVis_diametre+pasDeVis_jeu, length=pasDeVis_longueur,
                       pitch=pasDeVis_epaisseurFilets, n_starts=pasDeVis_nbFilets,
                       n_segments=stepsPerTurn, internal=true);
-        sphere(d=balle_diametre_interne-1, $fn=stepsPerTurn);
+        sphere(d=balle_diametre_interne, $fn=stepsPerTurn);
         ouvertures ();
     }
 }
