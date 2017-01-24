@@ -11,7 +11,7 @@ vue = "montee";
 //vue = "pas_de_vis";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = vue == "impression" ? 64:32; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 64:16; 	// number of slices to create per turn
 marge = .1;
 
 attache = "vis"; // ["vis", "vis_metal", "clip"]
