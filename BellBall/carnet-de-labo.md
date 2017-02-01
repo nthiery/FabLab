@@ -111,7 +111,7 @@ Analyse?
 trop de jours entre la matiere
 support genant pour la vis de fixation du petit support de la cloche
  je pense qu il faut un  poil plus de matiere
- 
+
 
 # 2016-12-21: impression noire (77876f5e466aca5aee4a9f9549721cf39065aaeb)
 
@@ -121,6 +121,14 @@ support genant pour la vis de fixation du petit support de la cloche
 - la fixation de cloche fonctionne super
 - avec un matériau plus souple, il faudra probablement renforcer le tout
   typiquement rétrécir les ouvertures
+
+# 2017-02-01: impression noire en nylon ()
+
+- La quantité de brim a été augmentée, de fait la balle a été plus compliquée
+ à découper/assembler
+- La balle a survécu à ~10 chutes avant de casser sur les ouvertures
+- Le nylon (noir) offre une très bonne qualité d'impression
+- Le test n'a pas été effectué avec une vraie cloche à l'intérieur
 
 À faire:
 - [ ] Chanfrein
