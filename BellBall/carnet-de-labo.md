@@ -122,7 +122,7 @@ support genant pour la vis de fixation du petit support de la cloche
 - avec un matériau plus souple, il faudra probablement renforcer le tout
   typiquement rétrécir les ouvertures
 
-# 2017-02-01: impression noire en nylon ()
+# 2017-02-01: impression noire en nylon (77876f5e466aca5aee4a9f9549721cf39065aaeb)
 
 - La quantité de brim a été augmentée, de fait la balle a été plus compliquée
  à découper/assembler
@@ -130,9 +130,20 @@ support genant pour la vis de fixation du petit support de la cloche
 - Le nylon (noir) offre une très bonne qualité d'impression
 - Le test n'a pas été effectué avec une vraie cloche à l'intérieur
 
+# 2017-02-03: Re-design + impression en Flex (77876f5e466aca5aee4a9f9549721cf39065aaeb)
+
+- [ ] cône au fond du trou dans la vis pour le ressort pour éviter du support:
+  Je n'arrive pas à trouver une bonne dimension de cône pour éviter le support,
+  tout en gardant un diamètre assez large pour y mettre le ressort.
+
+- J'ai imprimé une demi-sphère en Semiflex (http://www.makershop.fr/filament-flexible/283-ninjaflex-semiflex-bleu-3mm.html).
+  L'impression a raté (plateau pas assez chaud), mais c'était suffisant pour avoir un aperçu du matériau.
+  Le rendu était assez souple, tout en étant résistant: comparable à un tee de rugby.
+  A creuser.
+
+
 À faire:
 - [ ] Chanfrein
 - [ ] arrondir plus les ouvertures
 - [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
 - [ ] trou de fixation du poids: il faudrat 3mm au lieu de 2.5mm
-- [ ] cône au fond du trou dans la vis pour le ressort pour éviter du support

@@ -4,9 +4,9 @@ use <threads.scad>
 // Configuration générale
 
 // Choix de la vue
-vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-vue = "montee";
-//vue = "impression";
+//vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
+//vue = "montee";
+vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -177,7 +177,7 @@ module contreAttache_vis_metal() {
                 }
             }
             // Trou pour le ressort du marteau
-            cylinder(d=marteau_diametreRessort,h=3*contreAttache_epaisseur, $fn=stepsPerTurn,center=true);
+            cylinder(d1=marteau_diametreRessort, d2=marteau_diametreRessort/1.5, h=3*contreAttache_epaisseur, $fn=               stepsPerTurn,center=true);
         }
     }
 }
@@ -250,7 +250,7 @@ module contreAttache_vis(diametreVis=cloche_diametre_trou2,
             }
         }
         translate([0,0,-marge])
-        cylinder(d=diametreTrouInterieur,h=contreAttache_epaisseur, $fn=stepsPerTurn);
+        cylinder(d1=diametreTrouInterieur, d2=diametreTrouInterieur/1.5, h=contreAttache_epaisseur, $fn=stepsPerTurn);
     }
 }
 
