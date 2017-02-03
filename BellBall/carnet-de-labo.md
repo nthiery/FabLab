@@ -140,7 +140,8 @@ support genant pour la vis de fixation du petit support de la cloche
   L'impression a raté (plateau pas assez chaud), mais c'était suffisant pour avoir un aperçu du matériau.
   Le rendu était assez souple, tout en étant résistant: comparable à un tee de rugby.
   A creuser.
-
+  Rendu: https://github.com/nthiery/FabLab/blob/master/BellBall/2017-02-03/rendu.jpg
+  Souplesse: https://github.com/nthiery/FabLab/blob/master/BellBall/2017-02-03/resistance.jpg
 
 À faire:
 - [ ] Chanfrein
