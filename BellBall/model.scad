@@ -5,13 +5,13 @@ use <threads.scad>
 
 // Choix de la vue
 //vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-//vue = "montee";
-vue = "impression";
+vue = "montee";
+//vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
 // Contrôle la finesse du résultat; 64 pour impression, 16 pour visualization
-stepsPerTurn  = vue == "impression" ? 64:16; 	// number of slices to create per turn
+stepsPerTurn  = vue == "impression" ? 64:16 ; 	// number of slices to create per turn
 marge = .1;
 
 attache = "vis"; // ["vis", "vis_metal", "clip"]
@@ -81,6 +81,8 @@ visClocheEnfoncement=2.5;
 
 contreAttache_diametre = 2*cloche_ecartement_trous_vis+ecrou_diametre+2;
 contreAttache_epaisseur = 6;
+contreAttache_epaisseurCone = 2;
+
 attache_hauteurSocle =balle_diametre/2-cloche_position-epaisseurFeutre;
 attache_hauteurVis = attache_hauteurSocle*.75;
 
@@ -250,7 +252,9 @@ module contreAttache_vis(diametreVis=cloche_diametre_trou2,
             }
         }
         translate([0,0,-marge])
-        cylinder(d1=diametreTrouInterieur, d2=diametreTrouInterieur/1.5, h=contreAttache_epaisseur, $fn=stepsPerTurn);
+        cylinder(d=diametreTrouInterieur, h=contreAttache_epaisseur, $fn=stepsPerTurn);
+        translate([0,0, -2*marge + contreAttache_epaisseur])
+        cylinder(d1=diametreTrouInterieur, d2=0, h=contreAttache_epaisseurCone, $fn=stepsPerTurn);
     }
 }
 
@@ -274,6 +278,7 @@ diametreExterieurOuvertures=600;
 epaisseurExterieurOuvertures=55;
 
 module ouvertures () {
+
     ratio = diametreInterieurOuvertures / diametreExterieurOuvertures;
     for (i =[1:nbOuvertures])
         rotate(a=360/nbOuvertures*(i+1/2),v=[0,0,1])
@@ -285,6 +290,25 @@ module ouvertures () {
                 translate([ epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
             }
 }
+module chanfreinSuperieur() {
+
+    hauteurCoupe = pasDeVis_epaisseurFilets+4;
+
+    difference() {
+        cylinder(d=balle_diametre, h=hauteurCoupe, $fn=stepsPerTurn, center=true);
+
+        cylinder(d1=balle_diametre, d2=balle_diametre-(2*hauteurCoupe), h=hauteurCoupe, $fn=stepsPerTurn, center=true);
+    }
+
+}
+
+module chanfreinInferieur() {
+
+    hauteurCoupe = pasDeVis_epaisseurFilets+1;
+
+    cylinder(d1=balle_diametre-0.8, d2=balle_diametre-(2*hauteurCoupe), h=hauteurCoupe, $fn=stepsPerTurn, center=true);
+
+}
 
 module balle_interieur() {
     difference () {
@@ -294,6 +318,7 @@ module balle_interieur() {
             metric_thread(diameter=pasDeVis_diametre-pasDeVis_jeu, length=pasDeVis_longueur,
                           pitch=pasDeVis_epaisseurFilets,
                           n_starts=pasDeVis_nbFilets, n_segments=stepsPerTurn);
+
             // La demi calotte
             difference() {
                 sphere(d=balle_diametre,$fn=stepsPerTurn);
@@ -305,7 +330,14 @@ module balle_interieur() {
                         cube(2*balle_diametre,center=true);
                 }
             }
+
+            translate([0,0, pasDeVis_longueur/2-8])
+            chanfreinInferieur();
+
         }
+        translate([0,0, pasDeVis_longueur/2])
+        chanfreinSuperieur();
+
         // forme interne ovoïde pour rajouter de l'épaisseur au niveau de la vis interne
         translate([0,0,pasDeVis_longueur/2])
             scale([balle_diametre_interne/2-pasDeVis_surplusEpaisseur,
@@ -359,23 +391,25 @@ module ajoute_attache(hauteurSocle=attache_hauteurSocle,
     }
 }
 
+
 module balle_cloche_interieur() {
     ajoute_attache()
         balle_interieur();
 }
 
 module balle_exterieur() {
+
     difference() {
         sphere(d=balle_diametre,$fn=stepsPerTurn);
         translate([0,0,-balle_diametre+-pasDeVis_longueur/2])
             cube(2*balle_diametre,center=true);
-        translate([0,0,-pasDeVis_longueur/2])
-        metric_thread(diameter=pasDeVis_diametre+pasDeVis_jeu, length=pasDeVis_longueur,
-                      pitch=pasDeVis_epaisseurFilets, n_starts=pasDeVis_nbFilets,
-                      n_segments=stepsPerTurn, internal=true);
+        // Retire le pas de vis à intérieur à la sphère
+        // On scale pour un pas de vis plus fluide
+        scale([1.01, 1.01, 1.01]) balle_interieur();
         sphere(d=balle_diametre_interne, $fn=stepsPerTurn);
         ouvertures ();
     }
+
 }
 
 module balle_cloche_exterieur() {
@@ -411,18 +445,20 @@ if (vue == "impression") {
             cloche();
         balle_cloche_interieur();
         balle_cloche_exterieur();
-        translate([0,0,-cloche_position+contreAttache_epaisseur+cloche_epaisseur])
-            rotate([180,0,0])
-            contreAttache();
+
+        translate([0,0,-cloche_position+    contreAttache_epaisseur+cloche_epaisseur])
+        rotate([180,0,0])
+        contreAttache();
+
         translate([0,0,-cloche_position+cloche_epaisseur])
-            marteau();
+        marteau();
     }
 }
 else if (vue == "eclatee") {
     translate([balle_diametre/2,0,0]) coupe (balle_diametre)
         balle_cloche_interieur();
     translate([-balle_diametre/2,0,0]) coupe(balle_diametre)
-        balle_cloche_exterieur();
+       balle_cloche_exterieur();
 } else if (vue == "accessoires") {
     vis();
     translate([10,0,0])
