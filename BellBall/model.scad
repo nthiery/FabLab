@@ -5,8 +5,8 @@ use <threads.scad>
 
 // Choix de la vue
 //vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-vue = "montee";
-//vue = "impression";
+//vue = "montee";
+vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -425,13 +425,15 @@ module balle_cloche_exterieur() {
 // Construction des différentes vues
 
 if (vue == "impression") {
-    D = balle_diametre/2+1;
-    translate([-D, 0, pasDeVis_longueur/2])
-    balle_cloche_exterieur();
-    translate([D, 0, pasDeVis_longueur/2]) rotate([0,180,0])
-    balle_cloche_interieur();
-    translate([0, D*.8, 0])
+      D = balle_diametre/2+1;
+      translate([-D, 0, pasDeVis_longueur/2])
+        balle_cloche_exterieur();
+      translate([D, 0, pasDeVis_longueur/2]) rotate([0,180,0])
+        balle_cloche_interieur();
+      translate([0, D*.8, 0])
         contreAttache();
+
+    }
 } else if (vue == "impression_attacheVis") {
     contreAttache();
     intersection () {
