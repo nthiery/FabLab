@@ -155,12 +155,12 @@ support genant pour la vis de fixation du petit support de la cloche
 
 - J'ai imprimé le nouveau pas de vis, la partie inférieure en nylon, la partie supérieure en
   TPU95A (un flexible de chez Ultimaker). Le pas de vis s'est bien assemblé, cependant la partie
-  supérieure (bien que remplie à 100%) est beaucoup trop souple par rapport au Semiflex de 
+  supérieure (bien que remplie à 100%) est beaucoup trop souple par rapport au Semiflex de
   chez Ninjaflex.
 
   Photos:
-   - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_1.jpg
-   - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_2.jpg
+   - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_1.jpeg
+   - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_2.jpeg
 
 À faire:
 - [ ] arrondir plus les ouvertures
