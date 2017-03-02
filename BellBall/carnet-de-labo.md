@@ -143,8 +143,26 @@ support genant pour la vis de fixation du petit support de la cloche
   Rendu: https://github.com/nthiery/FabLab/blob/master/BellBall/2017-02-03/rendu.jpg
   Souplesse: https://github.com/nthiery/FabLab/blob/master/BellBall/2017-02-03/resistance.jpg
 
+# 2017-02-28: Design du chanfrein & du cône (77876f5e466aca5aee4a9f9549721cf39065aaeb)
+
+- Le chanfrein inférieur et supérieur a été réalisé.
+  Cependant, il faut encore le tester lors d'une impression.
+- Le code du pas de vis extérieur a été modifié, on ne le construit plus "à la main" :
+  on le déduit par différence avec le pas de vis intérieur.
+- Il y a maintenant un cône au fond du trou dans la vis pour éviter le support.
+
+# 2017-03-01: Impression du pas de vis (6c777bc78fd0ed41f65ebaf3f90aa5fdf1a84f64)
+
+- J'ai imprimé le nouveau pas de vis, la partie inférieure en nylon, la partie supérieure en
+  TPU95A (un flexible de chez Ultimaker). Le pas de vis s'est bien assemblé, cependant la partie
+  supérieure (bien que remplie à 100%) est beaucoup trop souple par rapport au Semiflex de
+  chez Ninjaflex.
+
+  Photos:
+   - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_1.jpeg
+   - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_2.jpeg
+
 À faire:
-- [ ] Chanfrein
 - [ ] arrondir plus les ouvertures
 - [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
 - [ ] trou de fixation du poids: il faudrat 3mm au lieu de 2.5mm
