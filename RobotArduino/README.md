@@ -48,6 +48,15 @@ beaucoup d'autres plateformes auraient été possibles; par exemple:
 
 - ...
 
+## Variantes
+
+- [RoboBox](https://www.robobox.fr/) propose des kits basés sur
+  arduino pour construire des robots. Le concept a l'air de laisser
+  une certaine liberté de construction, tout en permettant de se
+  concentrer principalement sur la programmation, plutôt que les
+  aspects mécaniques ou électroniques.
+
+
 ## Matériel
 
 Voici les composants que j'ai utilisé pour fabriquer ce robot. La
