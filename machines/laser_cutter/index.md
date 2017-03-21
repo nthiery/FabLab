@@ -77,3 +77,11 @@ Check the network connection:
 ## TODO: tips and tricks to produce documents from inkscape
 
 ## TODO: tips and tricks to print on slices of wood
+
+## Materials
+
+### Contreplaqué 4mm (Bricomarché)
+
+export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
+
+fentes: 3.4 mm
