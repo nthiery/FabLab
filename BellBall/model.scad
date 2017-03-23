@@ -333,7 +333,7 @@ module balle_interieur() {
 
             translate([0,0, pasDeVis_longueur/2-8])
             chanfreinInferieur();
-
+           
         }
         translate([0,0, pasDeVis_longueur/2])
         chanfreinSuperieur();
@@ -343,8 +343,18 @@ module balle_interieur() {
             scale([balle_diametre_interne/2-pasDeVis_surplusEpaisseur,
                    balle_diametre_interne/2-pasDeVis_surplusEpaisseur,
                    balle_diametre_interne/2+pasDeVis_longueur/2])
-            sphere($fn=stepsPerTurn);
+            sphere($fn=stepsPerTurn);        
     }
+    
+    difference(){
+        // On rajoute un petit rebord intérieur au biseau pour faciliter l'impression
+     translate([0,0, pasDeVis_longueur/2-1-marge])
+     cylinder(h=1,r=balle_diametre_interne/2 - pasDeVis_surplusEpaisseur + 2*marge);
+        
+     translate([0,0, pasDeVis_longueur/2-2-marge])
+     cylinder(h=3,r=balle_diametre_interne/2-3);
+    }
+        
 }
 
 module ajoute_attache(hauteurSocle=attache_hauteurSocle,
@@ -405,9 +415,14 @@ module balle_exterieur() {
             cube(2*balle_diametre,center=true);
         // Retire le pas de vis à intérieur à la sphère
         // On scale pour un pas de vis plus fluide
-        scale([1.01, 1.01, 1.01]) balle_interieur();
+        scale([1.02, 1.02, 1.02]) balle_interieur();
         sphere(d=balle_diametre_interne, $fn=stepsPerTurn);
         ouvertures ();
+        
+        // On retire 1mm pour ne pas avoir une fin en biseau
+        translate([-250,-250,-pasDeVis_longueur/2])
+        cube([500,500,1]);
+                
     }
 
 }
@@ -425,15 +440,15 @@ module balle_cloche_exterieur() {
 // Construction des différentes vues
 
 if (vue == "impression") {
+    
       D = balle_diametre/2+1;
-      translate([-D, 0, pasDeVis_longueur/2])
+      translate([-D, 0, pasDeVis_longueur/2-1]) //-1: Pour compenser le millimètre qu'on retire au pas de vis
         balle_cloche_exterieur();
-      translate([D, 0, pasDeVis_longueur/2]) rotate([0,180,0])
-        balle_cloche_interieur();
-      translate([0, D*.8, 0])
-        contreAttache();
-
-    }
+      //translate([D, 0, pasDeVis_longueur/2-1]) rotate([0,180,0])              
+        //balle_cloche_interieur();
+      //translate([0, D*.8, 0]) 
+        //contreAttache();
+ 
 } else if (vue == "impression_attacheVis") {
     contreAttache();
     intersection () {
@@ -458,7 +473,7 @@ if (vue == "impression") {
 }
 else if (vue == "eclatee") {
     translate([balle_diametre/2,0,0]) coupe (balle_diametre)
-        balle_cloche_interieur();
+       balle_cloche_interieur();
     translate([-balle_diametre/2,0,0]) coupe(balle_diametre)
        balle_cloche_exterieur();
 } else if (vue == "accessoires") {

@@ -162,6 +162,17 @@ support genant pour la vis de fixation du petit support de la cloche
    - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_1.jpeg
    - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_2.jpeg
 
+# 2017-03-23: Impression en Polycarbonate & Nouvelle piste (6c777bc78fd0ed41f65ebaf3f90aa5fdf1a84f64)
+
+- Impression en Polycarbonate, un matériau très résistant mais très peu ductile, ce qui rend
+ les ouvertures très fragiles. Après plusieurs tests de résistances, la balle (infill à 100%)
+ a vite rompue.
+ - Une nouvelle piste reste à explorer: la cire. On pourrait imprimer la balle en cire perdue puis
+ créer un moule à partir de cette dernière.
+
+ Photos:
+ - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-23/rendu.jpg
+
 À faire:
 - [ ] arrondir plus les ouvertures
 - [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
