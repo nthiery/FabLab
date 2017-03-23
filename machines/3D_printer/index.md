@@ -8,6 +8,10 @@ images: [ultimaker-2-imprimante-3d.png]
 
 TODO: move here the instructions from CassesTetes/README.md
 
+    sudo add-apt-repository ppa:thopiekar/cura
+    sudo apt update
+    sudo apt install cura
+
 ## References
 
 - [http://libre3d.com/](): models and references

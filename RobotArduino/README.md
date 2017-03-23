@@ -27,7 +27,7 @@ dessinés au feutre épais sur une feuille blanche (ou un tableau blanc).
 
 - Ne (presque) pas nécessiter de soudure.
 
-Le choix s'est porté sur la plateforme [Arduino](arduino.cc): un mini
+Mon choix s'est porté sur la plateforme [Arduino](arduino.cc): un mini
 ordinateur conçu pour interagir avec des circuits électroniques. Mais
 beaucoup d'autres plateformes auraient été possibles; par exemple:
 
@@ -48,9 +48,18 @@ beaucoup d'autres plateformes auraient été possibles; par exemple:
 
 - ...
 
+## Variantes
+
+- [RoboBox](https://www.robobox.fr/) propose des kits basés sur
+  arduino pour construire des robots. Le concept a l'air de laisser
+  une certaine liberté de construction, tout en permettant de se
+  concentrer principalement sur la programmation, plutôt que les
+  aspects mécaniques ou électroniques.
+
+
 ## Matériel
 
-Voici Les composants que j'ai utilisé pour fabriquer ce robot. La
+Voici les composants que j'ai utilisé pour fabriquer ce robot. La
 plupart d'entre eux -- y compris l'arduino, se trouvent dans tout bon
 magasin d'électronique. Certains nécessitent de passer par un
 revendeur spécialisé; il y en a plusieurs en France; en l'occurence je
@@ -93,7 +102,7 @@ rentable d'acheter l'un des nombreux kits de démarrage.
 - [ ] Réordonner les câbles sur les prises des moteurs pas à pas
 - [ ] Utiliser les connecteurs empilables supplémentaires pour faire
       des prises débranchables pour la plaque Adafruit
-- [ ] 
+- [ ] ...
 
 
 TODO: compléter et ajouter les photos
@@ -110,7 +119,7 @@ Autres: voir ...
 
 ### Installer la bibliothèque de contrôle de l'extension Adafruit de commande de moteur
 
-    https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/install-software
+https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/install-software
 
 Références:
 - https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino
