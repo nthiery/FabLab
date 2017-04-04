@@ -96,7 +96,7 @@ attache_hauteurVis = attache_hauteurSocle*.75;
 // Ici, on mets des sphères de rayon 1 afin d'éviter les angles vifs
 
 module pseudoPoint () {
-    sphere(center=true,d=2,$fn=16);
+    sphere(center=true,d=1,$fn=16);
 }
 
 // Coupe un objet centré par un coin à 45 degrés pour en voir l'intérieur
@@ -276,6 +276,7 @@ diametreInterieurOuvertures=50;
 epaisseurInterieurOuvertures=1;
 diametreExterieurOuvertures=600;
 epaisseurExterieurOuvertures=55;
+reductionHauteur=20;
 
 module ouvertures () {
 
@@ -284,8 +285,8 @@ module ouvertures () {
         rotate(a=360/nbOuvertures*(i+1/2),v=[0,0,1])
             hull () {
                 translate([0,0,0]) pseudoPoint();
-                translate([-epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
-                translate([ epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
+                translate([-epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures-reductionHauteur]) pseudoPoint();
+                translate([ epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures-reductionHauteur]) pseudoPoint();
                 translate([-epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
                 translate([ epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
             }
@@ -442,12 +443,12 @@ module balle_cloche_exterieur() {
 if (vue == "impression") {
     
       D = balle_diametre/2+1;
-      translate([-D, 0, pasDeVis_longueur/2-1]) //-1: Pour compenser le millimètre qu'on retire au pas de vis
+      translate([-D, 0, pasDeVis_longueur/2-1])
         balle_cloche_exterieur();
-      //translate([D, 0, pasDeVis_longueur/2-1]) rotate([0,180,0])              
-        //balle_cloche_interieur();
-      //translate([0, D*.8, 0]) 
-        //contreAttache();
+      translate([D, 0, pasDeVis_longueur/2]) rotate([0,180,0])              
+        balle_cloche_interieur();
+      translate([0, D*.8, 0]) 
+        contreAttache();
  
 } else if (vue == "impression_attacheVis") {
     contreAttache();
@@ -474,8 +475,8 @@ if (vue == "impression") {
 else if (vue == "eclatee") {
     translate([balle_diametre/2,0,0]) coupe (balle_diametre)
        balle_cloche_interieur();
-    translate([-balle_diametre/2,0,0]) coupe(balle_diametre)
-       balle_cloche_exterieur();
+    //translate([-balle_diametre/2,0,0]) coupe(balle_diametre)
+       //balle_cloche_exterieur();
 } else if (vue == "accessoires") {
     vis();
     translate([10,0,0])

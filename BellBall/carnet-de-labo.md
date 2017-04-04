@@ -176,4 +176,10 @@ support genant pour la vis de fixation du petit support de la cloche
 À faire:
 - [ ] arrondir plus les ouvertures
 - [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
-- [ ] trou de fixation du poids: il faudrat 3mm au lieu de 2.5mm
+- [ ] trou de fixation du poids: il faudrait 3mm au lieu de 2.5mm
+
+# 2017-04-04: Impression en Cire & changement design (6c777bc78fd0ed41f65ebaf3f90aa5fdf1a84f64)
+
+- Impression en cire perdue, qu'on fera fondre après l'avoir moulé (dans du plâtre par exemple)
+- Renforcement des ouvertures supérieures dans le design  
+- Prochaine étape: découper une boite pour mouler la balle dedans
