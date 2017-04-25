@@ -183,3 +183,14 @@ support genant pour la vis de fixation du petit support de la cloche
 - Impression en cire perdue, qu'on fera fondre après l'avoir moulé (dans du plâtre par exemple)
 - Renforcement des ouvertures supérieures dans le design  
 - Prochaine étape: découper une boite pour mouler la balle dedans
+
+# 2017-04-25: Impression du moule en silicone + test (386f099bcf3ad84240d896ca99e6a6fc145ece7c)
+
+- Impression d'un moule en silicone, malheureusement la découpe du moule (pour sortir la balle)
+l'a beaucoup abimé.
+- Le rendu de la balle coulée en Onyx n'était donc pas parfait.
+- Prochaine étape: imprimer un moule perdu en 3D directement.
+
+Photos:
+ - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-04-25/rendu.jpg
+ - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-04-25/moule.jpg
