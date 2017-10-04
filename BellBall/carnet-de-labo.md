@@ -162,7 +162,35 @@ support genant pour la vis de fixation du petit support de la cloche
    - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_1.jpeg
    - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-01/rendu_2.jpeg
 
+# 2017-03-23: Impression en Polycarbonate & Nouvelle piste (6c777bc78fd0ed41f65ebaf3f90aa5fdf1a84f64)
+
+- Impression en Polycarbonate, un matériau très résistant mais très peu ductile, ce qui rend
+ les ouvertures très fragiles. Après plusieurs tests de résistances, la balle (infill à 100%)
+ a vite rompue.
+ - Une nouvelle piste reste à explorer: la cire. On pourrait imprimer la balle en cire perdue puis
+ créer un moule à partir de cette dernière.
+
+ Photos:
+ - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-03-23/rendu.jpg
+
 À faire:
 - [ ] arrondir plus les ouvertures
 - [ ] trou pour ressort: il faudrait 5.5 mm pour 7mm de profondeur
-- [ ] trou de fixation du poids: il faudrat 3mm au lieu de 2.5mm
+- [ ] trou de fixation du poids: il faudrait 3mm au lieu de 2.5mm
+
+# 2017-04-04: Impression en Cire & changement design (6c777bc78fd0ed41f65ebaf3f90aa5fdf1a84f64)
+
+- Impression en cire perdue, qu'on fera fondre après l'avoir moulé (dans du plâtre par exemple)
+- Renforcement des ouvertures supérieures dans le design  
+- Prochaine étape: découper une boite pour mouler la balle dedans
+
+# 2017-04-25: Impression du moule en silicone + test (386f099bcf3ad84240d896ca99e6a6fc145ece7c)
+
+- Impression d'un moule en silicone, malheureusement la découpe du moule (pour sortir la balle)
+l'a beaucoup abimé.
+- Le rendu de la balle coulée en Onyx n'était donc pas parfait.
+- Prochaine étape: imprimer un moule perdu en 3D directement.
+
+Photos:
+ - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-04-25/rendu.jpg
+ - https://github.com/nthiery/FabLab/blob/master/BellBall/2017-04-25/moule.jpg

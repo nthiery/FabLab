@@ -5,8 +5,8 @@ use <threads.scad>
 
 // Choix de la vue
 //vue = "eclatee"; // ["eclatee", "montee", "impression", "accessoires"]
-//vue = "montee";
-vue = "impression";
+vue = "montee";
+//vue = "impression";
 //vue = "accessoires";
 //vue = "pas_de_vis";
 
@@ -96,7 +96,7 @@ attache_hauteurVis = attache_hauteurSocle*.75;
 // Ici, on mets des sphères de rayon 1 afin d'éviter les angles vifs
 
 module pseudoPoint () {
-    sphere(center=true,d=2,$fn=16);
+    sphere(center=true,d=1,$fn=16);
 }
 
 // Coupe un objet centré par un coin à 45 degrés pour en voir l'intérieur
@@ -276,6 +276,7 @@ diametreInterieurOuvertures=50;
 epaisseurInterieurOuvertures=1;
 diametreExterieurOuvertures=600;
 epaisseurExterieurOuvertures=55;
+reductionHauteur=20;
 
 module ouvertures () {
 
@@ -284,8 +285,8 @@ module ouvertures () {
         rotate(a=360/nbOuvertures*(i+1/2),v=[0,0,1])
             hull () {
                 translate([0,0,0]) pseudoPoint();
-                translate([-epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
-                translate([ epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures]) pseudoPoint();
+                translate([-epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures-reductionHauteur]) pseudoPoint();
+                translate([ epaisseurInterieurOuvertures,diametreInterieurOuvertures,hauteurOuvertures-reductionHauteur]) pseudoPoint();
                 translate([-epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
                 translate([ epaisseurExterieurOuvertures,diametreExterieurOuvertures,hauteurOuvertures]) pseudoPoint();
             }
@@ -345,6 +346,16 @@ module balle_interieur() {
                    balle_diametre_interne/2+pasDeVis_longueur/2])
             sphere($fn=stepsPerTurn);
     }
+
+    difference(){
+        // On rajoute un petit rebord intérieur au biseau pour faciliter l'impression
+     translate([0,0, pasDeVis_longueur/2-1-marge])
+     cylinder(h=1,r=balle_diametre_interne/2 - pasDeVis_surplusEpaisseur + 2*marge);
+
+     translate([0,0, pasDeVis_longueur/2-2-marge])
+     cylinder(h=3,r=balle_diametre_interne/2-3);
+    }
+
 }
 
 module ajoute_attache(hauteurSocle=attache_hauteurSocle,
@@ -408,6 +419,11 @@ module balle_exterieur() {
         scale([1.01, 1.01, 1.01]) balle_interieur();
         sphere(d=balle_diametre_interne, $fn=stepsPerTurn);
         ouvertures ();
+
+        // On retire 1mm pour ne pas avoir une fin en biseau
+        translate([-250,-250,-pasDeVis_longueur/2])
+        cube([500,500,1]);
+
     }
 
 }
@@ -425,15 +441,15 @@ module balle_cloche_exterieur() {
 // Construction des différentes vues
 
 if (vue == "impression") {
+
       D = balle_diametre/2+1;
-      translate([-D, 0, pasDeVis_longueur/2])
+      translate([-D, 0, pasDeVis_longueur/2-1])
         balle_cloche_exterieur();
       translate([D, 0, pasDeVis_longueur/2]) rotate([0,180,0])
         balle_cloche_interieur();
       translate([0, D*.8, 0])
         contreAttache();
 
-    }
 } else if (vue == "impression_attacheVis") {
     contreAttache();
     intersection () {
@@ -458,7 +474,7 @@ if (vue == "impression") {
 }
 else if (vue == "eclatee") {
     translate([balle_diametre/2,0,0]) coupe (balle_diametre)
-        balle_cloche_interieur();
+       balle_cloche_interieur();
     translate([-balle_diametre/2,0,0]) coupe(balle_diametre)
        balle_cloche_exterieur();
 } else if (vue == "accessoires") {
