@@ -11,10 +11,10 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="61cm"
    height="30.5cm"
-   viewBox="0 0 216.14173 0"
+   viewBox="0 0 2161.4173 1080.7087"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.1 r15371"
    sodipodi:docname="empty-sheet.svg">
   <defs
      id="defs4" />
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.63476867"
-     inkscape:cx="361.9898"
-     inkscape:cy="692.71863"
+     inkscape:zoom="0.31738434"
+     inkscape:cx="792.06774"
+     inkscape:cy="818.74879"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -39,7 +39,11 @@
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
-       id="grid3355" />
+       id="grid3355"
+       originx="0"
+       originy="0"
+       spacingx="37.795276"
+       spacingy="37.795276" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -49,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
