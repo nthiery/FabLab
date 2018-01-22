@@ -1,8 +1,8 @@
 // toutes les dimensions sont en mm
 diametre=26;
-epaisseur=6;
-trou_diametre=5 + .25; // + marge
-trou_vis_diametre=3 + .25; // + marge
+epaisseur=2;
+trou_diametre=5.5 + .25; // + marge
+trou_vis_diametre=3 + .5; // + marge
 trou_vis_ecartement=10;
 fn=50; // nombre de facettes
 
