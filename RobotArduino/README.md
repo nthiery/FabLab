@@ -31,6 +31,18 @@ Mon choix s'est porté sur la plateforme [Arduino](arduino.cc): un mini
 ordinateur conçu pour interagir avec des circuits électroniques. Mais
 beaucoup d'autres plateformes auraient été possibles; par exemple:
 
+- [microbit](http://microbit.org): une carte compatible Arduino, avec
+  plusieurs capteurs et effecteurs directement intégrés, pour se
+  concentrer sur la programmation. La carte microbit a été développée
+  pour les écoles en Grande Bretagne par un consortium incluant la
+  BBC, google, microsoft, ... et distribuée à des millions d'élèves.
+
+- [RoboBox](https://www.robobox.fr/) propose des kits basés sur
+  arduino pour construire des robots. Le concept a l'air de laisser
+  une certaine liberté de construction, tout en permettant de se
+  concentrer principalement sur la programmation, plutôt que les
+  aspects mécaniques ou électroniques.
+
 - [Raspberry Pi](https://www.raspberrypi.org/): même concept que
   l'Arduino, mais avec un ordinateur plus évolué (système
   d'exploitation complet sous GNU/Linux). Prise en main plus complexe,
@@ -46,16 +58,8 @@ beaucoup d'autres plateformes auraient été possibles; par exemple:
   grande simplicité de mise en oeuvre. Mais nettement plus cher et on
   est plus enfermé dans la gamme d'un fabriquant.
 
-- ...
-
-## Variantes
-
-- [RoboBox](https://www.robobox.fr/) propose des kits basés sur
-  arduino pour construire des robots. Le concept a l'air de laisser
-  une certaine liberté de construction, tout en permettant de se
-  concentrer principalement sur la programmation, plutôt que les
-  aspects mécaniques ou électroniques.
-
+- [VEX Robotics](https://www.vexrobotics.com/) Similaire à Lego
+  Mindstorms.
 
 ## Matériel
 
