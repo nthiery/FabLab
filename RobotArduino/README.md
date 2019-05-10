@@ -36,6 +36,10 @@ beaucoup d'autres plateformes auraient été possibles; par exemple:
   concentrer sur la programmation. La carte microbit a été développée
   pour les écoles en Grande Bretagne par un consortium incluant la
   BBC, google, microsoft, ... et distribuée à des millions d'élèves.
+  
+  De nombreuses extensions sont commercialisées, dont le chassis
+  [Bit:Bot](https://4tronix.co.uk/blog/?p=1490) de nature similaire
+  au robot décrit ici, mais préfabriqué.
 
 - [RoboBox](https://www.robobox.fr/) propose des kits basés sur
   arduino pour construire des robots. Le concept a l'air de laisser
