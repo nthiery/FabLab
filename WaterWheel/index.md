@@ -2,7 +2,7 @@
 layout: project
 machines: laser_cutter
 title: A laser cut water wheel for a pond fountain
-authors: [nthiery, elise]
+authors: [nthiery,ethiery]
 images: [fountain-closeup.jpg, fountain.jpg, negative.jpg]
 sources: model.svg
 material: heavy cardboard

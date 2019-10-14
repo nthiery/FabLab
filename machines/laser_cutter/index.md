@@ -24,22 +24,40 @@ Both the machine below and the laser cutter itself.
 
 ### Connect the laptop to the local network
 
-Connect the laptop to the free orange cable on the table next to the
-laser cutter. Set up the network with:
+#### Epilog Mini, Former configuration
 
-    sudo ifconfig eth0 129.175.5.208/16
+Connect the laptop to the free orange cable on the table next to the
+laser cutter.
+
+Set:
+
+    IP=129.175.5.207
+    EPILOG_IP=129.175.5.206
+
+#### Laser Fusion
+
+Set:
+
+    IP=192.168.3.5
+    EPILOG_IP=192.168.3.4
+
+### Setup network
 
 If you are using wicd to manage your network connections, you need to turn off first the daemon:
 
     sudo service wicd stop
 
+Set up the network with:
+
+    sudo ifconfig eth0 $IP/16
+
 Check the network connection:
 
-    ping 129.175.5.206
+    ping $EPILOG_IP
 
 ### Configure cups-epilog and its parameters
 
-    export DEVICE_URI="epilog://129.175.5.206/Legend/rp=100/rs=20/rm=grey/vp=100/vs=20/vf=500"
+    export DEVICE_URI="epilog://$EPILOG_IP/Legend/rp=100/rs=20/rm=grey/vp=100/vs=20/vf=500"
 
 - rp: raster power (engraving)
 - rs: raster speed
@@ -56,7 +74,7 @@ Check the network connection:
 
 - Send the file to the printer:
 
-        ../cups-epilog/epilog 123 user jobname < file.eps
+        cups-epilog/epilog 123 user jobname < file.eps
 
 - Put the sheet on the laser cutter, with its lower left corner on the
   upper limit of the 12 mark.
@@ -77,3 +95,11 @@ Check the network connection:
 ## TODO: tips and tricks to produce documents from inkscape
 
 ## TODO: tips and tricks to print on slices of wood
+
+## Materials
+
+### Contreplaqué 4mm (Bricomarché)
+
+export DEVICE_URI="epilog://$EPILOG_IP/Legend/rp=100/rs=20/vp=100/vs=20/vf=500/rm=grey"
+
+fentes: 3.4 mm

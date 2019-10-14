@@ -6,7 +6,7 @@ title:            Fablab Digiscope
 tagline:          ''
 description:      ''
 url:              'https://nthiery.github.io/FabLab/'
-baseurl:          ''
+baseurl:          '/FabLab'
 official_fablab_url: https://fablabdigiscope.wordpress.com/
 
 # About/contact
