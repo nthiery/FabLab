@@ -1,7 +1,7 @@
 ---
 layout: project
 machines: laser_cutter
-title: Covid19: prédécoupe laser de blouses pour les soignants
+title: "Covid19: prédécoupe laser de blouses pour les soignants"
 authors: [blandine, delaet, nthiery]
 sources: [BlousesV1.3.svg]
 images: [equipe.jpg]
@@ -9,33 +9,35 @@ date: 2020/04/30
 material: coton
 ---
 
-Du fait le l'épidémie de Covid19, l'hôpital d'Arpajon et des Ehad des
-environs ont fait un appel à l'aide pour produire plus d'un millier de
-blouses blanches lavables en coton [de type très
-couvrant](BlousePourHopital.JPG). Pour répondre à ce besoin, un réseau
-d'une centaine de bénévoles --
-[Bénéblouses](https://www.artdelecoute.com/445336164) -- s'est monté. 
-L'hôpital fournit le tissu (draps, ...).
+Du fait le l'épidémie de Covid19, l'hôpital d'Arpajon et des EHPAD des
+environs ont lancé un appel à l'aide pour produire plus d'un millier
+de blouses blanches lavables en coton [de type très
+couvrant](BlousePourHopital.JPG) à partir de stocks de draps. Pour
+répondre à ce besoin, un réseau d'une centaine de bénévoles --
+[Bénéblouses](https://www.artdelecoute.com/445336164) -- s'est monté.
 
 La reproduction du patron et la découpe à la main prennent à peu près
 40 minutes (et pas mal d'ampoules), soit a peu près la moitié du temps
-de production. L'idée a alors germé d'**utiliser la la grande découpeuse
-laser (1016 x 711 mm) du FabLab Digiscope (Laboratoire de Recherche en
-Informatique, Université Paris Sud/Saclay), pour industrialiser la
+de production. L'idée a alors germé d'**utiliser la grande découpeuse
+laser** (1016 x 711 mm) du [FabLab
+Digiscope](https://fablabdigiscope.gitlab.io/) ([Laboratoire de
+Recherche en Informatique](http://www.lri.fr), [Université Paris
+Sud/Saclay](universite-paris-saclay.fr), pour **industrialiser la
 découpe du tissu et fournir des kits prêts à coudre aux
 couturièr.es**.
 
 Ce projet est mené depuis le 9 avril par Blandine, Sylvie Delaët,
-Nicolas Thiéry. Il y a fallu environ 10 jours de conception
-prototypage puis 10 jours de préproduction au cours desquels 80 kits
-ont été produits avant d'atteindre la phase de production. Voir le
-[carnet de labo](CarnetDeLabo.md). Au total, 140 kits ont été produits à
-ce jour. En exploitant les chutes, 100 kits de masques ont été
-produit.
+Nicolas Thiéry. Du fait des conditions (accès limité au FabLab,
+dispersion des acteurs, autres urgences), il a fallu une dizaine de
+jours de prototypage suivis d'une dizaine de jours de préproduction au
+cours desquels 80 kits ont été produits avant d'atteindre la phase de
+production. Voir le [carnet de laboratoire](CarnetDeLabo/). Au
+total, 140 kits ont été produits à ce jour. En exploitant les chutes,
+100 kits de masques ont été produit.
 
 ## Modes d'emploi
-
-- [kits blouse](ModeDEmploiKitBlouse.md)
+    
+- [kits blouse](ModeDEmploiKitBlouse/)
 - [kits masque](ModeDEmploiKitMasque.pdf)
 
 ## Objectifs
@@ -109,7 +111,7 @@ Cartons de draps reçus: 3+5+1
 
 ## Projets similaires
 
-Patrons protection médicale pour personnel soignant (surblouse,
-pyjama) validés CHU Paris:
+[Patrons protection médicale](https://drive.google.com/drive/folders/1EfqRlpa1mkeg3x9N9Fk_O0WYd06L2cRE)
+pour personnel soignant (surblouse, pyjama) validés CHU Paris:
 
-https://drive.google.com/drive/folders/1EfqRlpa1mkeg3x9N9Fk_O0WYd06L2cRE
+
