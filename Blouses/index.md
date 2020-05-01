@@ -22,7 +22,7 @@ de production. L'idée a alors germé d'**utiliser la grande découpeuse
 laser** (1016 x 711 mm) du [FabLab
 Digiscope](https://fablabdigiscope.gitlab.io/) ([Laboratoire de
 Recherche en Informatique](http://www.lri.fr), [Université Paris
-Sud/Saclay](universite-paris-saclay.fr), pour **industrialiser la
+Sud/Saclay](universite-paris-saclay.fr)), pour **industrialiser la
 découpe du tissu et fournir des kits prêts à coudre aux
 couturièr.es**.
 
