@@ -4,7 +4,7 @@ machines: laser_cutter
 title: Covid19: prédécoupe laser de blouses pour les soignants
 authors: [blandine, delaet, nthiery]
 sources: [BlousesV1.3.svg]
-images: [2015-12-16-alcoves.jpg]
+images: [equipe.jpg]
 date: 2020/04/30
 material: coton
 ---
@@ -28,9 +28,10 @@ couturièr.es**.
 Ce projet est mené depuis le 9 avril par Blandine, Sylvie Delaët,
 Nicolas Thiéry. Il y a fallu environ 10 jours de conception
 prototypage puis 10 jours de préproduction au cours desquels 80 kits
-ont été produits avant d'atteindre la phase de production. Au total,
-140 kits ont été produits à ce jour. En exploitant les chutes, 100
-kits de masques ont été produit.
+ont été produits avant d'atteindre la phase de production. Voir le
+[carnet de labo](CarnetDeLabo.md). Au total, 140 kits ont été produits à
+ce jour. En exploitant les chutes, 100 kits de masques ont été
+produit.
 
 ## Modes d'emploi
 
