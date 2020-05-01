@@ -2,14 +2,14 @@
 layout: project
 machines: laser_cutter
 title: "Covid19: prédécoupe laser de blouses pour les soignants"
-authors: [blandine, delaet, nthiery]
+authors: [Blandine, Sylvie Delaët, nthiery]
 sources: [BlousesV1.3.svg]
 images: [equipe.jpg]
 date: 2020/04/30
 material: coton
 ---
 
-Du fait le l'épidémie de Covid19, l'hôpital d'Arpajon et des EHPAD des
+Du fait de l'épidémie de Covid19, l'hôpital d'Arpajon et des EHPAD des
 environs ont lancé un appel à l'aide pour produire plus d'un millier
 de blouses blanches lavables en coton [de type très
 couvrant](BlousePourHopital.JPG) à partir de stocks de draps. Pour
@@ -31,9 +31,9 @@ Nicolas Thiéry. Du fait des conditions (accès limité au FabLab,
 dispersion des acteurs, autres urgences), il a fallu une dizaine de
 jours de prototypage suivis d'une dizaine de jours de préproduction au
 cours desquels 80 kits ont été produits avant d'atteindre la phase de
-production. Voir le [carnet de laboratoire](CarnetDeLabo/). Au
-total, 140 kits ont été produits à ce jour. En exploitant les chutes,
-100 kits de masques ont été produit.
+production. Voir le [carnet de laboratoire](CarnetDeLabo/). Au total,
+140 kits ont été produits à ce jour. En sus, une centaine kits de
+masques ont été produits en exploitant les chutes,
 
 ## Modes d'emploi
     
