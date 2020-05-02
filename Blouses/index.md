@@ -2,7 +2,7 @@
 layout: project
 machines: laser_cutter
 title: "Covid19: prédécoupe laser de blouses pour les soignants"
-authors: [Blandine, Sylvie Delaët, nthiery]
+authors: [Blandine Bournonville, Sylvie Delaët, nthiery]
 sources: [BlousesV1.3.svg]
 images: [equipe.jpg]
 date: 2020/04/30
@@ -26,7 +26,7 @@ Sud/Saclay](universite-paris-saclay.fr)), pour **industrialiser la
 découpe du tissu et fournir des kits prêts à coudre aux
 couturièr.es**.
 
-Ce projet est mené depuis le 9 avril par Blandine, Sylvie Delaët,
+Ce projet est mené depuis le 9 avril par Blandine Bournonville, Sylvie Delaët,
 Nicolas Thiéry. Du fait des conditions (accès limité au FabLab,
 dispersion des acteurs, autres urgences), il a fallu une dizaine de
 jours de prototypage suivis d'une dizaine de jours de préproduction au
