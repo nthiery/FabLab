@@ -8,11 +8,11 @@ title: Mode d'emploi kit blouses Covid 19
 Les kits ont été distribués en trois versions, deux de prototypage, et
 une de production:
 
-| Version          | Contenu du kit                                             |
-| -------          | --------------                                             |
-| V0.8 (prototype) | 2 corps, 4 manches avec repères h,H,m,M                    |
-| V0.9 (prototype) | 2 corps, 4 manches avec repères h,H,m,M, 4 biais de manche |
-| V1.3             | 2 corps, 4 manches avec repères h,H,t,T, 2 biais de col    |
+| Version           | Contenu du kit                                                  |
+| -------           | --------------                                                  |
+| V0.9 (prototype)  | 2 corps, 4 manches avec repères h,H,m,M                         |
+| V0.10 (prototype) | 2 corps, 4 manches avec repères h,H,m,M, 4 biais de manche      |
+| V1.3              | 2 corps, 4 manches avec repères h,H,t,T, 2 biais de col de 70cm |
 
 Ce mode d'emploi concerne la version V1.3. Le principe de montage
 était similaire pour les versions précédentes, mais avec une couture
@@ -41,6 +41,13 @@ n'y a que des coutures droites à faire.
   et 1F1 avec 1F1) pour fermer le haut de la blouse.
 
 - Préparer le biais puis le poser pour finir le col et le haut du dos.
+
+  :warning: dans les deux cartons de V1.3 livrés le 30/04, le biais
+  fourni est trop court (70cm au lieu de 95cm). Suggestion de
+  correctif: ourler les 20 premiers centimètres du haut du dos de
+  chaque côté en partant des coins; puis poser le biais en le centrant
+  sur le col. Ainsi toute la partie en contact avec le cou est
+  couverte de biais.
 
 - Replier une manche en deux, puis la monter à plat sur le corps, en
   superposant chacun de ses deux repères 1h2 avec le repère

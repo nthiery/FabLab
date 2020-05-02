@@ -260,7 +260,7 @@ bruler le tissu replié en bas de la machine
 De combien de biais avons nous vraiment besoin?
 
 Pour chaque manche: un biais 2x 5cm x 35cm
-Pour le col: un biais de 5cm x 70cm
+Pour le col: un biais de 5cm x ~~70cm~~ 95cm
 
 ### Masques
 
