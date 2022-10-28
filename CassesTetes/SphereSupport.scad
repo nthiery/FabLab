@@ -47,6 +47,6 @@ intersection() {
 translate([0,0,-eps/2]) {
      union() {
 	  piece();
-	  support();
+//	  support();
      }
 }

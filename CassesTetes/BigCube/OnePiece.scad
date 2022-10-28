@@ -3,13 +3,13 @@ use <BigCubeGeneric.scad>;
 // Shape parameters
 cote=20;
 c2=2*cote;
-eps=0.5;
+eps=0.4;
 d=cote*sqrt(2)/4;
 de=d+eps;
 $fn=100;
 
 module support () {
-translate([0,0,-eps/2]) intersection() {
+translate([0,0,-eps]) intersection() {
   difference() {
     translate([0,0,d/4-eps]) {
       union() {
@@ -30,7 +30,7 @@ translate([0,0,-eps/2]) intersection() {
 // module shape(cote) { shapeCylinder(cote); } lbar=1.22*cote;
 // module shape() { shapeDodecahedron(cote); } lbar=cote;
 // module shape(cote) { shapeOctahedron(cote); } lbar=3*cote/2;
-module shape(cote) { sphere(cote*sqrt(3)/2); } lbar=cote*1.21;
+module shape(cote) { sphere(cote*sqrt(3)/2); } lbar=3*cote/2;
 // module shape(cote) { shapeTruncatedCube(cote); } lbar=5*cote/4+eps;
 
 // Choice of the edges of the cube
@@ -42,6 +42,6 @@ module shape(cote) { sphere(cote*sqrt(3)/2); } lbar=cote*1.21;
 // Draw one piece
 translate([0,0,-eps/2]) bipiece(cote);
 
-supwidth = 1.2;
+supwidth = 0.8;
 translate([0, lbar,0]) support();
 translate([0,-lbar,0]) support();
