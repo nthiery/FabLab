@@ -14,8 +14,8 @@ author:
   name:           'Nicolas M. Thiéry'
   url:            http://Nicolas.Thiery.name/
 
-gems:
-- emoji
+plugins:
+- jemoji
 
 # Custom vars
 version:          0.1.0
