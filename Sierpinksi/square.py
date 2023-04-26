@@ -46,7 +46,7 @@ c = canvas.canvas()
 c = step(c)
 c = step(c)
 c = step(c)
-c = step(c, middle=True)
+c = step(c)
 # c = step(c)
 
 hoffset=0.4

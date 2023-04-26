@@ -1006,7 +1006,7 @@ rayon = 3;
 module stellgr(graph, proj) {
     for (edge=graph) {
         color (colormat[edge[2]])
-            cylinder_ep(edge[0]*proj, edge[1]*proj, rayon, rayon);
+            cylinder_ep(edge[0]*proj, edge[1]*proj, rayon, 2*rayon);
     }
 }
 
@@ -1024,10 +1024,10 @@ Tetra5 = [[ 0, 1,-sq2], [ 0,-1,-sq2], [ 1, 0, sq2], [-1, 0, sq2], [0,0,2]];
 
 
 // stellgr(Stell3, 15*idproj);
-stellgr(Stell4, 15*XYZproj);
+stellgr(Stell4, 15*Tetra);
 // stellgr(Stell5, 25*XYZ5proj);
 
 
-convex_poly([for (p=perm4) p * 15*XYZproj]);
+// convex_poly([for (p=perm4) p * 15*Tetra]);
 
 // convex_poly([for (p=Tetra) 60*p]);

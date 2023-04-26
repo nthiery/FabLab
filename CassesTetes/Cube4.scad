@@ -17,9 +17,9 @@ intersection()
                             slices= sl,
                             radius=size, nb = 6, jeu=jeu);
 };
-translate([-size/2,size/2-3*jeu,-size]) {
+translate([-size/2,size/2-5*jeu,-size]) {
   intersection() {
-    cube([size/2,3*jeu,size/2]);
+    cube([size/2,5*jeu,size/2]);
     rotate([0,-45,0]) cube(size);
   }
 }

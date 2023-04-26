@@ -94,26 +94,26 @@ $fn=100;
 // module shape(cote) { shapeBar(cote); } lbar=cote;
 // module shape() { shapeCylinder(cote); } lbar=1.22*cote;
 // module shape() { shapeDodecahedron(cote); } lbar=cote;
-// module shape() { shapeOctahedron(cote); } lbar=3*cote/2;
+module shape() { shapeOctahedron(cote); } lbar=3*cote/2;
 // module shape() { sphere(cote*sqrt(3)/2); } lbar=cote*1.21;
-module shape() { sphere(cote*sqrt(3)/2); } lbar=cote*1.21;
+// module shape() { sphere(cote*sqrt(3)/2); } lbar=cote*1.21;
 // module shape() { shapeTruncatedCube(cote); } lbar=5*cote/4+eps;
 
 // Choice of the edges of the cube
 // module link() { }
-// module link() { linkBar(); }
+module link() { linkBar(); }
 // module link() { linkBar(r=cote/3); }
-module link() { linkBar(r=cote/3.5, fn=48); }
+// module link() { linkBar(r=cote/3.5, fn=48); }
 
 // Draw one piece
-bipiece(cote);
+// bipiece(cote);
 
 // Assemble the cube
 time = 1; // 0 = beggining of the move, 1 = end of the move
 //assemble(cote, lbar, time) { bipiece(); };
 
 // Animation
-// assemble(cote, lbar, $t) { bipiece(); };
+assemble(cote, lbar, $t) { bipiece(); };
 
 /*
 module Klingon() {
